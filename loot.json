@@ -1,0 +1,221 @@
+{
+  "items": [
+    {
+      "id": "healing_potion",
+      "name": "İyileştirme İksiri",
+      "type": "healing",
+      "description": "8 can yeniler. Combat sırasında 1 aksiyon harcar.",
+      "amount": 8
+    },
+    {
+      "id": "shadow_cloak",
+      "name": "Gölge Pelerini",
+      "type": "equipment",
+      "slot": "cloak",
+      "description": "Kuşanınca gizliliğe +2. Sessiz geçiş kontrolünü kolaylaştırır.",
+      "stealth_bonus": 2
+    },
+    {
+      "id": "warded_armor",
+      "name": "Mühürlü Kül Zırhı",
+      "type": "equipment",
+      "slot": "armor",
+      "description": "Üzerindeki koruyucu rünler Armor Class değerine +2 verir. Her sınıf kuşanabilir.",
+      "armor_bonus": 2
+    },
+    {
+      "id": "iron_sword",
+      "name": "Kara Demir Kılıç",
+      "type": "equipment",
+      "slot": "weapon",
+      "classes": [
+        "Fighter",
+        "Rogue"
+      ],
+      "description": "Fiziksel saldırılarının hasarına +2. Fighter ve Rogue kullanabilir.",
+      "damage_bonus": 2
+    },
+    {
+      "id": "fury_potion",
+      "name": "Öfke İksiri",
+      "type": "fury",
+      "description": "Combat sırasında 1 aksiyonla içilir. O oyuncu turundaki kalan tüm isabetlerine +3 hasar. Tur bitince etki sona erer; birikmez.",
+      "damage_bonus": 3
+    },
+    {
+      "id": "focus_potion",
+      "name": "Odak İksiri",
+      "type": "focus",
+      "classes": [
+        "Mage"
+      ],
+      "description": "3 Focus yeniler. Combat sırasında 1 aksiyon harcar.",
+      "amount": 3
+    },
+    {
+      "id": "seal_stone",
+      "name": "Mühür Taşı",
+      "type": "quest",
+      "description": "Son haznenin görev eşyası. Bunu aldıktan sonra mahzen girişine dönmelisin."
+    },
+    {
+      "id": "ash_cleaver",
+      "name": "Külbiçen",
+      "type": "equipment",
+      "slot": "weapon",
+      "classes": [
+        "Fighter"
+      ],
+      "damage_bonus": 4,
+      "description": "Ağır, rünlü bir kılıç. Fighter saldırılarına +4 hasar verir."
+    },
+    {
+      "id": "whisper_dagger",
+      "name": "Fısıltı Hançeri",
+      "type": "equipment",
+      "slot": "weapon",
+      "classes": [
+        "Rogue"
+      ],
+      "damage_bonus": 3,
+      "stealth_bonus": 1,
+      "description": "Rogue saldırılarına +3 hasar ve kuşanıldığında +1 gizlilik."
+    },
+    {
+      "id": "rune_staff",
+      "name": "Gece Rünü Asası",
+      "type": "equipment",
+      "slot": "weapon",
+      "classes": [
+        "Fighter",
+        "Rogue",
+        "Mage"
+      ],
+      "damage_bonus": 2,
+      "description": "Mage: arkane büyü hasarına +2. Fighter/Rogue: 1d4 + STR sopa vuruşu, büyü etkisi yok. 1 aksiyon.",
+      "staff": true
+    },
+    {
+      "id": "battle_axe",
+      "name": "Köz Baltası",
+      "classes": [
+        "Fighter",
+        "Rogue"
+      ],
+      "damage_dice": "1d10",
+      "damage_stat": "STR",
+      "damage_bonus": 2,
+      "ap_cost": 1,
+      "description": "1d10 + STR +2 hasar. Saldırı 1 aksiyon. Fighter ve Rogue kullanabilir.",
+      "type": "equipment",
+      "slot": "weapon"
+    },
+    {
+      "id": "war_hammer",
+      "name": "Bazalt Savaş Çekici",
+      "classes": [
+        "Fighter"
+      ],
+      "damage_dice": "3d8",
+      "damage_stat": "STR",
+      "damage_bonus": 3,
+      "ap_cost": 2,
+      "description": "3d8 + STR +3 hasar. Her saldırı, ıskalasa da 2 aksiyon harcar. Fighter kullanabilir.",
+      "type": "equipment",
+      "slot": "weapon"
+    },
+    {
+      "id": "iron_mace",
+      "name": "Kara Demir Gürz",
+      "classes": [
+        "Fighter",
+        "Rogue"
+      ],
+      "damage_dice": "1d8",
+      "damage_stat": "STR",
+      "damage_bonus": 3,
+      "ap_cost": 1,
+      "description": "1d8 + STR +3 hasar. Saldırı 1 aksiyon. Fighter ve Rogue kullanabilir.",
+      "type": "equipment",
+      "slot": "weapon"
+    },
+    {
+      "id": "ash_spear",
+      "name": "Kül Uçlu Mızrak",
+      "classes": [
+        "Fighter",
+        "Rogue"
+      ],
+      "damage_dice": "1d8",
+      "damage_stat": "DEX",
+      "damage_bonus": 2,
+      "ap_cost": 1,
+      "description": "1d8 + DEX +2 hasar. Saldırı 1 aksiyon. Fighter ve Rogue kullanabilir.",
+      "type": "equipment",
+      "slot": "weapon"
+    },
+    {
+      "id": "lightning_staff",
+      "name": "Şimşek Asası",
+      "spell": {
+        "name": "Şimşek",
+        "damage_dice": "1d10",
+        "ap_cost": 1,
+        "armor_piercing": 2
+      },
+      "description": "Mage: 1d10 + INT şimşek hasarı; hedefin AC değerinin 2 puanını yok sayar. 1 aksiyon. Fighter/Rogue: 1d4 + STR sopa vuruşu, 1 aksiyon.",
+      "type": "equipment",
+      "slot": "weapon",
+      "staff": true,
+      "classes": [
+        "Fighter",
+        "Rogue",
+        "Mage"
+      ]
+    },
+    {
+      "id": "ice_staff",
+      "name": "Buz Asası",
+      "spell": {
+        "name": "Buz Mızrağı",
+        "damage_dice": "1d8",
+        "ap_cost": 1,
+        "effect": "chill"
+      },
+      "description": "Mage: 1d8 + INT buz hasarı; isabet ederse düşmanın sonraki saldırısı -2 isabet. 1 aksiyon. Fighter/Rogue: 1d4 + STR sopa vuruşu, 1 aksiyon.",
+      "type": "equipment",
+      "slot": "weapon",
+      "staff": true,
+      "classes": [
+        "Fighter",
+        "Rogue",
+        "Mage"
+      ]
+    },
+    {
+      "id": "fireball_staff",
+      "name": "Ateş Topu Asası",
+      "spell": {
+        "name": "Ateş Topu",
+        "damage_dice": "2d8",
+        "ap_cost": 2,
+        "effect": "burn"
+      },
+      "description": "Mage: 2d8 + INT ateş hasarı; düşmanın sonraki turunun başında 2 yanma hasarı. 2 aksiyon. Fighter/Rogue: 1d4 + STR sopa vuruşu, 1 aksiyon.",
+      "type": "equipment",
+      "slot": "weapon",
+      "staff": true,
+      "classes": [
+        "Fighter",
+        "Rogue",
+        "Mage"
+      ]
+    },
+    {
+      "id": "old_map",
+      "name": "Eskimiş Mahzen Haritası",
+      "type": "map",
+      "description": "Bir tutsağın sararmış parşömene çizdiği mahzen planı. Yanında taşıyabilir, envanterden tekrar açabilirsin. Haritaya bakmak aksiyon harcamaz."
+    }
+  ]
+}

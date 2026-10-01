@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "status": "minimap_grid_navigation",
+  "attributes": {
+    "STR": "Yakın dövüş hasarı, itme, taşıma ve fiziksel engeller.",
+    "DEX": "İsabet, savunma, inisiyatif, gizlilik ve tuzakları etkisizleştirme.",
+    "INT": "Büyü hasarı, rünler, mekanizmalar ve yaratıkların davranışını anlama."
+  },
+  "creation": {
+    "stat_budget": 38,
+    "stat_min": 6,
+    "stat_max": 20,
+    "customization": "Hazır dağılımı kullan veya 38 puanı üç özelliğe dağıt. Sınıf yetenekleri sınıf kimliğini korur."
+  },
+  "combat": {
+    "ap_per_turn": 3,
+    "movement": "Oda içindeki bloklar minimap ile yönetilir. İleri/geri 1 blok, hızlı ileri 3 blok. Duvar ve sütunlar yolu keser. Kapıya 1 blok mesafede oda geçişi açılır.",
+    "modifier": "(stat - 10) // 2",
+    "check": "d20 + ilgili özellik değiştiricisi >= zorluk",
+    "difficulty": {
+      "easy": 8,
+      "normal": 11,
+      "hard": 14
+    },
+    "physical_attack": "d20 + DEX değiştiricisi + 2 > hedef AC",
+    "magic_attack": "d20 + INT değiştiricisi + 2 > hedef AC",
+    "defense": "10 + DEX değiştiricisi + zırh bonusu",
+    "initiative": "d20 + DEX değiştiricisi + combat başlamadan hazırlanmışsa 2; beraberlikte oyuncu önce",
+    "damage": "İsabet toplamı AC değerinden büyükse hasar zarı atılır. Minimum 1 hasar; bu sürümde kritik hasar ve zehir yok. Eşit AC ıskadır.",
+    "advantage": "İki d20 at, yüksek olanı kullan. Aynı anda avantaj ve dezavantaj varsa tek d20.",
+    "minimum_hp": 1,
+    "stealth": "d20 + DEX değiştiricisi + sınıf gizlilik değiştiricisi + Rogue için 4 + ekipman bonusu. DC Fighter 18, Mage 15, Rogue 11; trol +3, muhafız +2. Doğal 1 başarısızdır.",
+    "inspect": "1 AP, INT kontrolü; yaratığın bir davranışını veya etkileşim seçeneğini gösterir. İpucu başarısızlığı ilerlemeyi kilitlemez.",
+    "rest": "Tek kullanımlık güvenli dinlenme: Mühür Odası’ndaki taş bank canı ve Focus’u tamamen doldurur. Yaratıklar yeniden doğmaz.",
+    "potion": "1 AP, 8 HP iyileştirir; maksimum canı aşmaz.",
+    "alarm": "0–3; yüksek alarm final Skeleton Muhafızın duyma menzilini artırır.",
+    "escape": "Combat sırasında yön seçilir. Başarılı DEX kontrolü aynı odada en fazla 3 blok uzaklaştırır. Düşman korunur; düşman bloğuna kaçış critical fail olur.",
+    "player_turn": "3 AP. Çekiç saldırısı 2 AP, diğer saldırılar 1 AP. Yetersiz AP saldırıyı engeller. Kaçış, hazırlık ve eşya kullanımı 1 AP."
+  },
+  "classes": {
+    "Fighter": {
+      "route": "fighter",
+      "priority": [
+        "STR",
+        "DEX",
+        "INT"
+      ],
+      "stats": {
+        "STR": 16,
+        "DEX": 14,
+        "INT": 8
+      },
+      "hp_base": 27,
+      "armor": "Ağır zırh",
+      "armor_bonus": 2,
+      "stealth_modifier": -2,
+      "resource": {
+        "name": "Focus",
+        "max": 0
+      },
+      "weapon": "Longsword",
+      "damage": "1d8",
+      "damage_stat": "STR",
+      "role": "Güçlü ve çevik yakın dövüşçü; fiziksel kestirmeler açar.",
+      "tradeoff": "Büyülü mekanizmalarda zayıf. Ağır zırh gizlilik kontrolüne -2 verir; normal yürüyüş alarm artırmaz.",
+      "abilities": [
+        {
+          "id": "slash",
+          "name": "Kılıç Darbesi",
+          "ap": 1,
+          "resource_cost": 0,
+          "range": 1,
+          "damage": "1d8",
+          "stat": "STR",
+          "effect": "Standart yakın dövüş saldırısı."
+        },
+        {
+          "id": "heavy_strike",
+          "name": "Ezici Darbe",
+          "ap": 2,
+          "resource_cost": 0,
+          "range": 1,
+          "damage": "2d6",
+          "stat": "STR",
+          "effect": "Başarılı vuruşta +1 alarm. Iska halinde alarm değişmez."
+        },
+        {
+          "id": "guard",
+          "name": "Savunma Duruşu",
+          "ap": 1,
+          "resource_cost": 0,
+          "effect": "Bir sonraki turuna kadar alınan ilk vuruşun hasarını 3 azaltır (minimum 0). Üst üste birikmez."
+        },
+        {
+          "id": "breach",
+          "name": "Engel Kırma",
+          "ap": 2,
+          "resource_cost": 0,
+          "effect": "Haritada işaretli zayıf duvarı kesin olarak açar; yalnızca ilk açılışta +2 alarm. Ağır taş kapağı açmak alarm üretmez."
+        }
+      ]
+    },
+    "Mage": {
+      "route": "mage",
+      "priority": [
+        "INT",
+        "DEX",
+        "STR"
+      ],
+      "stats": {
+        "STR": 8,
+        "DEX": 10,
+        "INT": 20
+      },
+      "hp_base": 21,
+      "armor": "Büyücü cübbesi",
+      "armor_bonus": 0,
+      "stealth_modifier": 0,
+      "resource": {
+        "name": "Focus",
+        "max": 6
+      },
+      "weapon": "Arcane Spark",
+      "damage": "1d4",
+      "damage_stat": "INT",
+      "role": "Uzaktan büyü, yaratık analizi ve büyülü yollar; INT belirgin biçimde en yüksek özellik.",
+      "tradeoff": "Canı ve savunması düşük; güçlü büyüler ile geçitler aynı Focus kaynağını kullanır.",
+      "abilities": [
+        {
+          "id": "spark",
+          "name": "Arkane Kıvılcım",
+          "ap": 1,
+          "resource_cost": 0,
+          "range": 4,
+          "damage": "1d4",
+          "stat": "INT",
+          "effect": "Kaynak tüketmeyen standart büyü saldırısı; görüş hattı gerekir."
+        },
+        {
+          "id": "frost",
+          "name": "Buz Bağı",
+          "ap": 2,
+          "resource_cost": 2,
+          "range": 4,
+          "damage": "1d6",
+          "stat": "INT",
+          "effect": "Başarılı vuruşta hedefin sonraki turunda hareket limiti 1 kare azalır; minimum 0. Birikmez."
+        },
+        {
+          "id": "ward",
+          "name": "Arkane Kalkan",
+          "ap": 1,
+          "resource_cost": 1,
+          "effect": "Bir sonraki turuna kadar ilk vuruşun hasarını 4 azaltır (minimum 0). Üst üste birikmez."
+        },
+        {
+          "id": "attune",
+          "name": "Rün Uyumu",
+          "ap": 2,
+          "resource_cost": 1,
+          "effect": "İşaretli büyülü kapı veya perdeyi kesin olarak açar; tekrar geçiş bedelsizdir. Focus yoksa dinlen veya savaş dışında 2 keşif turu meditasyonla 1 Focus kazan; alarm üretmez."
+        }
+      ]
+    },
+    "Rogue": {
+      "route": "rogue",
+      "priority": [
+        "DEX",
+        "INT",
+        "STR"
+      ],
+      "stats": {
+        "STR": 6,
+        "DEX": 18,
+        "INT": 14
+      },
+      "hp_base": 26,
+      "armor": "Hafif deri zırh",
+      "armor_bonus": 1,
+      "stealth_modifier": 0,
+      "resource": {
+        "name": "Focus",
+        "max": 0
+      },
+      "weapon": "Dagger",
+      "damage": "1d6",
+      "damage_stat": "DEX",
+      "role": "DEX ana özellik; INT ile tuzak ve mekanizma analizi. Sessiz kestirmeleri kullanır.",
+      "tradeoff": "Ağır fiziksel engellerde zayıf. Pusu için saklanma ve doğru konum gerekir.",
+      "abilities": [
+        {
+          "id": "stab",
+          "name": "Hassas Vuruş",
+          "ap": 1,
+          "resource_cost": 0,
+          "range": 1,
+          "damage": "1d6",
+          "stat": "DEX",
+          "effect": "Standart yakın dövüş saldırısı."
+        },
+        {
+          "id": "ambush",
+          "name": "Pusu",
+          "ap": 1,
+          "resource_cost": 0,
+          "range": 1,
+          "damage": "2d6",
+          "stat": "DEX",
+          "effect": "Yalnızca saklanmışken kullanılabilir; avantajlı saldırı. Her tur en fazla bir kez. Saldırı saklanmayı bitirir; ıskada da o turdaki kullanım tüketilir."
+        },
+        {
+          "id": "hide",
+          "name": "Gölgede Kaybol",
+          "ap": 1,
+          "resource_cost": 0,
+          "effect": "Görüşü kesen engel arkasında DEX kontrolüyle saklan; zorluk 11. Başarısızlıkta aynı tur tekrar denenemez."
+        },
+        {
+          "id": "tools",
+          "name": "İnce İşçilik",
+          "ap": 2,
+          "resource_cost": 0,
+          "effect": "İşaretli menfezi veya gizli çıkışı kesin olarak açar. Tuzak sökmede DEX kontrolüne +2; mekanizma incelemesinde INT kullanır."
+        }
+      ]
+    }
+  },
+  "inventory": {
+    "weapon_limit": 1,
+    "swap": "Yeni silah alınırken mevcut silah oyuncunun bulunduğu blokta yere bırakılır. Sonradan geri alınabilir.",
+    "pickup": "Ganimetler minimap üzerinde mavi işaretlidir. Eşyanın bloğuna en fazla 1 blok yaklaşınca isimli Al seçeneği açılır; eşyalar tek tek alınır.",
+    "staff": "Fighter/Rogue: 1d4 + STR fiziksel hasar, 1 AP, büyü etkisi yok. Mage: asanın büyüsü INT kullanır. Şimşek 2 AC deler; buz sonraki düşman saldırısına -2 isabet; ateş topu 2 AP ve bir kez 2 yanma hasarı."
+  }
+}
