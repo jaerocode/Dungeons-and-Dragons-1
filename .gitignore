@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+game.html
+game.web.html
+.github-upload/
+node_modules/
+.env
+.env.*

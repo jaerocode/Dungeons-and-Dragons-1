@@ -4,11 +4,13 @@ const read=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
 const embed=file=>JSON.stringify(JSON.parse(read(file))).replace(/</g,'\\u003c');
 const assets={};
 const webAssets={};
+const assetFolders=['assets1','assets2'];
 const map=JSON.parse(read('dungeon_map.json'));
 const bestiary=JSON.parse(read('bestiary.json'));
 for(const name of new Set([...map.rooms.flatMap(r=>[r.art,r.enemy_art,r.empty_art]),...bestiary.monsters.map(m=>m.art)].filter(Boolean))) {
- const file=path.join(__dirname,'assets',name+'.png');
- if(fs.existsSync(file)){assets[name]='data:image/png;base64,'+fs.readFileSync(file).toString('base64');webAssets[name]='/assets/'+name+'.png';}
+ const matches=assetFolders.filter(folder=>fs.existsSync(path.join(__dirname,folder,name+'.png')));
+ if(matches.length>1)throw new Error('Duplicate art asset: '+name);
+ if(matches.length){const folder=matches[0],file=path.join(__dirname,folder,name+'.png');assets[name]='data:image/png;base64,'+fs.readFileSync(file).toString('base64');webAssets[name]='/'+folder+'/'+name+'.png';}
 }
 for(const required of [...map.rooms.flatMap(r=>[r.art,r.enemy_art,r.empty_art]),...bestiary.monsters.map(m=>m.art)].filter(Boolean))if(!assets[required])throw new Error('Missing art asset: '+required);
 let template=read('game.template.html');

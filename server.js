@@ -15,9 +15,9 @@ const server = http.createServer((req, res) => {
   let pathname;
   try { pathname = new URL(req.url, 'http://localhost').pathname; }
   catch { res.writeHead(400); return res.end(); }
-  const asset=/^\/assets\/([a-z_]+\.png)$/.exec(pathname);
+  const asset=/^\/(assets[12])\/([a-z_]+\.png)$/.exec(pathname);
   if (asset) {
-    const file=path.join(__dirname,'assets',asset[1]);
+    const file=path.join(__dirname,asset[1],asset[2]);
     fs.readFile(file,(error,data)=>{if(error){res.writeHead(404);return res.end('Not found');}res.writeHead(200,{'Content-Type':'image/png','Content-Length':data.length,'Cache-Control':'public, max-age=3600'});res.end(req.method==='HEAD'?undefined:data);});
     return;
   }

@@ -67,7 +67,7 @@
 .enemy-lore p{font-size:13px;line-height:1.55}.enemy-portrait-skeleton img{object-fit:cover;object-position:50% 0%}.enemy-dossier-header{padding-top:11px;padding-bottom:8px}.enemy-lore{padding-top:10px;padding-bottom:12px}@media(max-width:700px){.enemy-lore p{font-size:11px;line-height:1.5}}
 .enemy-portrait-skeleton img{object-position:50% 0%}
 
-.map-cell.fog,.map-cell.fog:disabled{background:#070b08;border-color:#101610;color:transparent;box-shadow:none}.map-cell.fog{pointer-events:none}.sight-status{font-size:11px;color:#c9b786;margin:4px 0;flex:none}.mini-grid .fog::before{content:none}
+.map-cell.fog,.map-cell.fog:disabled{color:transparent;box-shadow:none}.map-cell.floor.fog,.map-cell.floor.fog:disabled{background:#303b2c;border-color:#46503b}.map-cell.wall.fog,.map-cell.wall.fog:disabled{background:#0b100d;border-color:#182119}.map-cell.fog{pointer-events:none}.sight-status{font-size:11px;color:#c9b786;margin:4px 0;flex:none}.mini-grid .fog::before{content:none}
 
 .shell:not(.torch-lit) .scene>svg{filter:saturate(.55) brightness(.48)}.torch-lit .scene>svg{filter:saturate(.8) brightness(.83)}.torch-lit .sight-status{color:#e2bd78}
 
