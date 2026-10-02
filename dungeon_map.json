@@ -813,16 +813,6 @@
       "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
         {
-          "id": "skeleton_captain",
-          "count": 1,
-          "positions": [
-            [
-              4,
-              2
-            ]
-          ]
-        },
-        {
           "id": "barrow_wight",
           "count": 1,
           "positions": [
@@ -974,7 +964,7 @@
           "positions": [
             [
               5,
-              6
+              7
             ]
           ]
         }

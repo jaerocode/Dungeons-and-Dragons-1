@@ -19,7 +19,7 @@ function renderIsometricRoom(){
   for(let row=-1;row<=h;row++)for(let col=-1;col<=w;col++){
     if((row<0||row===h)&&(col<0||col===w))continue;
     const p={x:rx+col,y:ry+row},outside=col<0||col===w||row<0||row===h,walk=!outside&&game.walkable(p),pillar=!outside&&!walk;
-    const player=game.distance(game.position,p)===0,seen=!outside&&(game.canSee(p)||game.roomId===MAP.start&&game.roomLoot.some(e=>e.id==='old_map'&&game.distance(e.position,p)===0));
+    const player=game.distance(game.position,p)===0,seen=!outside&&(game.canSee(p)||game.roomId===MAP.start&&game.roomLoot.some(e=>e.id==='old_map'&&game.enemyOccupies(e,p)));
     const enemy=seen&&game.visibleEnemies.find(e=>game.distance(e.position,p)===0),drops=seen?game.visibleLoot.filter(e=>game.distance(e.position,p)===0):[];
     const door=!outside&&doors.find(d=>game.distance(game.spawnPosition(d),p)===0),visibleDoor=door;
     const adjacent=Math.abs(p.x-game.position.x)+Math.abs(p.y-game.position.y)===1,direction=p.y<game.position.y?0:p.x>game.position.x?1:p.y>game.position.y?2:3;

@@ -87,17 +87,45 @@ class ThreeDungeon {
       if(appearance.beard){const beard=this.mesh(new THREE.ConeGeometry(.14,.31,5),'#d2c9ac',0,1.04,.2,g);beard.rotation.x=Math.PI;}
     }
     for(const side of [-1,1]){
-      const ready=game.prepared&&side===1,elbow=ready?[.34,.9,.24]:[side*.35,.79,.075],hand=ready?[.3,.88,.47]:[side*.34,.64,.19];
+      const elbow=[side*.35,.79,.075],hand=[side*.34,.64,.19];
       this.limb(g,[side*.27,1,0],elbow,.095,body);this.limb(g,elbow,hand,.075,mage?body:leather);
       this.mesh(new THREE.DodecahedronGeometry(.065,0),skin,...hand,g);
     }
     if(game.prepared){
-      const pose=new THREE.Group();pose.name='held-weapon-pose';g.add(pose);pose.position.set(.3,.88,.47);pose.rotation.x=Math.PI/2-.2;
+      const pose=new THREE.Group();pose.name='held-weapon-pose';g.add(pose);pose.position.set(.34,.64,.19);pose.rotation.x=Math.PI/2;
       const held=this.weapon(pose,weapon,mage);held.position.set(-.32,-.68,-.12);
     }
     this.ring(0,0,'#c9b96e',g,.33);return g;
   }
-  humanoid(kind,x,z,appearance,weapon){if(kind==='player')return this.playerModel(x,z,appearance,weapon);const g=new THREE.Group();g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);const player=kind==='player',cls=game.characterClass,body=player?(appearance?.body||'#47523b'):kind==='troll'?'#667060':kind==='barrow_wight'?'#8b9988':'#819473';const skin=player?'#b5a388':body,head=player?(appearance?.head||'#68745c'):body;
+  wightModel(x,z){
+    const g=new THREE.Group();g.position.set(x,0,z);g.userData.kind='barrow_wight';g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);
+    const cloth='#348d89',bone='#a5e0d0',shadow='#173e43';
+    this.cylinder(.19,.3,.87,cloth,0,.72,0,g,7);
+    this.cylinder(.24,.18,.26,'#4aa29b',0,1.14,0,g,6);
+    for(let i=0;i<7;i++){const a=i/7*Math.PI*2;const hem=this.mesh(new THREE.ConeGeometry(.12,.3+(i%3)*.045,3),i%2?'#287571':cloth,Math.cos(a)*.22,.2,Math.sin(a)*.22,g);hem.rotation.z=Math.PI;}
+    this.cylinder(.06,.07,.13,bone,0,1.35,0,g,5);
+    const skull=this.mesh(new THREE.SphereGeometry(.21,7,5),bone,0,1.58,0,g);skull.scale.set(.9,1,1);
+    this.box(.19,.09,.16,bone,0,1.4,.075,g);
+    for(const side of [-1,1]){
+      const socket=this.mesh(new THREE.SphereGeometry(.057,5,3),shadow,side*.078,1.6,.168,g);socket.scale.z=.5;
+      this.mesh(new THREE.SphereGeometry(.019,4,3),'#5bc9c2',side*.078,1.6,.197,g,'#459c99');
+      this.limb(g,[side*.2,1.19,0],[side*.36,1.03,.18],.105,cloth);
+      this.limb(g,[side*.36,1.03,.18],[side*.37,1.02,.4],.06,bone);
+      this.cylinder(.12,.1,.13,cloth,side*.36,1.04,.2,g,5).rotation.x=Math.PI/2;
+      this.box(.12,.065,.14,bone,side*.37,1.02,.45,g);
+      for(let finger=0;finger<4;finger++){
+        const fx=side*.37+(finger-1.5)*.033,len=.12+(finger%2)*.035;
+        this.limb(g,[fx,1.015,.5],[fx+side*.015,.99,.5+len],.013,bone);
+        this.limb(g,[fx+side*.015,.99,.5+len],[fx+side*.02,.935,.54+len],.01,bone);
+      }
+      this.limb(g,[side*.32,1.03,.44],[side*.27,.995,.53],.018,bone);
+    }
+    this.mesh(new THREE.ConeGeometry(.027,.055,3),shadow,0,1.52,.187,g).rotation.z=Math.PI;
+    this.box(.15,.018,.012,shadow,0,1.435,.16,g);for(let i=0;i<5;i++)this.box(.018,.035,.016,bone,(i-2)*.029,1.44,.175,g);
+    for(let i=0;i<3;i++){const stitch=this.box(.012,.06,.013,shadow,0,1.17-i*.055,.19,g);stitch.rotation.z=i%2?.65:-.65;}
+    this.ring(0,0,'#c65b50',g,.35);return g;
+  }
+  humanoid(kind,x,z,appearance,weapon){if(kind==='player')return this.playerModel(x,z,appearance,weapon);if(kind==='barrow_wight')return this.wightModel(x,z);const g=new THREE.Group();g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);const player=kind==='player',cls=game.characterClass,body=player?(appearance?.body||'#47523b'):kind==='troll'?'#667060':kind==='barrow_wight'?'#8b9988':'#819473';const skin=player?'#b5a388':body,head=player?(appearance?.head||'#68745c'):body;
     this.cylinder(.19,.26,.47,body,0,.57,0,g,6);this.mesh(new THREE.SphereGeometry(.2,6,4),skin,0,.99,0,g);this.mesh(new THREE.SphereGeometry(.21,6,4),head,0,1.06,-.015,g);this.box(.24,.12,.07,skin,0,.96,.16,g);
     this.box(.09,.12,.065,'#243a32',-.08,1.02,.18,g);this.box(.09,.12,.065,'#243a32',.08,1.02,.18,g);
     for(const side of [-1,1]){this.box(.12,.24,.13,body,side*.26,.62,0,g);this.box(.12,.1,.14,skin,side*.26,.45,0,g);this.box(.13,.28,.15,'#39473a',side*.11,.25,0,g);this.box(.15,.08,.21,'#2e3a31',side*.11,.12,.04,g);}
@@ -105,7 +133,7 @@ class ThreeDungeon {
     else if(player&&cls==='Rogue')this.box(.27,.095,.08,appearance?.mask||'#273c30',0,.9,.18,g);
     else {this.box(.035,.39,.035,'#b1b79c',0,1.07,.21,g);if(!player){this.mesh(new THREE.ConeGeometry(.13,.31,4),head,-.26,1.03,0,g).rotation.z=1;this.mesh(new THREE.ConeGeometry(.13,.31,4),head,.26,1.03,0,g).rotation.z=-1;}}
     if(player&&game.prepared&&cls!=='Mage')this.weapon(g,weapon,false);if(!player){this.weapon(g,{id:kind==='troll'?'war_hammer':'iron_sword'},false);this.ring(0,0,'#c65b50',g,.35);}else this.ring(0,0,'#c9b96e',g,.33);
-    if(kind==='troll'){g.scale.set(1.8,1.65,1.6);this.box(.58,.28,.4,'#657462',0,.73,0,g);}if(kind==='barrow_wight'){g.scale.y=1.2;this.mesh(new THREE.ConeGeometry(.32,.65,6),'#65776f',0,.5,0,g);this.box(.25,.23,.07,'#283a35',0,1.02,.19,g);for(const side of [-1,1])this.mesh(new THREE.SphereGeometry(.032,5,3),'#a4d4c6',side*.065,1.06,.24,g,'#72b6ac');}g.userData.kind=kind;return g;
+    if(kind==='troll'){g.scale.set(2.65,2.15,2.4);this.box(.58,.28,.4,'#657462',0,.73,0,g);}if(kind==='barrow_wight'){g.scale.y=1.2;this.mesh(new THREE.ConeGeometry(.32,.65,6),'#65776f',0,.5,0,g);this.box(.25,.23,.07,'#283a35',0,1.02,.19,g);for(const side of [-1,1])this.mesh(new THREE.SphereGeometry(.032,5,3),'#a4d4c6',side*.065,1.06,.24,g,'#72b6ac');}g.userData.kind=kind;return g;
   }
   // Animate a separate model group so its tile position and selection ring stay fixed.
   rigEnemy(g){
@@ -155,12 +183,12 @@ class ThreeDungeon {
       if(trap&&(seen||trap.triggered))this.trapPlate(x,z,trap.triggered,seen);
       if(!game.walkable(p)){if(game.roomId==='troll_hall')this.pillar(x,z,seen);else this.obstacle(x,z,seen);continue;}
       const door=game.doors().find(d=>game.distance(game.spawnPosition(d),p)===0),oldMap=game.roomId===MAP.start&&game.roomLoot.some(e=>e.id==='old_map'&&game.distance(e.position,p)===0),drops=seen||oldMap?game.visibleLoot.filter(e=>game.distance(e.position,p)===0):[];
-      if(door)this.door(x,z,door.direction,seen);else if(!trap&&!drops.length&&game.distance(game.position,p)>0)this.decoration(x,z,seen);
+      if(door)this.door(x,z,door.direction,seen);else if(!trap&&!drops.length&&game.distance(game.position,p)>0&&!game.visibleEnemies.some(e=>game.enemyOccupies(e,p)))this.decoration(x,z,seen);
       drops.forEach(e=>this.loot(game.items.get(e.id),x,z));
       if(game.roomId==='troll_hall'&&(x===0||z===0)&&(x+z)%4===0){this.box(.12,.6,.12,'#9c492b',x,.5,z);}
     }
     this.enemyAnimations=[];
-    for(const enemy of game.visibleEnemies){const x=enemy.position.x-rx,z=enemy.position.y-ry;const model=['spider','warg'].includes(enemy.definition.kind)?this.beast(enemy.definition.kind,x,z):this.humanoid(enemy.definition.kind,x,z);this.rigEnemy(model);}
+    for(const enemy of game.visibleEnemies){const [fw,fh]=enemy.definition.footprint||[1,1],x=enemy.position.x-rx+(fw-1)/2,z=enemy.position.y-ry+(fh-1)/2;const model=['spider','warg'].includes(enemy.definition.kind)?this.beast(enemy.definition.kind,x,z):this.humanoid(enemy.definition.kind,x,z);model.userData.cellKey=enemy.position.x+':'+enemy.position.y;this.rigEnemy(model);}
     const target={x:game.position.x-rx,z:game.position.y-ry};this.player=this.humanoid('player',target.x,target.z,game.appearance,game.items.get(game.equipment.weapon));this.player.rotation.y=Math.PI-game.facing*Math.PI/2;
     this.targetPosition=target;if(this.lastRoom===game.roomId&&this.lastPosition){this.player.position.x=this.lastPosition.x;this.player.position.z=this.lastPosition.z;}this.lastPosition=target;this.lastRoom=game.roomId;
     if(game.torchLit){this.torchLight=new THREE.PointLight(0xffcb7d,2.4,4,2);this.torchLight.position.set(0,.9,0);this.player.add(this.torchLight);this.mesh(new THREE.ConeGeometry(.06,.18,5),'#ffc363',-.31,.7,.14,this.player,'#ff9b42');}

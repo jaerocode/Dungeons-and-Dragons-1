@@ -101,7 +101,11 @@
       "damage": 11,
       "noncombat": "Sütunların yanındaki gölgelerde gizlenerek yan koridorlardan geç.",
       "art": "troll",
-      "lore": "Moria’nın karanlık galerilerinde dolaşan bir mağara trolü. Orkların kullandığı kaba zincirin halkaları bileğinde kalmış. Geniş omuzları taş kemeri dolduruyor; elindeki ağır sopa, cüce sütunlarının dibinde kırık izler bırakıyor."
+      "lore": "Moria’nın karanlık galerilerinde dolaşan bir mağara trolü. Orkların kullandığı kaba zincirin halkaları bileğinde kalmış. Geniş omuzları taş kemeri dolduruyor; elindeki ağır sopa, cüce sütunlarının dibinde kırık izler bırakıyor.",
+      "footprint": [
+        2,
+        2
+      ]
     },
     {
       "aggro_radius": 1,
@@ -113,7 +117,7 @@
       "behavior": "Görüş alanına girdiğinde fark edilir; merkezindeki 3×3 alana yaklaşınca saldırır.",
       "id": "barrow_wight",
       "name": "Barrow-wight",
-      "label": "Solgun gözlü bir mezar ruhu",
+      "label": "Kemikli elleri ve soluk turkuaz cübbesiyle bir mezar ruhu",
       "kind": "barrow_wight",
       "hp": 22,
       "defense": 12,
@@ -121,11 +125,11 @@
       "attack_bonus": 4,
       "damage": 5,
       "damage_dice": "1d6+2",
-      "attack_name": "Soğuk Kılıç",
-      "miss_text": " soğuk kılıcını savurdu ama zırhın karşıladı.",
+      "attack_name": "Soğuk Pençeler",
+      "miss_text": " kemikli parmaklarını sana uzattı ama zırhın karşıladı.",
       "flee_dc": 12,
       "art": "barrow_wight",
-      "lore": "Eski mezarları ele geçiren kötü ruhları andıran bir Barrow-wight. Solgun gözlerinin ardında yaşayan bir yüz yok; uzun parmakları paslanmış bir kılıcı kavrıyor. Bu yan galeride belirmesi oyunun Orta Dünya uyarlamasına ait bir karşılaşma; Moria tarihinden bir olay anlatmıyor.",
+      "lore": "Eski mezarları ele geçiren kötü ruhları andıran bir Barrow-wight. Soluk turkuaz cübbesinin yırtıkları yerde süzülür; boş göz çukurları ve öne uzanan kemikli parmakları karanlıkta seçilir. Bu yan galeride belirmesi oyunun Orta Dünya uyarlamasına ait bir karşılaşma; Moria tarihinden bir olay anlatmıyor.",
       "source": "https://www.encyclopedia-of-arda.com/b/barrowwights.html"
     },
     {

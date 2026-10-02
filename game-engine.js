@@ -13,11 +13,11 @@
       this.torchLit=false;this.justEntered=true;this.items.set('torch',{id:'torch',name:'Meşale',type:'torch',description:'Yakınca görüşün 3 blok, sönükken 1 blok. Yanan meşaleyle gizlenemezsin. Combat sırasında yakmak veya söndürmek 1 aksiyon harcar.'});this.inventory.torch=1;
       this.groundWeapons={};this.facing=0;this.position=this.spawnPosition();
       const definitions=new Map((options.bestiary?.monsters||[]).map(m=>[m.id,m]));
-      for(const room of map.rooms)for(const encounter of room.monsters||[]){const definition=definitions.get(encounter.id);if(!definition)throw Error('Missing monster: '+encounter.id);for(let i=0;i<encounter.count;i++){const p=options.fixedSpawns?(encounter.positions?.[i]||[Math.floor(room.bounds[2]/2)+i,Math.floor(room.bounds[3]/2)]):this.randomEnemyPosition(room);this.enemies.push({id:room.id+':'+encounter.id+':'+i,roomId:room.id,position:{x:room.bounds[0]+p[0],y:room.bounds[1]+p[1]},definition,hp:definition.hp,maxHp:definition.hp,alert:false});}}
+      for(const room of map.rooms)for(const encounter of room.monsters||[]){const definition=definitions.get(encounter.id);if(!definition)throw Error('Missing monster: '+encounter.id);for(let i=0;i<encounter.count;i++){const p=options.fixedSpawns?(encounter.positions?.[i]||[Math.floor(room.bounds[2]/2)+i,Math.floor(room.bounds[3]/2)]):this.randomEnemyPosition(room,definition);this.enemies.push({id:room.id+':'+encounter.id+':'+i,roomId:room.id,position:{x:room.bounds[0]+p[0],y:room.bounds[1]+p[1]},definition,hp:definition.hp,maxHp:definition.hp,alert:false});}}
       const pool=map.riddles||[],candidates=pool.filter(r=>r.id!==options.previousRiddleId);this.riddle=(candidates.length?candidates:pool)[Math.floor(this.random()*(candidates.length||pool.length))];
       this.floorLoot=[];this.lootSerial=0;
       for(const room of map.rooms){const [rx,ry,w,h]=room.bounds,center={x:rx+Math.floor(w/2),y:ry+Math.floor(h/2)},cells=[];
-        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++)if(!this.isDoorPosition({x,y},room)&&!(room.pillars||[]).some(p=>p[0]+rx===x&&p[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&e.position.x===x&&e.position.y===y))cells.push({x,y});
+        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++)if(!this.isDoorPosition({x,y},room)&&!(room.pillars||[]).some(p=>p[0]+rx===x&&p[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&this.enemyOccupies(e,{x,y})))cells.push({x,y});
         cells.sort((a,b)=>this.distance(a,center)-this.distance(b,center)||a.y-b.y||a.x-b.x);
         const entries=[...(room.loot||[])];
 
@@ -38,7 +38,10 @@
       while(x!==p.x||y!==p.y){const twice=2*error;if(twice>-dy){error-=dy;x+=sx;}if(twice<dx){error+=dx;y+=sy;}if(x===p.x&&y===p.y)return true;if(!this.walkable({x,y}))return false;}
       return true;
     }
-    get visibleEnemies(){return this.currentEnemies.filter(e=>this.combat?e.alert||e.id===this.combat.target:this.torchLit&&this.canSee(e.position));}
+    enemyCells(enemy){const [w,h]=enemy.definition?.footprint||[1,1],cells=[];for(let y=0;y<h;y++)for(let x=0;x<w;x++)cells.push({x:enemy.position.x+x,y:enemy.position.y+y});return cells;}
+    enemyOccupies(enemy,p){return this.enemyCells(enemy).some(q=>q.x===p.x&&q.y===p.y);}
+    enemyDistance(enemy,p){return Math.min(...this.enemyCells(enemy).map(q=>this.distance(p,q)));}
+    get visibleEnemies(){return this.currentEnemies.filter(e=>this.combat?e.alert||e.id===this.combat.target:this.torchLit&&this.enemyCells(e).some(p=>this.canSee(p)));}
     get enemyHint(){const unseen=this.currentEnemies.filter(e=>!this.visibleEnemies.includes(e));if(!unseen.length)return '';const kinds=new Set(unseen.map(e=>e.definition.kind)),hints=[];if(kinds.has('goblin'))hints.push('Tam kestiremiyorsun ama karanlığın içinden boğuk homurtular ve taşta sürüklenen metal sesleri duyuyorsun.');if(kinds.has('spider'))hints.push('Gölgelerden ince hıslamalar geliyor. Bir şey taşların üzerinde hızla sürünüyor.');if(kinds.has('troll'))hints.push('Derin, ağır bir hırıltı duyuyorsun. Çok ağır ayak sesleri zemini titretiyor.');if(kinds.has('barrow_wight'))hints.push('Taş duvarlardan soğuk, boğuk bir fısıltı geliyor. Hava birden buz kesiyor.');if(kinds.has('warg'))hints.push('Karanlıkta alçak bir hırıltı ve taşları çizen pençe sesleri duyuyorsun.');return hints.join(' ');}
     get visibleLoot(){return this.roomLoot.filter(e=>e.id==='old_map'&&this.roomId===this.map.start||this.canSee(e.position));}
     toggleTorch(){if(!this.canAct())return;this.begin();this.torchLit=!this.torchLit;this.justEntered=false;if(this.torchLit){this.hidden=false;this.bypassed=false;}this.finish(this.torchLit?'Meşaleyi yakıyorsun. Görüşün genişledi, ama ışığın içinde gizlenemezsin.':'Meşaleyi söndürüyorsun. Yalnızca hemen çevreni seçebiliyorsun; artık gölgelere karışabilirsin.');if(this.combat)this.spendAP();else this.checkEncounter();}
@@ -53,14 +56,15 @@
     get attackCost(){return this.attackSpec.ap;}
     get availableWeapons(){return [...new Set(this.roomLoot.filter(e=>this.items.get(e.id)?.slot==='weapon').map(e=>e.id))];}
     canTakeLoot(entry){const item=this.items.get(entry.id);return this.available()&&!this.combat&&this.visibleLoot.includes(entry)&&this.distance(this.position,entry.position)<=1&&(!this.visibleEnemies.length||this.bypassed)&&(!item.classes||item.classes.includes(this.characterClass));}
-    randomEnemyPosition(room){
+    randomEnemyPosition(room,definition){
       const [rx,ry,w,h]=room.bounds,cells=[],doors=this.map.connections.filter(c=>c.from===room.id||c.to===room.id).map(c=>{const q=c.points[c.from===room.id?0:c.points.length-1];return {x:Math.max(rx,Math.min(rx+w-1,q[0])),y:Math.max(ry,Math.min(ry+h-1,q[1]))};});
-      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0))cells.push(p);}
-      const interior=cells.filter(p=>doors.every(d=>this.distance(p,d)>1)),pool=interior.length?interior:cells;if(!pool.length)throw Error('No valid enemy spawn block');const p=pool[Math.min(pool.length-1,Math.floor(this.random()*pool.length))];return [p.x-rx,p.y-ry];
+      const [fw,fh]=definition?.footprint||[1,1];
+      for(let y=ry+1;y<=ry+h-fh-1;y++)for(let x=rx+1;x<=rx+w-fw-1;x++){const p={x,y},area=this.enemyCells({position:p,definition});if(area.every(q=>!this.isDoorPosition(q,room)&&!(room.pillars||[]).some(v=>v[0]+rx===q.x&&v[1]+ry===q.y)&&!this.enemies.some(e=>e.roomId===room.id&&this.enemyOccupies(e,q))))cells.push(p);}
+      const interior=cells.filter(p=>doors.every(d=>this.distance(p,d)>1)),pool=interior.length?interior:cells;if(!pool.length)throw Error('No interior enemy spawn block in '+room.id);const p=pool[Math.min(pool.length-1,Math.floor(this.random()*pool.length))];return [p.x-rx,p.y-ry];
     }
     spawnTraps(){
       for(const room of this.map.rooms){if(!room.traps)continue;const [rx,ry,w,h]=room.bounds,cells=[];
-        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.floorLoot.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0)&&!this.enemies.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0))cells.push(p);}
+        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.floorLoot.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0)&&!this.enemies.some(e=>e.roomId===room.id&&this.enemyOccupies(e,p)))cells.push(p);}
         if(cells.length<room.traps.count)throw Error('Not enough safe trap blocks: '+room.id);
         for(let i=0;i<room.traps.count;i++){const index=Math.min(cells.length-1,Math.floor(this.random()*cells.length));this.traps.push({roomId:room.id,position:cells.splice(index,1)[0],triggered:false,definition:room.traps});}
       }
@@ -77,7 +81,7 @@
     }
     safeLootPosition(preferred){
       const [rx,ry,w,h]=this.room.bounds,cells=[];
-      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(this.walkable(p)&&!this.isDoorPosition(p)&&!this.traps.some(t=>t.roomId===this.roomId&&this.distance(t.position,p)===0)&&!this.currentEnemies.some(e=>this.distance(e.position,p)===0))cells.push(p);}
+      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(this.walkable(p)&&!this.isDoorPosition(p)&&!this.traps.some(t=>t.roomId===this.roomId&&this.distance(t.position,p)===0)&&!this.currentEnemies.some(e=>this.enemyOccupies(e,p)))cells.push(p);}
       cells.sort((a,b)=>this.distance(a,preferred)-this.distance(b,preferred)||a.y-b.y||a.x-b.x);
       if(!cells.length)throw new Error('No safe floor block for loot');return {...cells[0]};
     }
@@ -99,7 +103,7 @@
     finish(message){this.say(message);this.turn++;return this.message;}
     available(){return !this.dead&&!this.completed;}
     canAct(){return this.available()&&(!this.combat||this.combat.phase==='player');}
-    checkEncounter(noisy=false){if(this.combat||this.bypassed||!this.available())return false;if(noisy)this.currentEnemies.filter(e=>this.distance(this.position,e.position)<=3).forEach(e=>e.alert=true);const hostile=this.currentEnemies.find(e=>this.distance(this.position,e.position)<=1);if(hostile){this.startCombat(hostile,'Düşmanın çok yakınına girdin. '+hostile.definition.name+' seni fark ediyor ve saldırmak için üzerine dönüyor.');return true;}const enemy=this.visibleEnemies.find(e=>!this.noticedEnemies.has(e.id));if(!enemy)return false;enemy.discovered=true;this.noticedEnemies.add(enemy.id);return false;}
+    checkEncounter(noisy=false){if(this.combat||this.bypassed||!this.available())return false;if(noisy)this.currentEnemies.filter(e=>this.enemyDistance(e,this.position)<=3).forEach(e=>e.alert=true);const hostile=this.currentEnemies.find(e=>this.enemyDistance(e,this.position)<=1);if(hostile){this.startCombat(hostile,'Düşmanın çok yakınına girdin. '+hostile.definition.name+' seni fark ediyor ve saldırmak için üzerine dönüyor.');return true;}const enemy=this.visibleEnemies.find(e=>!this.noticedEnemies.has(e.id));if(!enemy)return false;enemy.discovered=true;this.noticedEnemies.add(enemy.id);return false;}
     doors(){return this.map.connections.filter(c=>c.from===this.roomId||c.to===this.roomId).map(c=>{const outgoing=c.from===this.roomId,p=c.points[outgoing?0:c.points.length-1],[rx,ry,w,h]=this.room.bounds;return {connection:c,id:c.from+':'+c.to,target:outgoing?c.to:c.from,direction:p[1]===ry?0:p[0]===rx+w?1:p[1]===ry+h?2:3,allowed:c.kind==='common'||c.kind===this.profile.route};});}
     doorLabel(door){const target=this.map.rooms.find(r=>r.id===door.target);return (door.connection.labels?.[this.roomId]||['Karşı kapıdan git','Sağ kapıdan git','Arka kapıdan git','Sol kapıdan git'][door.direction])+' · '+target.name;}
     passageNarrative(door){
@@ -137,7 +141,7 @@
     meditate(){if(!this.canAct()||this.combat||this.characterClass!=='Mage')return;this.begin();this.focus=Math.min(this.profile.resource.max,this.focus+1);this.finish('Korunaklı bir köşede meditasyon yapıyorsun. 1 Focus yenilendi.');}
     rest(){if(!this.canAct()||this.combat||this.roomId!=='seal_room'||this.restUsed)return;this.begin();this.restUsed=true;this.hp=this.maxHp;this.focus=this.profile.resource.max;this.finish('Taş bankta dinleniyorsun. Canın ve Focus’un tamamen yenilendi.');}
     flee(direction){if(!this.combat||!this.canAct())return;this.begin();if(!Number.isInteger(direction)||direction<0||direction>3)return this.say('Kaçacağın yönü seç.');const enemy=this.target,dc=Math.max(...this.currentEnemies.map(e=>e.definition.flee_dc)),v=[[0,-1],[1,0],[0,1],[-1,0]][direction];let destination={...this.position},moved=0,path=[];
-      for(let i=0;i<3;i++){const p={x:destination.x+v[0],y:destination.y+v[1]};if(!this.walkable(p))break;if(this.currentEnemies.some(e=>this.distance(p,e.position)===0)){const reason='Doğrudan düşmanın bulunduğu bloğa kaçmaya çalıştın. Yolunu kesiyor; kaçışın başarısız!';this.finish('Critical fail! '+reason);this.reportResult('Kaçışın kesildi!',reason);this.spendAP();return;}destination=p;path.push(p);moved++;}
+      for(let i=0;i<3;i++){const p={x:destination.x+v[0],y:destination.y+v[1]};if(!this.walkable(p))break;if(this.currentEnemies.some(e=>this.enemyOccupies(e,p))){const reason='Doğrudan düşmanın bulunduğu bloğa kaçmaya çalıştın. Yolunu kesiyor; kaçışın başarısız!';this.finish('Critical fail! '+reason);this.reportResult('Kaçışın kesildi!',reason);this.spendAP();return;}destination=p;path.push(p);moved++;}
       if(!moved){const reason='Bu yönde duvar veya sütun var. Başka bir yön seç.';this.say(reason);this.reportResult('Yol kapalı',reason);return;}
       if(this.roll(20)+this.mod('DEX')>=dc){this.combat=null;this.damageBuff=null;this.bypassed=false;this.currentEnemies.forEach(e=>e.alert=false);for(const p of path){this.position=p;if(this.triggerTrap()){this.turn++;return;}}this.finish(moved+' blok uzağa kaçıyorsun. Düşman odada kalıyor; canı korunuyor.');this.checkEncounter();}else {const reason=enemy.definition.name+' önüne geçti ve kaçışını blokladı. Geçebileceğin aralığa zamanında ulaşamadın.';this.finish(reason);this.reportResult('Kaçamadın!',reason);this.spendAP();}}
     selectTarget(id){if(this.combat&&this.currentEnemies.some(e=>e.id===id))this.combat.target=id;}
