@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),{DungeonExplorer}=require('./game-engine');
 const map=require('./dungeon_map.json'),rules=require('./game_rules.json'),bestiary=require('./bestiary.json'),loot=require('./loot.json');
-const make=()=>new DungeonExplorer(map,rules,'Rogue','Gölge',{bestiary,loot,random:()=>.99});
+const make=()=>new DungeonExplorer(map,rules,'Rogue','Gölge',{fixedSpawns:true,bestiary,loot,random:()=>.99});
 const g=make();assert.equal(g.inventory.torch,1);assert.equal(g.torchLit,false);assert.equal(g.sightRadius,1);assert.equal(g.canSee({x:g.position.x,y:g.position.y-2}),false);g.toggleTorch();assert.equal(g.sightRadius,3);assert.ok(g.canSee({x:g.position.x,y:g.position.y-2}));
 for(let facing=0;facing<4;facing++){g.facing=facing;const [dx,dy]=[[0,-1],[1,0],[0,1],[-1,0]][facing];assert.ok(g.canSee({x:g.position.x+dx,y:g.position.y+dy}));assert.equal(g.canSee({x:g.position.x-dx,y:g.position.y-dy}),false,'Arkayı göremezsin');assert.equal(g.canSee({x:g.position.x+dy,y:g.position.y-dx}),false,'Doğrudan yan tarafı göremezsin');}g.facing=0;
 g.roomId='troll_hall';const enemy=g.currentEnemies[0];g.position={x:enemy.position.x,y:enemy.position.y+2};g.justEntered=true;assert.equal(g.visibleEnemies.length,1);g.checkEncounter();assert.equal(g.notice.kind,'enemy');assert.equal(g.combat,null);g.sneak();assert.equal(g.bypassed,false);assert.match(g.message,/meşaleyi söndür/);g.toggleTorch();g.sneak();assert.equal(g.bypassed,true);g.toggleTorch();assert.equal(g.bypassed,false);assert.equal(g.hidden,false);

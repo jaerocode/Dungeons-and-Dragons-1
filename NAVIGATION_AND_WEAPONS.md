@@ -21,7 +21,7 @@ Doğrulama: `node test_navigation.js`, `node test_game.js`, `node test_progressi
 
 ## Bloklarda ganimet ve asalar
 
-Her eşya ayrı bir ganimet kaydı ve blok konumu taşır. Mavi ◆ minimap işareti, alınmamış eşyaları ve bırakılmış silahları gösterir. Eşyanın bloğuna en fazla 1 blok yaklaşınca `Al · Eşyanın adı` açılır. Eşyalar tek tek alınır. Silah seçimi penceresi yalnızca seçilen eşyayı gösterir; eskisi oyuncunun bulunduğu blokta kalır. Mühür Taşı da aynı yakınlık kuralıyla alınır. Minimap’te eşyanın üzerine gelmek adını gösterir.
+Her eşya ayrı bir ganimet kaydı ve blok konumu taşır. Mavi ◆ minimap işareti, alınmamış eşyaları ve bırakılmış silahları gösterir. Eşyanın bloğuna en fazla 1 blok yaklaşınca `Al · Eşyanın adı` açılır. Eşyalar tek tek alınır. Silah seçimi penceresi yalnızca seçilen eşyayı gösterir; eskisi oyuncunun bulunduğu blokta kalır. Mithril Külçesi da aynı yakınlık kuralıyla alınır. Minimap’te eşyanın üzerine gelmek adını gösterir.
 
 Tüm sınıflar asaları taşıyabilir. Fighter ve Rogue asayla 1d4 + STR yakın dövüş hasarı verir, 1 aksiyon tüketir; büyü etkisi ve büyülü hasar bonusu uygulanmaz. Mage INT kullanır:
 

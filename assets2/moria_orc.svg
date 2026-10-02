@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 500">
+<defs><linearGradient id="skin" x2="1" y2="1"><stop stop-color="#68705a"/><stop offset="1" stop-color="#242e23"/></linearGradient><linearGradient id="iron" x2=".8" y2="1"><stop stop-color="#53574b"/><stop offset=".5" stop-color="#242a25"/><stop offset="1" stop-color="#101813"/></linearGradient><radialGradient id="shade"><stop stop-color="#000" stop-opacity=".7"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="205" cy="465" rx="150" ry="28" fill="url(#shade)"/>
+<g stroke="#131b14" stroke-width="6" stroke-linejoin="round">
+<path d="M123 303L116 449L87 470L161 470L188 330M217 330L238 472H302L280 450L281 302" fill="url(#iron)"/>
+<path d="M112 155L65 185L50 290L94 312L126 247L293 240L320 332L357 312L344 191L289 157Z" fill="url(#skin)"/>
+<path d="M131 141L92 188L113 328L199 351L292 322L312 187L270 143Z" fill="url(#iron)"/>
+<path d="M108 162L75 185L68 218L137 203L143 164M270 162L310 159L347 202L296 219Z" fill="#45493d"/>
+<path d="M129 110L102 64L141 78L154 37L233 28L266 80L305 57L283 115L265 139L247 165L174 165L145 139Z" fill="url(#skin)"/>
+<path d="M146 62L161 30L209 15L253 38L268 77L234 67L209 41L174 72Z" fill="url(#iron)"/>
+<path d="M145 90L177 87L190 104M226 104L238 87L266 91" stroke="#1a2119" stroke-width="12"/>
+<path d="M162 99H180M238 99H252" stroke="#c99e55" stroke-width="5"/>
+<path d="M207 99L194 124L220 124M166 140Q211 122 254 140L239 156H179Z" fill="#121911"/>
+<path d="M173 135L183 153L190 133M232 133L239 153L248 135" fill="#c4b392" stroke-width="2"/>
+<path d="M136 178L262 295M276 175L145 301" stroke="#69513b" stroke-width="18"/>
+<path d="M114 266L291 263L289 294L115 297Z" fill="#473b29"/><rect x="184" y="264" width="36" height="31" fill="#6b6851"/>
+<path d="M345 259L359 430L342 436L327 265Z" fill="#63523a"/>
+<path d="M338 275L318 191L356 103L377 79L393 157L360 278Z" fill="url(#iron)"/>
+<path d="M103 177L117 197M290 178L309 199M147 317L166 333M258 314L275 331" stroke="#8e8b71" stroke-width="4"/>
+<path d="M45 287L72 274L106 293L95 325L59 323Z M321 298L347 285L366 308L351 338L325 333Z" fill="url(#skin)"/>
+</g></svg>

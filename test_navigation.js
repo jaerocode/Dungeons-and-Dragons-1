@@ -1,6 +1,6 @@
 const {collectRoom,takeWeaponAt,winCombat}=require('./test-loot-helpers');
 const assert=require('node:assert/strict'),fs=require('node:fs');const {DungeonExplorer}=require('./game-engine');const read=p=>JSON.parse(fs.readFileSync(p));const map=read('dungeon_map.json'),rules=read('game_rules.json'),bestiary=read('bestiary.json'),loot=read('loot.json');
-const make=(cls='Fighter')=>new DungeonExplorer(map,rules,cls,'Test',{bestiary,loot,random:()=>.99});
+const make=(cls='Fighter')=>new DungeonExplorer(map,rules,cls,'Test',{fixedSpawns:true,bestiary,loot,random:()=>.99});
 function walkToDoor(g,door){const target=door.position||g.spawnPosition(door),key=p=>p.x+','+p.y,queue=[[g.position,[]]],seen=new Set([key(g.position)]);let path;
   while(queue.length){const [p,route]=queue.shift();if(g.distance(p,target)<=1){path=route;break;}for(const [d,v] of [[0,[0,-1]],[1,[1,0]],[2,[0,1]],[3,[-1,0]]]){const q={x:p.x+v[0],y:p.y+v[1]};if(g.walkable(q)&&!seen.has(key(q))){seen.add(key(q));queue.push([q,[...route,d]]);}}}
   assert.ok(path,'Kapı yolu bulunmalı: '+g.roomId+' → '+door.target);for(const d of path){assert.ok(g.move(d));assert.equal(g.combat,null);}assert.ok(g.distance(g.position,target)<=1);

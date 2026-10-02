@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),{DungeonExplorer}=require('./game-engine');
-const map=require('./dungeon_map.json'),rules=require('./game_rules.json'),options={bestiary:require('./bestiary.json'),loot:require('./loot.json')};
+const map=require('./dungeon_map.json'),rules=require('./game_rules.json'),options={fixedSpawns:true,bestiary:require('./bestiary.json'),loot:require('./loot.json')};
 for(const cls of ['Fighter','Mage','Rogue']){
  const g=new DungeonExplorer(map,rules,cls,'Test',options);
  for(const room of map.rooms){g.roomId=room.id;for(const entry of g.roomLoot){assert.ok(g.walkable(entry.position));assert.equal(g.isDoorPosition(entry.position),false,room.id+': '+entry.id+' kapıya gelmemeli');}}

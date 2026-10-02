@@ -10,32 +10,31 @@ from pathlib import Path
 RACES = {
     "Human": {
         "speed": 30,
-        "age": (18, 70)
+        "age": [
+            18,
+            70
+        ]
     },
-
     "Elf": {
         "speed": 30,
-        "age": (80, 500)
+        "age": [
+            80,
+            500
+        ]
     },
-
     "Dwarf": {
         "speed": 25,
-        "age": (40, 300)
+        "age": [
+            40,
+            300
+        ]
     },
-
-    "Halfling": {
+    "Hobbit": {
         "speed": 25,
-        "age": (20, 120)
-    },
-
-    "Half-Orc": {
-        "speed": 30,
-        "age": (16, 70)
-    },
-
-    "Tiefling": {
-        "speed": 30,
-        "age": (18, 100)
+        "age": [
+            20,
+            120
+        ]
     }
 }
 
@@ -51,130 +50,62 @@ GENDERS = [
 
 
 NAMES = {
-
     "Human": {
         "Male": [
-            "Aldric",
-            "Cedric",
-            "Garrick",
-            "Darian",
-            "Edmund",
-            "Roland"
+            "Beregond",
+            "Bergil",
+            "Forlong",
+            "Hirgon"
         ],
-
         "Female": [
-            "Elara",
-            "Mira",
-            "Nora",
-            "Helena",
-            "Isolde",
-            "Clara"
+            "Ioreth",
+            "Morwen",
+            "Gilraen"
         ]
     },
-
     "Elf": {
         "Male": [
-            "Theren",
-            "Aelar",
-            "Erevan",
-            "Varis",
-            "Faelar"
+            "Galdor",
+            "Lindir",
+            "Erestor",
+            "Gildor"
         ],
-
         "Female": [
-            "Lia",
-            "Thalia",
-            "Sylvara",
-            "Naivara",
-            "Aeris"
+            "Nimrodel",
+            "Mithrellas"
         ]
     },
-
     "Dwarf": {
         "Male": [
-            "Borin",
-            "Thorin",
-            "Durgan",
-            "Harbek",
-            "Orsik"
+            "Nori",
+            "Dori",
+            "Ori",
+            "Bifur",
+            "Bofur",
+            "Bombur"
         ],
-
         "Female": [
-            "Vistra",
-            "Helja",
-            "Gunnloda",
-            "Kathra",
-            "Brynja"
+            "Dís"
         ]
     },
-
-    "Halfling": {
+    "Hobbit": {
         "Male": [
-            "Milo",
-            "Perrin",
-            "Osborn",
-            "Finn",
-            "Roscoe"
+            "Fredegar",
+            "Folco",
+            "Odo",
+            "Doderic"
         ],
-
         "Female": [
-            "Lidda",
-            "Seraphina",
-            "Callie",
-            "Vani",
-            "Meri"
-        ]
-    },
-
-    "Half-Orc": {
-        "Male": [
-            "Grom",
-            "Thokk",
-            "Dorn",
-            "Karg",
-            "Rogar"
-        ],
-
-        "Female": [
-            "Baggi",
-            "Emen",
-            "Ovak",
-            "Shautha",
-            "Vola"
-        ]
-    },
-
-    "Tiefling": {
-        "Male": [
-            "Akmenos",
-            "Morthos",
-            "Leucis",
-            "Mordai",
-            "Therai"
-        ],
-
-        "Female": [
-            "Akta",
-            "Bryseis",
-            "Criella",
-            "Orianna",
-            "Nemeia"
+            "Lobelia",
+            "Dora",
+            "Esmeralda"
         ]
     }
 }
 
 
 SURNAMES = [
-    "Blackwood",
-    "Ironheart",
-    "Stormborn",
-    "Ravencrest",
-    "Ashford",
-    "Thorn",
-    "Silverhand",
-    "Grimwood",
-    "Redwater",
-    "Moonfall"
+    ""
 ]
 
 
@@ -335,7 +266,7 @@ def generate_character(character_class=None, custom_stats=None):
 
     surname = random.choice(SURNAMES)
 
-    name = f"{first_name} {surname}"
+    name = f"{first_name} {surname}".strip()
 
     age_range = RACES[race]["age"]
 

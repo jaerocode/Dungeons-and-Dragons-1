@@ -1,7 +1,7 @@
 {
-  "id": "forgotten_seal",
-  "name": "Moria Madenleri",
-  "objective": "Mühür Haznesi’ndeki Mühür Taşı’nı al ve Zindan Hücreleri’nin dış kapısından kaç.",
+  "id": "mines_of_moria",
+  "name": "Mines of Moria",
+  "objective": "Khazad-dûm’un son deposundaki Mithril Külçesi’ni bul; Doğu Kapısı’nın altındaki hücrelere dön ve madenden çık.",
   "grid": {
     "columns": 48,
     "rows": 36,
@@ -13,7 +13,7 @@
     {
       "id": "entrance",
       "number": 1,
-      "name": "Zindan Hücreleri",
+      "name": "Doğu Kapısı Hücreleri",
       "type": "entry",
       "bounds": [
         22,
@@ -21,10 +21,10 @@
         6,
         4
       ],
-      "description": "Demir parmaklıklardan sızan ay ışığı, ıslak samanın üzerinde ince çizgiler bırakıyor. Tavandan damlayan su, kırık bir tasın içinde birikiyor. Bileğine takılı paslı kelepçe açık; seni buraya getirenlerin ayak sesleri çoktan kesilmiş.",
-      "encounter": "Hücrelerin kilitleri içeriden kırılmış. Son hücrenin duvarında bir taş gevşek; altında eski bir tutsağın notu var. Dış kapının ortasındaki yeşil yuva, aradığın Mühür Taşı’nın biçimine uyuyor.",
-      "reward": "Dungeon’a giriş ve dönüş rotası.",
-      "consequence": "Mühür Taşı ile buraya dönmek macerayı tamamlar.",
+      "description": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var.",
+      "encounter": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -33,19 +33,19 @@
         }
       ],
       "art": "simple_prison",
-      "mood": "DEMİR · RUTUBET · MAVİ AY IŞIĞI",
-      "arrival": "Aralık hücre kapısından avluya çıkıyorsun. Dış kapı hâlâ mühürlü.",
-      "inspection": "Hücrelerin kilitleri içeriden kırılmış. Son hücrenin duvarında bir taş gevşek; altında eski bir tutsağın notu var. Dış kapının ortasındaki yeşil yuva, aradığın Mühür Taşı’nın biçimine uyuyor. Islak samanın yanında, deri bir bağla sarılmış eski bir parşömen duruyor: mahzenin el çizimi haritası.",
+      "mood": "DEMİR · CÜCE TAŞÇILIĞI · SOĞUK HAVA",
+      "arrival": "Doğu Kapısı Hücreleri eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Bir tutsağın son notu",
-          "text": "Buraya isimlerimizle girdik, numaralarımızla kaldık. Simyacı hastaları iyileştirdiğini söylüyordu; aşağıdan gelen çığlıklar başka bir şey anlatıyordu. Dış kapıyı kilitleyen büyü bir taşa bağlı. O taşı bulabilirsen bu duvarlar seni tutamaz."
+          "title": "Doğu Kapısı’na dönüş",
+          "text": "Cüce işaretleri çıkış yolunu gösteriyor: Doğu Kapısı’nın alt geçidi. Yolculuğunu tamamlamak için son depodaki mithril külçesini alıp bu hücrelere dönmelisin. Bu alt odaların planı, Khazad-dûm’un geniş salonlarının yalnızca küçük bir bölümünü gösteriyor."
         },
         {
           "id": "text_1",
-          "title": "Hücre duvarındaki çizikler",
-          "text": "Birbirinin üstüne kazınmış sayılar elli ikiye kadar gidiyor. Son çizginin yanında bir ok var: “Demirin sesini takip et. Silah deposunda hâlâ işe yarar şeyler bulunur.” Taşın kenarı, buraya yazan kişinin son anda acele ettiğini gösteriyor."
+          "title": "Durin’in Halkı’nın işareti",
+          "text": "Duvara bir taç ve yıldızlar kazınmış. Bunlar Uzunsakalların, Durin’in Halkı’nın hatırası. Daha yeni çizikler işaretin altını yaralamış; aşağıdaki ok, sağlam kalan silah raflarına yöneliyor."
         }
       ],
       "interactions": [
@@ -57,20 +57,20 @@
           "result": "Soğuk suyla yaralarını temizliyorsun. En fazla 4 can yenilendi."
         }
       ],
-      "summary": "Paslı parmaklıkların arasından soğuk ışık sızıyor. Kelepçen açık. Önündeki kapı zindan avlusuna çıkıyor.",
+      "summary": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var.",
       "door_hotspots": [
         {
           "x": 50,
           "y": 42
         }
       ],
-      "quiet_summary": "Paslı parmaklıklar, ıslak saman ve duvar boyunca sıralanmış boş hücreler. Dışarı çıkan kapı hâlâ mühürlü.",
-      "quiet_inspection": "Hücrelerin kilitleri içeriden kırılmış. Son hücrenin duvarında bir taş gevşek; altında eski bir tutsağın notu var. Dış kapının ortasındaki yeşil yuva, aradığın Mühür Taşı’nın biçimine uyuyor. Islak samanın yanında, deri bir bağla sarılmış eski bir parşömen duruyor: mahzenin el çizimi haritası."
+      "quiet_summary": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var.",
+      "quiet_inspection": "Khazad-dûm’un Doğu Kapısı altındaki hücrelerde uyanıyorsun. Paslı parmaklıkların ardında cüce taşçılığının keskin çizgileri hâlâ seçiliyor. Açılmış bir kelepçe, soğuk su ve eskimiş bir maden planı var."
     },
     {
       "id": "hall",
       "number": 2,
-      "name": "Üç Kapı Avlusu",
+      "name": "Khazad-dûm Kavşağı",
       "type": "exploration",
       "bounds": [
         22,
@@ -78,10 +78,10 @@
         6,
         4
       ],
-      "description": "Yukarıdaki zincirli fenerler hava akımıyla sallanıyor. Sol kapının pirinç tokmağı bir kılıç biçiminde; sağ kapının altından keskin ot ve kükürt kokusu geliyor. Karşıdaki bazalt kapının çevresi, içeriden vuran sıcaklıkla kızarmış.",
-      "encounter": "Yerdeki tozda üç farklı iz var: ağır zırhlı botlar, ince tabanlı ayakkabılar ve sürüklenmiş bir yük. Bir gölge pelerini eski bir nöbetçinin kancasına takılmış. Kapıların hiçbiri seni kendi başına içeri çekmiyor; hangi yolu izleyeceğin sana kalmış.",
-      "reward": "Üç farklı keşif kolunu ve ortak yolu seçme fırsatı.",
-      "consequence": "Hızlı hareket yakınındaki yaratığı uyarabilir. Yavaş hareket daha az ses çıkarır.",
+      "description": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
+      "encounter": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -90,23 +90,23 @@
         }
       ],
       "art": "simple_crossroads",
-      "mood": "SÖNÜK FENERLER · ÜÇ AYRI YOL",
-      "arrival": "Kemerli avluda kapıların önünde duruyorsun.",
-      "inspection": "Yerdeki tozda üç farklı iz var: ağır zırhlı botlar, ince tabanlı ayakkabılar ve sürüklenmiş bir yük. Bir gölge pelerini eski bir nöbetçinin kancasına takılmış. Kapıların hiçbiri seni kendi başına içeri çekmiyor; hangi yolu izleyeceğin sana kalmış.",
+      "mood": "KEMERLER · TOZ · UZUN YANKILAR",
+      "arrival": "Khazad-dûm Kavşağı eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Mahzenin görev çizelgesi",
-          "text": "Sol kanat: cephane ve sorgu kayıtları. Sağ kanat: simya tezgâhı ve başbüyücünün arşivi. Derin salon: ocak bekçisi ve rünlü mühür. Son satırın üzerine siyah mürekkep dökülmüş; “bekçi” sözcüğünün yanında yalnızca büyük bir pençe izi seçiliyor."
+          "title": "Khazad-dûm ve Moria",
+          "text": "Cüceler buraya Khazad-dûm derdi. Başka halkların Moria adıyla andığı bu yer, Sisli Dağlar’ın altında uzanan eski bir krallıktı. Bu kavşaktan görülen odalar, büyük madenin terk edilmiş bir yan koluna ait."
         },
         {
           "id": "text_1",
-          "title": "Yırtık bir uyarı",
-          "text": "Sessizlik ağır zırhı sevmez. Deri tabanlılar sütunların gölgesinden geçsin. Silahına güvenenler önce onu hazırlasın. Bir kapıyı açmak bazen savaş kazanmaktan daha değerlidir."
+          "title": "Uzunsakalların yol işaretleri",
+          "text": "Çekiç işareti işliklere, kitap işareti kayıtlara yöneltiyor. Taş kapakların ardındaki kestirmeler herkese uygun değil: ağır kapaklar güç, dar menfezler çeviklik, eski kilitler ise bilgi ister."
         }
       ],
       "interactions": [],
-      "summary": "Sallanan tek bir fener, dört ayrı kapıyı aydınlatıyor. Demir, keskin ot ve sıcak kül kokuları birbirine karışıyor.",
+      "summary": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
       "door_hotspots": [
         {
           "x": 17,
@@ -125,13 +125,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Sallanan bir fener ayrı kapılara gölge düşürüyor. Demir, keskin ot ve sıcak kül kokuları birbirine karışıyor.",
-      "quiet_inspection": "Yerdeki tozda üç farklı iz var: ağır zırhlı botlar, ince tabanlı ayakkabılar ve sürüklenmiş bir yük. Bir gölge pelerini eski bir nöbetçinin kancasına takılmış. Kapıların hiçbiri seni kendi başına içeri çekmiyor; hangi yolu izleyeceğin sana kalmış."
+      "quiet_summary": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
+      "quiet_inspection": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor."
     },
     {
       "id": "barracks",
       "number": 3,
-      "name": "İşkence Odası",
+      "name": "Orkların Ele Geçirdiği Nöbet Odası",
       "type": "combat",
       "bounds": [
         8,
@@ -139,10 +139,10 @@
         6,
         4
       ],
-      "description": "Kızıl mumlar, boş bir demir sandalyenin kollarına bağlanmış eski deri kayışları aydınlatıyor. Tavandaki makaradan gevşek zincirler sarkıyor. Uzun masanın üzerinde kurumuş mürekkep, kırık bir mühür ve yığınla sorgu kâğıdı var. Bir Skeleton masanın yanında nöbet tutuyor.",
-      "encounter": "Düzeneklerin çoğu yıllardır kullanılmamış. Sandalyenin altında içi dolu bir iksir şişesi duruyor; duvardaki silahın kabzası pas tutmamış. Sorgu defterindeki tutuklu adlarının hepsi daha sonra “arşive gönderildi” diye işaretlenmiş.",
-      "reward": "Bir iyileştirme iksiri ve silah deposunun konumu.",
-      "consequence": "Skeleton yenildiğinde bir iyileştirme iksiri alınır. Silah önceden hazırsa combat başlangıcında +2 inisiyatif kazanırsın.",
+      "description": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "encounter": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
         {
           "id": "skeleton",
@@ -170,24 +170,23 @@
         }
       ],
       "art": "simple_torture",
-      "mood": "PASLI ZİNCİRLER · KIZIL MUMLAR",
-      "arrival": "Boş sorgu düzeneklerinin arasında bir iskelet başını kaldırıyor.",
-      "inspection": "Düzeneklerin çoğu yıllardır kullanılmamış. Sandalyenin altında içi dolu bir iksir şişesi duruyor; duvardaki silahın kabzası pas tutmamış. Sorgu defterindeki tutuklu adlarının hepsi daha sonra “arşive gönderildi” diye işaretlenmiş.",
+      "mood": "PASLI ZİNCİRLER · İS · KIRMIZI KORLAR",
+      "arrival": "Orkların Ele Geçirdiği Nöbet Odası eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Sorgucunun defteri",
-          "text": "“Tutuklu aynı cevabı tekrarlıyor: Rünlü kapı kan değil, doğru bir söz ister.” Bu satırın altına farklı bir el “O hâlde niçin hâlâ buradayız?” yazmış. Bir sonraki sayfa koparılmış. Kâğıdın arkası, cephaneliğe giden servis yolunu tarif ediyor."
+          "title": "Silinmiş cüce levhası",
+          "text": "Levhanın kenarında Khazad-dûm’un nöbet düzenine ait işaretler kalmış. Yazının ortası kazınmış; orkların kaba çentikleri cüce harflerinin üstüne binmiş. Silah deposuna açılan servis kapısının menteşesi hâlâ sağlam."
         },
         {
           "id": "text_1",
-          "title": "Kırık mühürlü mektup",
-          "text": "Sorgu odasını kapatın. Ocak salonundaki yaratık zincirlerinden kurtuldu. Üst katta kalan her muhafız aşağıya inmekten kaçınıyor. Hazneye gidecek kişi silahını yanında taşısın; gürültüsü onu ele vermesin."
+          "title": "Moria orklarının izleri",
+          "text": "Orklar madenin karanlık yollarını sığınak ve geçit olarak kullanıyor. Buradaki ayak izleri ağır çizme tabanlarına ait. Metalin taşta sürüklenmesi, yakınlarda silahlı bir nöbetçinin bulunduğunu düşündürüyor."
         }
       ],
       "interactions": [],
-      "summary": "Boş işkence tezgâhının yanında zincirler sarkıyor. Paslı kılıcını taşıyan Skeleton odada nöbet tutuyor.",
-      "enemy_art": "simple_torture_enemy",
+      "summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
       "door_hotspots": [
         {
           "x": 23,
@@ -216,13 +215,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Boş işkence tezgâhının yanında zincirler sarkıyor. Kızıl mumlar demir aletlerin üzerinde titriyor.",
-      "quiet_inspection": "Düzeneklerin çoğu yıllardır kullanılmamış. Sandalyenin altında içi dolu bir iksir şişesi duruyor; duvardaki silahın kabzası pas tutmamış. Sorgu defterindeki tutuklu adlarının hepsi daha sonra “arşive gönderildi” diye işaretlenmiş."
+      "quiet_summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "quiet_inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor."
     },
     {
       "id": "armory",
       "number": 4,
-      "name": "Kara Demir Cephaneliği",
+      "name": "Khazad-dûm Silah Deposu",
       "type": "treasure",
       "bounds": [
         8,
@@ -230,10 +229,10 @@
         6,
         4
       ],
-      "description": "Uzun kılıçlar, kancalı mızraklar ve rün kazınmış baltalar duvarları dolduruyor. Kırmızı kadife üzerine serilmiş bir hançer, ışığı neredeyse yutuyor. Cam vitrindeki mavi damarlı kılıç hâlâ keskin; ağır bir zırhın göğsünde kül rengi koruma işaretleri var.",
-      "encounter": "Raflardaki sıradan silahlar kırık ve paslı. Üç parça öne çıkıyor: Külbiçen’in ağır ağzı, Fısıltı Hançeri’nin sessiz kını ve koruyucu rünlü Kül Zırhı. Güneydeki cephane yolu açık. Öteki duvardaki darbe izleri, yeterince güçlü birinin kırabileceği çatlak bir duvarı gösteriyor.",
-      "reward": "Keskin bir balta ve kışlanın eski görev defteri.",
-      "consequence": "Zayıf duvarı kırmak +2 alarm üretir. Final muhafızı yüksek alarmda seni daha uzaktan fark eder.",
+      "description": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "encounter": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -286,23 +285,23 @@
         }
       ],
       "art": "simple_armory",
-      "mood": "SOĞUK ÇELİK · KIRMIZI KADİFE",
-      "arrival": "Silah raflarının önünde soluk çelik parıltıları görüyorsun.",
-      "inspection": "Raflardaki sıradan silahlar kırık ve paslı. Üç parça öne çıkıyor: Külbiçen’in ağır ağzı, Fısıltı Hançeri’nin sessiz kını ve koruyucu rünlü Kül Zırhı. Güneydeki cephane yolu açık. Öteki duvardaki darbe izleri, yeterince güçlü birinin kırabileceği çatlak bir duvarı gösteriyor.",
+      "mood": "ÇELİK · ÇEKİÇ İZLERİ · KIRMIZI KUMAŞ",
+      "arrival": "Khazad-dûm Silah Deposu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Ustanın silah kataloğu",
-          "text": "Külbiçen — tek eliyle taşıyabilene ağır bir ödül. Fısıltı Hançeri — hızlı ellere ve karanlık ceplere göre. Kül Zırhı — alevden önce darbeye karşı örüldü. Usta her açıklamanın yanına aynı sözü eklemiş: “En iyi silah, bir daha kuşanabildiğindir.”"
+          "title": "Cüce ustalarının tezgâhı",
+          "text": "Khazad-dûm’un ustaları taşı da metali de işlerdi. Raftaki ağır çekiç, tek darbede büyük güç taşır ama yeniden kaldırmak zaman ister. Hafif bir hançer veya mızrak daha çabuk kullanılır. Yanında yalnızca iki silah taşıyabilirsin."
         },
         {
           "id": "text_1",
-          "title": "Demirciye gönderilen sipariş",
-          "text": "Ocak bekçisi için altı zincir daha istendi. Her biri insan beli kalınlığında olmalı. Usta mektubun arkasına yalnızca “Hiçbir zincir yeterli olmayacak” yazmış. Masada onarım için bırakılmış bir rün asası da duruyor."
+          "title": "Mithril üzerine bir kayıt",
+          "text": "Moria-gümüşü diye de anılan mithril, hafifliği ve sağlamlığıyla değerliydi. Bu depodaki her parlak parça mithril değildir: çoğu demir ve çeliktir. Son haznede kalan tek külçe, aradığın maden örneği."
         }
       ],
       "interactions": [],
-      "summary": "Demir raflarda ağır baltalar, ince hançerler ve rünlü silahlar var. Bir zırh takımı soluk ışıkta parlıyor.",
+      "summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
       "door_hotspots": [
         {
           "x": 22,
@@ -313,13 +312,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Paslı silah rafları duvarları kaplıyor. Kırmızı kadife parçaları, taş zeminin üzerinde eski bir sancağın kalıntıları gibi yatıyor.",
-      "quiet_inspection": "Raflardaki sıradan silahlar kırık ve paslı. Üç parça öne çıkıyor: Külbiçen’in ağır ağzı, Fısıltı Hançeri’nin sessiz kını ve koruyucu rünlü Kül Zırhı. Güneydeki cephane yolu açık. Öteki duvardaki darbe izleri, yeterince güçlü birinin kırabileceği çatlak bir duvarı gösteriyor."
+      "quiet_summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "quiet_inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş."
     },
     {
       "id": "rubble",
       "number": 5,
-      "name": "Çökmüş Katakomblar",
+      "name": "Çökmüş Maden Geçidi",
       "type": "exploration",
       "bounds": [
         16,
@@ -327,10 +326,10 @@
         5,
         4
       ],
-      "description": "Taş lahitlerin kapakları yana devrilmiş. Tavandaki çatlaklardan sarkan kökler, oyulmuş kemik nişlerine dolaşıyor. Bir komutanın kabartmalı mezarı yarı yarıya çökmüş; yanında ağların içine gizlenmiş iri bir örümcek var.",
-      "encounter": "Komutanın taş elinin altında bir savaş notu saklı. Muhafızın her kılıç savuruşundan sonra omzunu açık bıraktığını anlatıyor. Çökmüş kemerin arkasında trol salonuna bağlanan sıcak bir servis koridoru bulunuyor.",
-      "reward": "Skeleton Muhafızın savunmasını anlatan bir komutan mektubu.",
-      "consequence": "Odayı incelemek finalde ilk saldırına avantaj verir.",
+      "description": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor.",
+      "encounter": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
         {
           "id": "spider",
@@ -354,23 +353,23 @@
         }
       ],
       "art": "simple_catacombs",
-      "mood": "KEMİK NİŞLERİ · TOZ · KÖKLER",
-      "arrival": "Kırık mezar taşlarının arasındaki kuru geçide giriyorsun.",
-      "inspection": "Komutanın taş elinin altında bir savaş notu saklı. Muhafızın her kılıç savuruşundan sonra omzunu açık bıraktığını anlatıyor. Çökmüş kemerin arkasında trol salonuna bağlanan sıcak bir servis koridoru bulunuyor.",
+      "mood": "ÇÖKMÜŞ KEMERLER · AĞLAR · TOZ",
+      "arrival": "Çökmüş Maden Geçidi eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Komutanın son emri",
-          "text": "Bronz haznenin bekçisi sağ omzunu korumayı unutur. Darbesini sabırla karşılayan, ikinci anda saldırabilir. Burada yatan askerler bu kusuru bir kez öğrendi; bir kısmı öğrenmeye fırsat bulamadı."
+          "title": "Maden damarının kaydı",
+          "text": "Taşa kazınmış işaretler, bu yan geçidin eski bir cevher arama kolu olduğunu gösteriyor. Moria’nın zenginliği dağın içinden çıkarılan mithrille büyümüştü. Şimdi galeriyi taşıyan kemerlerden yalnızca birkaçı ayakta."
         },
         {
           "id": "text_1",
-          "title": "Lahit kapağının yazısı",
-          "text": "Taşı koruyanlar yeminlerini ölümden sonra da taşır. Adını hatırlamayan nöbetçi kapısını hatırlar. Yanına silahsız yaklaşan bir dost, bazen silahlı bir yabancıdan daha uzun yaşar."
+          "title": "Ağların gerisindeki yol",
+          "text": "İşaretli taş basamaklar çöküntünün kenarından dolaşıyor. Ağlar yeni; üzerlerinde henüz toz birikmemiş. Taşların altındaki karanlık boşluğu görmeden elini uzatma."
         }
       ],
       "interactions": [],
-      "summary": "Çökmüş lahitler ve birkaç örümcek ağı yolu daraltıyor. Büyük bir örümcek taşların arasında bekliyor.",
+      "summary": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor.",
       "enemy_art": "simple_catacombs_enemy",
       "door_hotspots": [
         {
@@ -392,13 +391,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Çökmüş lahitler ve örümcek ağları yolu daraltıyor. Kökler, çatlamış taşların arasından uzanıyor.",
-      "quiet_inspection": "Komutanın taş elinin altında bir savaş notu saklı. Muhafızın her kılıç savuruşundan sonra omzunu açık bıraktığını anlatıyor."
+      "quiet_summary": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor.",
+      "quiet_inspection": "Yıkılmış kemerler maden yolunu daraltıyor. Taş aralıkları kalın ağlarla örtülü. Khazad-dûm’un eski oyma çizgileri, tozun ve köklerin altında kayboluyor."
     },
     {
       "id": "rune_hall",
       "number": 6,
-      "name": "Yasak Simya Odası",
+      "name": "Cüce Şifacıların İşliği",
       "type": "puzzle",
       "bounds": [
         33,
@@ -406,10 +405,10 @@
         6,
         4
       ],
-      "description": "Bakır imbikler birbirine ince tüplerle bağlı. Yeşil ve mor sıvılar ağır ağır kaynıyor; kurutulmuş otlar tavan kirişlerinden sarkıyor. Siyah taş tezgâhın üzerinde açık bir reçete, temiz bir iksir şişesi ve büyücünün arşivine giden rünlü kapının anahtarı bulunuyor.",
-      "encounter": "İmbiğin ateşi hâlâ yanıyor. Reçetenin son satırı okunabilir: acı ot, temiz su, sonra tek damla yeşil öz. Karışımı dikkatle tamamlamak bir iyileştirme iksiri verebilir. Arşiv kapısındaki rünler büyülü bir dokunuşa cevap verir.",
-      "reward": "Rünler Mühür Odası’ndaki sembollerin anlamını açıklar.",
-      "consequence": "Yavaş hareket bir adım, hızlı hareket üç adım ilerletir. Açılan geçitlerden tekrar geçmek Focus tüketmez.",
+      "description": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
+      "encounter": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -426,19 +425,19 @@
         }
       ],
       "art": "simple_alchemy",
-      "mood": "BAKIR DAMITICILAR · YEŞİL VE MOR CAM",
-      "arrival": "Cam tüplerdeki kabarcıklar, sessiz tezgâhların üzerinde yükseliyor.",
-      "inspection": "İmbiğin ateşi hâlâ yanıyor. Reçetenin son satırı okunabilir: acı ot, temiz su, sonra tek damla yeşil öz. Karışımı dikkatle tamamlamak bir iyileştirme iksiri verebilir. Arşiv kapısındaki rünler büyülü bir dokunuşa cevap verir.",
+      "mood": "OTLAR · CAM · SOLUK RÜNLER",
+      "arrival": "Cüce Şifacıların İşliği eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "İyileştirme reçetesi",
-          "text": "Bir tutam acı otu suya kat. Kaynama durunca özden yalnızca bir damla ekle. İkinci damla tedaviyi zehre çevirir. Simyacı sayfanın kenarına şunu not düşmüş: “Bilmek ile acele etmek aynı şey değildir.”"
+          "title": "İşlikteki kap işaretleri",
+          "text": "Kaplar iyileşme, dayanıklılık ve zihni toparlama işaretleriyle ayrılmış. Sağlam şişeler mantarla kapatılmış, kuru otlar havanın yanında bırakılmış. Bir kabın dibinde tortu var; yalnızca iyi korunmuş karışımlara güven."
         },
         {
           "id": "text_1",
-          "title": "Simyacının günlüğü",
-          "text": "Ocak salonundaki kanallar ısıyı eşit dağıtıyor; fakat bekçi büyüdükçe taşlar çatlıyor. Yaratığın teni eski demirden daha sert. Sütunlar onun bakışını böler. Biri geçmek zorundaysa kılıçtan önce sessizliğe güvenmeli."
+          "title": "Cirth çizimleri",
+          "text": "Cüce ustası kilidin çevresine Cirth harflerinin çizimlerini bırakmış. Bunlar bir bilmecenin cevabından çok, mekanizmanın dilini öğrenmek için hazırlanmış alıştırmalara benziyor. İnce taş sürgüleri doğru sırada açmak gerek."
         }
       ],
       "interactions": [
@@ -455,7 +454,7 @@
           "failure": "Karışım bulandı. Reçeteyi yeniden okuyup tekrar deneyebilirsin."
         }
       ],
-      "summary": "Simya masasındaki şişeler yeşil ışık yayıyor. Küçük kazanın dumanına kükürt ve acı ot kokusu karışıyor.",
+      "summary": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
       "door_hotspots": [
         {
           "x": 16,
@@ -466,13 +465,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Simya masasındaki şişeler yeşil ışık yayıyor. Kazandan kükürt ve acı ot kokusu yükseliyor.",
-      "quiet_inspection": "İmbiğin ateşi hâlâ yanıyor. Reçetenin son satırı okunabilir: acı ot, temiz su, sonra tek damla yeşil öz. Karışımı dikkatle tamamlamak bir iyileştirme iksiri verebilir. Arşiv kapısındaki rünler büyülü bir dokunuşa cevap verir."
+      "quiet_summary": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
+      "quiet_inspection": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor."
     },
     {
       "id": "archive",
       "number": 7,
-      "name": "Başbüyücünün Arşivi",
+      "name": "Mazarbul Kayıt Odası",
       "type": "lore",
       "bounds": [
         34,
@@ -480,10 +479,10 @@
         6,
         4
       ],
-      "description": "Deri ciltli kitaplar tavana kadar uzanıyor. Birkaç kitap raflarından ayrılıp havada asılı kalmış. Çalışma masasındaki yıldız çizelgesi mor ışık saçıyor; tüy kalem, yarım bırakılmış bir cümlenin üzerinde duruyor. Oda duman ve eski kâğıt kokuyor.",
-      "encounter": "Başbüyücünün kayıtları Mühür Taşı’nın dış kapıyı da yönettiğini doğruluyor. Kenardaki savaş çizimi, Skeleton Muhafızın savunmasındaki boşluğu gösteriyor. Masanın altında gizli hazineye giden sıradan bir kapı var.",
-      "reward": "Skeleton Muhafızın savunmasını anlatan rün kaydı.",
-      "consequence": "Kaydı incelemek finalde bir saldırına avantaj verir.",
+      "description": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
+      "encounter": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -500,19 +499,19 @@
         }
       ],
       "art": "simple_wizard_archive",
-      "mood": "MOR RÜNLER · HAVADA ASILI KİTAPLAR",
-      "arrival": "Raflar arasındaki kitaplar, geldiğini fark etmiş gibi kıpırdıyor.",
-      "inspection": "Başbüyücünün kayıtları Mühür Taşı’nın dış kapıyı da yönettiğini doğruluyor. Kenardaki savaş çizimi, Skeleton Muhafızın savunmasındaki boşluğu gösteriyor. Masanın altında gizli hazineye giden sıradan bir kapı var.",
+      "mood": "DERİ KAPAKLAR · MÜREKKEP · CIRTH",
+      "arrival": "Mazarbul Kayıt Odası eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Mührün yapısı üzerine",
-          "text": "Taş yalnızca bir kapıyı değil, mahzenin bütün dış sınırını mühürler. Taş yerinden alınırsa hazne kararır; dış hücre kapısı ise taşı tanır. İşlem geri dönüş yolunu kapatmaz. Sahibini bekleyen taş, taşıyanın adını sormaz."
+          "title": "Mazarbul Kitabı",
+          "text": "Balin’in Moria’ya dönen halkı, onarılan salonları ve yeniden bulunan mithrili bu kitaba kaydetmiş. Sayfalar ilerledikçe sevinç yerini yolların kapanmasına ve kuşatma korkusuna bırakıyor. Son yapraklardaki acele el yazısı, Ori’nin kayıtlarını taşıyor. Yanmış ve yırtılmış sayfalar yine de okunabiliyor."
         },
         {
           "id": "text_1",
-          "title": "Rün bekçisine dair not",
-          "text": "Bekçi düşünmez; eski bir hareketi tekrar eder. Kılıcını savururken sağ omzundaki kemik açıklığı büyür. Bu notu okuyan kişi o açıklığı ilk saldırısında kullanabilir. Kapının bilmecesi ise her ziyaretçi için aynı sözleri söylemez."
+          "title": "Durin’in Halkı’nın hatırası",
+          "text": "Durin, Uzunsakalların atası olarak anılır. Halkının Khazad-dûm’daki taş ve maden işçiliği, bu raflardaki çizimlerde iz bırakmış. Bir çekiç, bir örs ve yıldızlı taç: karanlıkta bile unutulmamış işaretler."
         }
       ],
       "interactions": [
@@ -524,7 +523,7 @@
           "result": "Rünlerin düzenini kavrıyorsun. 2 Focus yenilendi."
         }
       ],
-      "summary": "Yüksek raflardaki kitapları mavi ışık okşuyor. Açık bir defter, büyücünün son notlarını saklıyor.",
+      "summary": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
       "door_hotspots": [
         {
           "x": 25,
@@ -539,13 +538,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Tozlu kitaplar tavana kadar uzanan raflarda dizili. Mürekkep kokusu, soluk rünlerin ışığına karışıyor.",
-      "quiet_inspection": "Başbüyücünün kayıtları Mühür Taşı’nın dış kapıyı da yönettiğini doğruluyor. Masanın altında gizli hazineye giden sıradan bir kapı var."
+      "quiet_summary": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
+      "quiet_inspection": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor."
     },
     {
       "id": "cistern",
       "number": 8,
-      "name": "Sular Altındaki Zindan",
+      "name": "Khazad-dûm Sarnıcı",
       "type": "exploration",
       "bounds": [
         4,
@@ -553,10 +552,10 @@
         6,
         4
       ],
-      "description": "Yeşil siyah su, alt kat hücrelerini diz boyuna doldurmuş. Paslı parmaklıkların arasından soğuk mavi ışık sızıyor. Tavandan düşen damlalar tek tek yankılanıyor. Ağları suya değmeyen bir örümcek, kapının üst kemerinde bekliyor.",
-      "encounter": "Dar set hâlâ geçilebilir. Bir tutsak, su geçirmeyen deri bir torbaya iki iksir ve eski bir kroki bırakmış. Krokide trol salonunun yan koridoruna çıkan bir bakım menfezi işaretli.",
-      "reward": "Bir iyileştirme iksiri ve eski kaçış krokisi.",
-      "consequence": "Örümcek yenilince iksir alınır. Kaçış denemesi DEX kontrolüdür; başarısızlık bir aksiyon harcar.",
+      "description": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor.",
+      "encounter": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
         {
           "id": "spider",
@@ -580,23 +579,23 @@
         }
       ],
       "art": "simple_cistern",
-      "mood": "SİYAH SU · SÖNÜK MAVİ IŞIK",
-      "arrival": "Eski hücrelerin önündeki dar taş sete çıkıyorsun.",
-      "inspection": "Dar set hâlâ geçilebilir. Bir tutsak, su geçirmeyen deri bir torbaya iki iksir ve eski bir kroki bırakmış. Krokide trol salonunun yan koridoruna çıkan bir bakım menfezi işaretli.",
+      "mood": "SİYAH SU · IZGARALAR · DAMLALAR",
+      "arrival": "Khazad-dûm Sarnıcı eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Su geçirmeyen mektup",
-          "text": "İlk selde kapıları açmadılar. İkinci selde nöbetçiler de gelmedi. Bu satırları yazan kişi kayığın ipini çözmüş, ama su yükselmeden önce arka menfezi işaretlemeye vakit bulmuş."
+          "title": "Sarnıcın taş planı",
+          "text": "Duvara oyulmuş çizim su kanallarını ve temizleme menfezlerini gösteriyor. İnce servis yolu ağır zırhla geçilemeyecek kadar dar. Suyun üstündeki kalaslar yeni, taş basamaklar ise çok daha eski."
         },
         {
           "id": "text_1",
-          "title": "Kaçış krokisinin açıklaması",
-          "text": "Demir ızgaranın gevşek vidaları soldadır. Ana koridoru izleme; o yol sesini taşır. Sıcak hava hissedersen bazalt salona yaklaştın. Yerdeki kızıl çizgileri su sanma."
+          "title": "Kheled-zâram’ın adı",
+          "text": "Kayıtta Kheled-zâram, Aynagöl, adı geçiyor. Göl madenin doğusunda, Dimrill Vadisi’ndedir; bu karanlık sarnıçla karıştırılmamalı. Durin’in Halkı için gölün adı, dağın dışındaki eski hatıralara uzanır."
         }
       ],
       "interactions": [],
-      "summary": "Sığ su sütunların dibinde dalgalanıyor. Kuru bir taşın üzerinde iri bir örümcek sessizce bekliyor.",
+      "summary": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor.",
       "enemy_art": "simple_cistern_enemy",
       "door_hotspots": [
         {
@@ -618,13 +617,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Sığ su, yosunlu taşların üzerinde durgun. Uzak bir damlanın sesi, suyun altından gelen yankıya karışıyor.",
-      "quiet_inspection": "Dar set hâlâ geçilebilir. Bir tutsak, su geçirmeyen deri bir torbaya iki iksir ve eski bir kroki bırakmış."
+      "quiet_summary": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor.",
+      "quiet_inspection": "Taş basamakların altını siyah su doldurmuş. Eski su kanalları duvarlardan geçiyor; cüce yapımı demir ızgaraların kenarında dar bir servis yolu kalmış. Her damla karanlıkta uzun bir yankı bırakıyor."
     },
     {
       "id": "seal_room",
       "number": 9,
-      "name": "Rünlü Kapı Odası",
+      "name": "Cirth Kapısının Ön Odası",
       "type": "puzzle",
       "bounds": [
         22,
@@ -632,10 +631,10 @@
         6,
         4
       ],
-      "description": "Tek parça obsidyenden oyulmuş kapı, gümüş mavi rünlerle çevrili. Önündeki dört küçük levha cevapları gösteriyor. Sözler gözlerinin önünde değişiyor; burada daha önce gördüğün işaretler şimdi başka anlam taşıyor. Duvar dibindeki taş bank güvenli ve serin.",
-      "encounter": "Kapı kuvvete tepki vermiyor. Yazıt bir cevap istiyor; yanlış sözler rünleri kızartsa da yeniden düşünmene izin veriyor. Taş bankta bir kez dinlenebilir, karşı kapı açılmadan önce canını ve Focus’unu yenileyebilirsin.",
-      "reward": "Kuzeydeki kılıç salonuna geçiş ve bir defalık güvenli dinlenme: tam HP / Focus.",
-      "consequence": "Bulmacayı herkes çözebilir. Yanlış sıra +1 alarm verir. Taş bank bir kez tam can ve Focus yeniler.",
+      "description": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
+      "encounter": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -644,23 +643,23 @@
         }
       ],
       "art": "simple_rune_chamber",
-      "mood": "OBSIDYEN · GÜMÜŞ IŞIK · FISILDAYAN YAZIT",
-      "arrival": "Obsidyen kapının önündeki yazıt, şekil değiştirerek bir bilmeceye dönüşüyor.",
-      "inspection": "Kapı kuvvete tepki vermiyor. Yazıt bir cevap istiyor; yanlış sözler rünleri kızartsa da yeniden düşünmene izin veriyor. Taş bankta bir kez dinlenebilir, karşı kapı açılmadan önce canını ve Focus’unu yenileyebilirsin.",
+      "mood": "RÜNLER · TAŞ BANK · SESSİZLİK",
+      "arrival": "Cirth Kapısının Ön Odası eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Kapı yapımcısının notu",
-          "text": "Bu kapıyı bir kral için yapmadım. Kralın emrinden kaçabilecek biri için yaptım. Güç kilidi kırabilir, ama doğru cevap onu sessizce açar. Seçeneklere bak; bazen aranan şey, gözünün önündeki sıradan bir nesnedir."
+          "title": "İç depo kilidi",
+          "text": "Bu iç depo kapısının çerçevesi cüce rünleriyle işlenmiş. Kilit kısa bir bilmeceyle sınar. Yaklaşmadan yazıyı okuyamazsın. Cevap doğruysa sürgü açılır, yanlışsa madenin sessizliği bozulur."
         },
         {
           "id": "text_1",
-          "title": "Bankın üstündeki hatıra",
-          "text": "Birisi taşa bir isim kazımış, ardından üstünü başka bir isimle örtmüş. Bankın altındaki örtü temiz; yanında dinlenmek için bırakılmış su var. Buradaki sessizlik, mahzenin geri kalanından farklı olarak seni dinlemiyor."
+          "title": "Taş bankın oyması",
+          "text": "Bankın yanına bir örs işareti kazınmış. Burada bırakılan temiz örtü ve su, uzun bir maden vardiyasının dinlenme yerini hatırlatıyor. Bu güvenli köşede bir kez dinlenebilirsin."
         }
       ],
       "interactions": [],
-      "summary": "Obsidyen kapıdaki rünler mavi ışıkla titreşiyor. Yazıt bir bilmece soruyor; taş bankta dinlenebilirsin.",
+      "summary": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
       "door_hotspots": [
         {
           "x": 20,
@@ -671,13 +670,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Kapının üzerindeki rünler soluk bir ışık yayıyor. Yanında aşınmış bir taş bank ve okunmayı bekleyen yazılar var.",
-      "quiet_inspection": "Kapı kuvvete tepki vermiyor. Yazıt bir cevap istiyor; yanlış sözler rünleri kızartsa da yeniden düşünmene izin veriyor. Taş bankta bir kez dinlenebilir, karşı kapı açılmadan önce canını ve Focus’unu yenileyebilirsin."
+      "quiet_summary": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
+      "quiet_inspection": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş."
     },
     {
       "id": "cache",
       "number": 10,
-      "name": "Gümüş Mühür Hazinesi",
+      "name": "Cüce Emanet Deposu",
       "type": "treasure",
       "bounds": [
         39,
@@ -685,10 +684,10 @@
         6,
         4
       ],
-      "description": "Gümüş bağlı sandığın çevresinde saç kadar ince teller uzanıyor. Tarnışmış paralar ağır kadife örtünün üstüne saçılmış. Yeşil fener ışığı, sandığın gövdesine oyulmuş küçük yaratıkları hareket ediyormuş gibi gösteriyor.",
-      "encounter": "Sandığın yan kapağında tuzağı devre dışı bırakan güvenli bir kol var. Hazineye ulaşan kişi için zırh ve iki Öfke İksiri ayrılmış. Kayıt kâğıtları bu malzemelerin hiç teslim alınmadığını söylüyor.",
-      "reward": "İkinci bir iksir ve koleksiyonluk gümüş mühür.",
-      "consequence": "Teli koparmak 2 hasar ve +1 alarm yaratır. Hazine zorunlu değildir. Bu oda Mage arşiv kolundadır.",
+      "description": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
+      "encounter": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -701,36 +700,36 @@
         }
       ],
       "art": "simple_treasure_cache",
-      "mood": "İNCE TELLER · ESKİ GÜMÜŞ · YEŞİL FENER",
-      "arrival": "İnce tellerle çevrili bir sandığın önünde duruyorsun.",
-      "inspection": "Sandığın yan kapağında tuzağı devre dışı bırakan güvenli bir kol var. Hazineye ulaşan kişi için zırh ve iki Öfke İksiri ayrılmış. Kayıt kâğıtları bu malzemelerin hiç teslim alınmadığını söylüyor.",
+      "mood": "SANDIKLAR · GÜMÜŞ PARILTISI · TOZ",
+      "arrival": "Cüce Emanet Deposu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Teslim alınmayan envanter",
-          "text": "İki savaş iksiri, bir koruyucu zırh ve bir koleksiyon mührü. Alıcı: aşağı salonun komutanı. Teslim eden: imzası silinmiş. Sonraki satırda yalnızca “komutan artık sipariş veremez” yazıyor."
+          "title": "Depo çetelesi",
+          "text": "Çetele, cüce işliklerinden gelen aletleri ve dışarıdan ulaşan eşyaları ayrı ayrı sayıyor. Rivendell işi bir pelerin, hafif bir mithril örgü ve sağlam demir silahlar son raflara ayrılmış. Bazı mühürler kırılmış, bazı sandıklar hiç açılmamış."
         },
         {
           "id": "text_1",
-          "title": "Sandığın kurucusundan",
-          "text": "Kapağı çekene tel, yan kolu bulana ödül. Kasanın üstündeki gümüşün kıymeti az; asıl değer, boşa harcanmamış bir savaş turudur."
+          "title": "Sandığın ince teli",
+          "text": "Kapağın içindeki tel basit bir kapanın parçası. İnce işçiliği fark eden biri, ana koridoru izlemek yerine bu depodaki güvenli kenarları kullanabilir. Buradaki eşyalar ganimettir; taş üzerindeki kayıtlar yerinde kalır."
         }
       ],
       "interactions": [],
-      "summary": "Küçük bir sandıkta iksirler, zırh ve eski bir mühür var. Oda sessiz ve güvenli.",
+      "summary": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
       "door_hotspots": [
         {
           "x": 50,
           "y": 42
         }
       ],
-      "quiet_summary": "Nemli taşlar karanlıkta kayboluyor.",
-      "quiet_inspection": "Sandığın yan kapağında tuzağı devre dışı bırakan güvenli bir kol var. Hazineye ulaşan kişi için zırh ve iki Öfke İksiri ayrılmış. Kayıt kâğıtları bu malzemelerin hiç teslim alınmadığını söylüyor."
+      "quiet_summary": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
+      "quiet_inspection": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış."
     },
     {
       "id": "guardian",
       "number": 11,
-      "name": "Kemik Bekçisinin Salonu",
+      "name": "Ork Nöbet Salonu",
       "type": "combat",
       "bounds": [
         22,
@@ -738,10 +737,10 @@
         6,
         4
       ],
-      "description": "Duvar nişleri isimsiz kemiklerle dolu. Eski kraliyet kalkanları, kararmış sütunlara çivilenmiş. Bronz hazne kapısının önünde Skeleton Muhafız nöbet tutuyor; kılıcının ucu taş zemine ince bir çizgi kazıyor.",
-      "encounter": "Bekçi kapıdan uzaklaşmıyor. Arşiv veya katakomblardan edindiğin not, onun aynı açık veren hareketi tekrarladığını gösteriyor. Kapıya ulaşmak için savaşabilir ya da nişlerin gölgesinden çok dikkatli biçimde geçebilirsin.",
-      "reward": "Mühür Haznesi’ne erişim.",
-      "consequence": "Muhafız yenilince son hazne açılır. Kaçarsan canı aynı kalır; geri döndüğünde tekrar karşılaşabilirsin.",
+      "description": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "encounter": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
         {
           "id": "skeleton_captain",
@@ -756,25 +755,24 @@
       ],
       "loot": [],
       "art": "simple_ossuary",
-      "mood": "FİLDİŞİ NİŞLER · BRONZ HAZNE KAPISI",
-      "arrival": "Bronz kapının önünde zırhlı bir iskelet bekçi duruyor.",
-      "inspection": "Bekçi kapıdan uzaklaşmıyor. Arşiv veya katakomblardan edindiğin not, onun aynı açık veren hareketi tekrarladığını gösteriyor. Kapıya ulaşmak için savaşabilir ya da nişlerin gölgesinden çok dikkatli biçimde geçebilirsin.",
+      "mood": "BRONZ KAPI · EZİLMİŞ KALKANLAR · İS",
+      "arrival": "Ork Nöbet Salonu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Bekçinin yemini",
-          "text": "Kapıyı koru. Taşı koru. Emir değişene kadar dur. Harflerin en altındaki tarih yüzyıllar öncesine ait; emir hiç değiştirilmemiş. Bekçinin parmakları kılıcın kabzasına ölümden sonra da sıkıca kapanmış."
+          "title": "Nöbet izleri",
+          "text": "Kapının önündeki geniş çizme izleri, Moria orklarının burada nöbet tuttuğunu gösteriyor. Küçük bir kampın silahları duvara yaslanmış. Bu yolun açık kalması, nöbetçiyi aşmana bağlı."
         },
         {
           "id": "text_1",
-          "title": "Bronz kapının çerçevesi",
-          "text": "İçeriden yeşil ışık sızıyor. Çerçevede dış hücre kapısındakiyle aynı taş yuvası işaretlenmiş. Aradığın şey artık yakın; fakat dönüş yolunu hatırlamak, onu bulmak kadar önemli."
+          "title": "Cüce kapısının çerçevesi",
+          "text": "Çerçevedeki işaretler son deponun cevher için ayrıldığını söylüyor. Bronz sürgü eski ama sağlam. Dönüşte bu eşiği yeniden kullanacaksın; geri kalan yolunu aklında tut."
         }
       ],
       "interactions": [],
       "stealth_difficulty": 2,
-      "summary": "Kemik yığınları arasında zırhlı Skeleton Muhafızı duruyor. Arkasındaki kapı son hazneye açılıyor.",
-      "enemy_art": "simple_ossuary_enemy",
+      "summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
       "door_hotspots": [
         {
           "x": 21,
@@ -795,13 +793,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Kemiklerle süslenmiş nişler kapının iki yanında yükseliyor. Koridorun sonunda ağır bir eşik var.",
-      "quiet_inspection": "Bekçi kapıdan uzaklaşmıyor. Arşiv veya katakomblardan edindiğin not, onun aynı açık veren hareketi tekrarladığını gösteriyor. Kapıya ulaşmak için savaşabilir ya da nişlerin gölgesinden çok dikkatli biçimde geçebilirsin."
+      "quiet_summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "quiet_inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor."
     },
     {
       "id": "vault",
       "number": 12,
-      "name": "Mühür Haznesi",
+      "name": "Mithril Deposu",
       "type": "goal",
       "bounds": [
         35,
@@ -809,10 +807,10 @@
         6,
         4
       ],
-      "description": "Bronz halkaların arasında yeşil bir taş asılı duruyor. Sisli zemin, kaidenin çevresinde usulca dönüyor. Taşın ışığı odanın bütün çatlaklarını gösteriyor; burada birikmiş toz bile sanki nefes alıyor.",
-      "encounter": "Kaideyi saran halkalar açık. Taşı alabilirsin. Duvar yazısı, onu zindanların dış kapısına götürmeni istiyor; geldiğin koridorlar dönüş için hâlâ açık.",
-      "reward": "Mühür Taşı. Taşı alınca görev girişe dön aşamasına geçer.",
-      "consequence": "Önceden açılmış geçitler dönüşte açık kalır; oyuncu dönüş rotasını seçer.",
+      "description": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun.",
+      "encounter": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
       "loot": [
         {
@@ -821,23 +819,23 @@
         }
       ],
       "art": "simple_vault",
-      "mood": "YEŞİL TAŞ · BOŞLUK · ESKİ BRONZ",
-      "arrival": "Yeşil Mühür Taşı kaidenin üzerinde seni bekliyor.",
-      "inspection": "Kaideyi saran halkalar açık. Taşı alabilirsin. Duvar yazısı, onu zindanların dış kapısına götürmeni istiyor; geldiğin koridorlar dönüş için hâlâ açık.",
+      "mood": "MITHRIL · TAŞ KAİDE · SOĞUK PARILTI",
+      "arrival": "Mithril Deposu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun.",
       "readings": [
         {
           "id": "text_0",
-          "title": "Kaidenin yazıtı",
-          "text": "Taşı bulmak, kaçışın yarısıdır. Onu başladığın hücrelerin dış kapısına götür. Arkanda bıraktığın düşmanlar unutmaz; açtığın kapılar ise seni ikinci kez sınamaz."
+          "title": "Cevher kaydı",
+          "text": "Kayıtta Moria-gümüşünün ağırlığı ve işlenmek üzere ayrılan parçalar sayılmış. Mithril hafif, sağlam ve çok değerlidir. Buradaki külçe, bu yan galerideki son sağlam örnek; görevini tamamlamak için onu Doğu Kapısı Hücreleri’ne götür."
         },
         {
           "id": "text_1",
-          "title": "Son kayıt",
-          "text": "Mühür, taş çıkarılınca güç kaybetmez; yönünü değiştirir. Haznedeki ışık sönerken dış kapı taşıyan kişiyi tanır. Şimdi bu kayıtların devamını yazacak biri kalmadı."
+          "title": "Dönüş işareti",
+          "text": "Taştaki ok Doğu Kapısı yönünü gösteriyor. Açtığın geçitler yeniden kullanılabilir. Aştığın düşmanlar ise hâlâ galerilerde olabilir. Mithrili aldıktan sonra başlangıç odasına dönmen yolculuğu tamamlar."
         }
       ],
       "interactions": [],
-      "summary": "Yeşil Mühür Taşı tek bir kaidenin üzerinde parlıyor. Aradığın şey burada; şimdi zindanlara geri götürmelisin.",
+      "summary": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun.",
       "empty_art": "simple_vault_empty",
       "door_hotspots": [
         {
@@ -845,13 +843,13 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Yeşil ışık, odanın ortasındaki taş kaideden yayılıyor. Duvarların üzerindeki eski mühürler ışığa cevap veriyor.",
-      "quiet_inspection": "Kaideyi saran halkalar açık. Taşı alabilirsin. Duvar yazısı, onu zindanların dış kapısına götürmeni istiyor; geldiğin koridorlar dönüş için hâlâ açık."
+      "quiet_summary": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun.",
+      "quiet_inspection": "Taş kaidenin üzerinde soğuk bir parıltı var. Son sağlam sandıktan çıkarılmış mithril külçesi, çevresindeki paslı demirden hemen ayrılıyor. Galerinin sonu sessiz; ama geri dönüş yolu hâlâ uzun."
     },
     {
       "id": "troll_hall",
       "number": 13,
-      "name": "Lav Damarları Salonu",
+      "name": "Derin Ocakların Trol Salonu",
       "type": "combat",
       "bounds": [
         22,
@@ -859,10 +857,10 @@
         10,
         12
       ],
-      "description": "Kapı eşiğini geçince yüzüne fırın sıcaklığında bir hava çarpıyor. Lav, duvar çatlaklarından akıp zemindeki kanalları dolduruyor. Sütunların arasındaki kütle doğruluyor: Mahzen Trolü, bir kapıyı tek eliyle yerinden sökebilecek kadar iri. Kopmuş zincirleri omuzlarından sarkıyor; taşla demirden yapılmış sopası zeminde derin bir iz bırakıyor. Her adımında ayaklarının altındaki bazalt titriyor. Yan galeriler hâlâ karanlık, fakat onun tek bir bakışı kaçış yolunu kapatmaya yeter.",
-      "encounter": "Lav kanalları salonun merkezini tehlikeli kılıyor. Sütunlarla ayrılmış yan galeriler ise gölgede. Trol çok güçlü; onunla savaşmak zorunda değilsin. Rogue sütun gölgelerini kolay kullanır. Fighter’ın ağır zırhı aynı yolu çok daha zor hâle getirir.",
-      "reward": "Mühür Odası’na geçiş ve bir iyileştirme iksiri.",
-      "consequence": "Trolü yenmek zorunlu değil. Sütunlar görüşü keser; gizlenme DEX ve ekipmanın gizlilik bonusunu kullanır.",
+      "description": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor.",
+      "encounter": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor.",
+      "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
+      "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "pillars": [
         [
           3,
@@ -908,26 +906,26 @@
         }
       ],
       "art": "simple_lava_hall",
-      "mood": "AKAN LAV · BAZALT SÜTUNLAR · KÜL",
-      "arrival": "Ağır bir sürtünme sesi duyuyorsun. Dev trol sopasını yerden kaldırıyor; tavandan kül dökülüyor. Lav ışığında gözleri açılıyor.",
-      "inspection": "Lav kanalları salonun merkezini tehlikeli kılıyor. Sütunlarla ayrılmış yan galeriler ise gölgede. Trol çok güçlü; onunla savaşmak zorunda değilsin. Rogue sütun gölgelerini kolay kullanır. Fighter’ın ağır zırhı aynı yolu çok daha zor hâle getirir.",
+      "mood": "BAZALT · LAV KANALLARI · DEV SÜTUNLAR",
+      "arrival": "Derin Ocakların Trol Salonu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor.",
       "stealth_difficulty": 3,
       "sneak_success": "Sütunların gölgesinden, lav köprülerini sessizce aşarak geçiyorsun. Trol sıcağın uğultusundan başka bir şey duymadı; kapılar önünde açık.",
       "sneak_failure": "Zırhın bazalta sürtünüyor. Uğultu bir an kesiliyor. Trol başını sana çeviriyor; kükremesi sütunlarda yankılanırken dev sopasını kaldırıyor!",
       "readings": [
         {
           "id": "text_0",
-          "title": "Ocak ustasının uyarısı",
-          "text": "Kanallar lavı taşır, taş köprüler insanı. Ortadaki yolu kullanma. Sütunların kör tarafında bekçi seni göremez; ama demirin taşa vuruşunu duyabilir. Bu odada en hafif ayak, en ağır kılıçtan değerlidir."
+          "title": "Derin ocakların kanalları",
+          "text": "Taş köprüler kızıl kanalların üstünden geçiyor; sütunların arkası görüşü kesiyor. Kayıt, servis yolunun salonun kenarını izlediğini gösteriyor. Ağır zırhın bazalta sürtünmesi yakındaki mağara trolünü uyarabilir; burada en sessiz yol, en kısa yoldan daha güvenli."
         },
         {
           "id": "text_1",
-          "title": "Kırılmış zincirin etiketi",
-          "text": "Altı zincir. Üç büyü. Bir bekçi. Etiketin altı pençeyle yırtılmış. Yerdeki bağlantı halkası yarım kalmış bir insan kolu kalınlığında; trol onu bir kez çekerek koparmış gibi görünüyor."
+          "title": "Kırılmış zincir",
+          "text": "Orkların trolleri ağır işlerde ve savaşta kullandığını hatırlatan kaba zincirler yerde duruyor. Bir halka kopmuş, bir sütunun tabanı ezilmiş. Bu salonun bekçisi cüce yapımı değil; karanlık galerilere sonradan yerleşmiş bir mağara trolü."
         }
       ],
       "interactions": [],
-      "summary": "Lavın uğultusu arasında taşların titrediğini hissediyorsun. Mahzen Trolü önünde yükseliyor; dev sopası ve kopmuş zincirleri lav ışığında parlıyor. Sütunların karanlık tarafı son saklanma şansın.",
+      "summary": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor.",
       "enemy_art": "boss_lava_hall_enemy",
       "door_hotspots": [
         {
@@ -973,8 +971,8 @@
           "y": 43
         }
       ],
-      "quiet_summary": "Duvar çatlaklarından lav akıyor; yerdeki kızgın kanallar salonu bölüyor. Bazalt sütunlar, gölgede kalan geniş galeriler oluşturuyor.",
-      "quiet_inspection": "Lav kanalları salonun merkezini tehlikeli kılıyor. Sütunlarla ayrılmış yan galeriler ise gölgede. Rogue sütun gölgelerini kolay kullanır. Fighter’ın ağır zırhı aynı yolu çok daha zor hâle getirir."
+      "quiet_summary": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor.",
+      "quiet_inspection": "Bazalt duvarlardan kızıl eriyik sızıyor; dar lav kanalları taş zemini bölüyor. Dev cüce sütunları arasında ezilmiş zincirler var. Isı yüzüne vuruyor, yerin altından ağır bir uğultu yükseliyor."
     }
   ],
   "connections": [
@@ -992,9 +990,9 @@
           28
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor.",
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor.",
       "labels": {
-        "hall": "Zindanlara geri dön"
+        "hall": "Doğu Kapısı’na geri dön"
       }
     },
     {
@@ -1011,7 +1009,7 @@
           26
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor.",
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor.",
       "labels": {
         "hall": "Sol kapıdan git"
       }
@@ -1030,7 +1028,7 @@
           26
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor.",
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor.",
       "labels": {
         "hall": "Sağ kapıdan git"
       }
@@ -1049,7 +1047,7 @@
           23
         ]
       ],
-      "description": "Bazalt kemerlerin arasındaki koridor gittikçe ısınıyor. Duvar çatlaklarından turuncu ışık sızıyor; taşın altından ağır bir uğultu geliyor. İlerideki kapıdan başka bir odanın havası vuruyor.",
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor.",
       "labels": {
         "hall": "Karşı kapıdan git"
       }
@@ -1068,7 +1066,7 @@
           18
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "armory",
@@ -1085,7 +1083,7 @@
           16
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "rubble",
@@ -1106,7 +1104,7 @@
           16
         ]
       ],
-      "description": "Bazalt kemerlerin arasındaki koridor gittikçe ısınıyor. Duvar çatlaklarından turuncu ışık sızıyor; taşın altından ağır bir uğultu geliyor. İlerideki kapıdan başka bir odanın havası vuruyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "rune_hall",
@@ -1127,7 +1125,7 @@
           18
         ]
       ],
-      "description": "Dar koridorda mürekkep ve eski kâğıt kokusu var. Duvardaki soluk rünler, geçişin boyunca birer birer yanıyor. Koridorun sonunda ağır ahşap bir kapı bekliyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "archive",
@@ -1144,7 +1142,7 @@
           16
         ]
       ],
-      "description": "Bazalt kemerlerin arasındaki koridor gittikçe ısınıyor. Duvar çatlaklarından turuncu ışık sızıyor; taşın altından ağır bir uğultu geliyor. İlerideki kapıdan başka bir odanın havası vuruyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "barracks",
@@ -1169,7 +1167,7 @@
           8
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "cistern",
@@ -1194,7 +1192,7 @@
           20
         ]
       ],
-      "description": "Bazalt kemerlerin arasındaki koridor gittikçe ısınıyor. Duvar çatlaklarından turuncu ışık sızıyor; taşın altından ağır bir uğultu geliyor. İlerideki kapıdan başka bir odanın havası vuruyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "archive",
@@ -1214,7 +1212,7 @@
           10
         ]
       ],
-      "description": "Dar koridorda mürekkep ve eski kâğıt kokusu var. Duvardaki soluk rünler, geçişin boyunca birer birer yanıyor. Koridorun sonunda ağır ahşap bir kapı bekliyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "seal_room",
@@ -1231,7 +1229,7 @@
           4
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "guardian",
@@ -1248,7 +1246,7 @@
           2
         ]
       ],
-      "description": "Meşale ışığı kemerlerin altında uzuyor. Nemli taşlar sesini büyütüyor; kapıların arasındaki koridorda kırık zincir halkaları ve solmuş işaretler var. İleride yeni bir odanın kapısı görünüyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     },
     {
       "from": "troll_hall",
@@ -1264,7 +1262,7 @@
           10
         ]
       ],
-      "description": "Bazalt kemerlerin arasındaki koridor gittikçe ısınıyor. Duvar çatlaklarından turuncu ışık sızıyor; taşın altından ağır bir uğultu geliyor. İlerideki kapıdan başka bir odanın havası vuruyor."
+      "description": "Khazad-dûm’un taş kemerleri iki yan odayı birleştiriyor. Cüce işaretleri geçidin yönünü gösteriyor."
     }
   ],
   "riddles": [

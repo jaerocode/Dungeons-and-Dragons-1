@@ -31,9 +31,9 @@
     "minimum_hp": 1,
     "stealth": "d20 + DEX değiştiricisi + sınıf gizlilik değiştiricisi + Rogue için 4 + ekipman bonusu. DC Fighter 18, Mage 15, Rogue 11; trol +3, muhafız +2. Doğal 1 başarısızdır.",
     "inspect": "1 AP, INT kontrolü; yaratığın bir davranışını veya etkileşim seçeneğini gösterir. İpucu başarısızlığı ilerlemeyi kilitlemez.",
-    "rest": "Tek kullanımlık güvenli dinlenme: Mühür Odası’ndaki taş bank canı ve Focus’u tamamen doldurur. Yaratıklar yeniden doğmaz.",
+    "rest": "Tek kullanımlık güvenli dinlenme: Cirth Kapısının Ön Odası’ndaki taş bank canı ve Focus’u tamamen doldurur. Yaratıklar yeniden doğmaz.",
     "potion": "1 AP, 8 HP iyileştirir; maksimum canı aşmaz.",
-    "alarm": "0–3; yüksek alarm final Skeleton Muhafızın duyma menzilini artırır.",
+    "alarm": "0–3; yüksek alarm final Moria Ork Nöbetçisiın duyma menzilini artırır.",
     "escape": "Combat sırasında yön seçilir. Başarılı DEX kontrolü aynı odada en fazla 3 blok uzaklaştırır. Düşman korunur; düşman bloğuna kaçış critical fail olur.",
     "player_turn": "3 AP. Çekiç saldırısı 2 AP, diğer saldırılar 1 AP. Yetersiz AP saldırıyı engeller. Kaçış, hazırlık ve eşya kullanımı 1 AP."
   },
@@ -128,7 +128,7 @@
       "abilities": [
         {
           "id": "spark",
-          "name": "Arkane Kıvılcım",
+          "name": "Rün Kıvılcımı",
           "ap": 1,
           "resource_cost": 0,
           "range": 4,

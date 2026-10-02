@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),{DungeonExplorer}=require('./game-engine');
-const make=()=>new DungeonExplorer(require('./dungeon_map.json'),require('./game_rules.json'),'Fighter','Test',{bestiary:require('./bestiary.json'),loot:require('./loot.json'),random:()=>.99});
+const make=()=>new DungeonExplorer(require('./dungeon_map.json'),require('./game_rules.json'),'Fighter','Test',{fixedSpawns:true,bestiary:require('./bestiary.json'),loot:require('./loot.json'),random:()=>.99});
 const g=make();g.roomId='armory';const starter=g.equipment.weapon;
 const at=id=>{const e=g.roomLoot.find(e=>e.id===id);g.position={...e.position};return e;};
 const axe=at('battle_axe');assert.ok(g.takeWeapon(axe.id,axe.uid));assert.equal(g.carriedWeapons.length,2);assert.equal(g.inventory[starter],1);assert.equal(g.equipment.weapon,'battle_axe');

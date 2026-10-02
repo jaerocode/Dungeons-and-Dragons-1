@@ -9,21 +9,21 @@
       this.sealSolved=false;this.combat=null;this.dead=false;this.completed=false;this.hasStone=false;this.potions=0;this.restUsed=false;this.finalAdvantage=false;
       this.hidden=false;this.bypassed=false;this.damageBuff=null;this.lastLoot=[];this.events=[];this.enemies=[];this.notice=null;this.resultNotice=null;this.noticedEnemies=new Set();
       this.items=new Map((options.loot?.items||[]).map(item=>[item.id,item]));this.inventory={};this.equipment={};this.collectedRooms=new Set();
-      const starter={id:'starter_'+characterClass.toLowerCase(),name:({Fighter:'Uzun Kılıç',Mage:'Arkane Kıvılcım',Rogue:'Hançer'})[characterClass],type:'equipment',slot:'weapon',classes:[characterClass],description:'Başlangıç silahın / büyün.',damage_dice:this.profile.damage,damage_stat:this.profile.damage_stat};this.items.set(starter.id,starter);this.inventory[starter.id]=1;this.equipment.weapon=starter.id;
+      const starter={id:'starter_'+characterClass.toLowerCase(),name:({Fighter:'Uzun Kılıç',Mage:'Rün Kıvılcımı',Rogue:'Hançer'})[characterClass],type:'equipment',slot:'weapon',classes:[characterClass],description:'Başlangıç silahın / büyün.',damage_dice:this.profile.damage,damage_stat:this.profile.damage_stat};this.items.set(starter.id,starter);this.inventory[starter.id]=1;this.equipment.weapon=starter.id;
       this.torchLit=false;this.justEntered=true;this.items.set('torch',{id:'torch',name:'Meşale',type:'torch',description:'Yakınca görüşün 3 blok, sönükken 1 blok. Yanan meşaleyle gizlenemezsin. Combat sırasında yakmak veya söndürmek 1 aksiyon harcar.'});this.inventory.torch=1;
       this.groundWeapons={};this.facing=0;this.position=this.spawnPosition();
       const definitions=new Map((options.bestiary?.monsters||[]).map(m=>[m.id,m]));
-      for(const room of map.rooms)for(const encounter of room.monsters||[]){const definition=definitions.get(encounter.id);if(!definition)throw Error('Missing monster: '+encounter.id);for(let i=0;i<encounter.count;i++){const p=encounter.positions?.[i]||[Math.floor(room.bounds[2]/2)+i,Math.floor(room.bounds[3]/2)];this.enemies.push({id:room.id+':'+encounter.id+':'+i,roomId:room.id,position:{x:room.bounds[0]+p[0],y:room.bounds[1]+p[1]},definition,hp:definition.hp,maxHp:definition.hp,alert:false});}}
+      for(const room of map.rooms)for(const encounter of room.monsters||[]){const definition=definitions.get(encounter.id);if(!definition)throw Error('Missing monster: '+encounter.id);for(let i=0;i<encounter.count;i++){const p=options.fixedSpawns?(encounter.positions?.[i]||[Math.floor(room.bounds[2]/2)+i,Math.floor(room.bounds[3]/2)]):this.randomEnemyPosition(room);this.enemies.push({id:room.id+':'+encounter.id+':'+i,roomId:room.id,position:{x:room.bounds[0]+p[0],y:room.bounds[1]+p[1]},definition,hp:definition.hp,maxHp:definition.hp,alert:false});}}
       const pool=map.riddles||[],candidates=pool.filter(r=>r.id!==options.previousRiddleId);this.riddle=(candidates.length?candidates:pool)[Math.floor(this.random()*(candidates.length||pool.length))];
       this.floorLoot=[];this.lootSerial=0;
       for(const room of map.rooms){const [rx,ry,w,h]=room.bounds,center={x:rx+Math.floor(w/2),y:ry+Math.floor(h/2)},cells=[];
         for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++)if(!this.isDoorPosition({x,y},room)&&!(room.pillars||[]).some(p=>p[0]+rx===x&&p[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&e.position.x===x&&e.position.y===y))cells.push({x,y});
         cells.sort((a,b)=>this.distance(a,center)-this.distance(b,center)||a.y-b.y||a.x-b.x);
         const entries=[...(room.loot||[])];
-        for(const reading of room.readings||[]){const id='reading_'+room.id+'_'+reading.id;this.items.set(id,{id,name:reading.title,type:'reading',description:'Mahzenden bir mektup / kayıt. Yanına alıp istediğin zaman okuyabilirsin.',text:reading.text,sourceRoom:room.id,readingId:reading.id});entries.push({id,quantity:1});}
+
         for(const [i,entry] of entries.entries())this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:room.id,id:entry.id,quantity:entry.quantity,position:{...(cells[i%cells.length])}});
       }
-      this.say('Soğuk bir hücrede gözlerini açıyorsun. Kilit kırılmış; zindanların kapısı aralık. Henüz silahını hazırlamadın.');
+      this.say('Soğuk bir hücrede gözlerini açıyorsun. Kilit kırılmış; Doğu Kapısı’nın alt geçidi aralık. Henüz silahını hazırlamadın.');
     }
     get room(){return this.map.rooms.find(r=>r.id===this.roomId);}
     get currentEnemies(){return this.enemies.filter(e=>e.roomId===this.roomId&&e.hp>0);}
@@ -38,7 +38,7 @@
       return true;
     }
     get visibleEnemies(){return this.currentEnemies.filter(e=>this.combat?e.alert||e.id===this.combat.target:this.torchLit&&this.canSee(e.position));}
-    get enemyHint(){const unseen=this.currentEnemies.filter(e=>!this.visibleEnemies.includes(e));if(!unseen.length)return '';const kinds=new Set(unseen.map(e=>e.definition.kind)),hints=[];if(kinds.has('skeleton'))hints.push('Tam kestiremiyorsun ama karanlığın içinden kemik tıkırtıları ve taşta sürüklenen metal sesleri duyuyorsun.');if(kinds.has('spider'))hints.push('Gölgelerden ince hıslamalar geliyor. Bir şey taşların üzerinde hızla sürünüyor.');if(kinds.has('troll'))hints.push('Derin, ağır bir hırıltı duyuyorsun. Çok ağır ayak sesleri zemini titretiyor.');return hints.join(' ');}
+    get enemyHint(){const unseen=this.currentEnemies.filter(e=>!this.visibleEnemies.includes(e));if(!unseen.length)return '';const kinds=new Set(unseen.map(e=>e.definition.kind)),hints=[];if(kinds.has('orc'))hints.push('Tam kestiremiyorsun ama karanlığın içinden boğuk homurtular ve taşta sürüklenen metal sesleri duyuyorsun.');if(kinds.has('spider'))hints.push('Gölgelerden ince hıslamalar geliyor. Bir şey taşların üzerinde hızla sürünüyor.');if(kinds.has('troll'))hints.push('Derin, ağır bir hırıltı duyuyorsun. Çok ağır ayak sesleri zemini titretiyor.');return hints.join(' ');}
     get visibleLoot(){return this.roomLoot.filter(e=>e.id==='old_map'&&this.roomId===this.map.start||this.canSee(e.position));}
     toggleTorch(){if(!this.canAct())return;this.begin();this.torchLit=!this.torchLit;this.justEntered=false;if(this.torchLit){this.hidden=false;this.bypassed=false;}this.finish(this.torchLit?'Meşaleyi yakıyorsun. Görüşün genişledi, ama ışığın içinde gizlenemezsin.':'Meşaleyi söndürüyorsun. Yalnızca hemen çevreni seçebiliyorsun; artık gölgelere karışabilirsin.');if(this.combat)this.spendAP();else this.checkEncounter();}
     get target(){return this.combat?this.currentEnemies.find(e=>e.id===this.combat.target)||this.currentEnemies[0]:null;}
@@ -48,10 +48,15 @@
     get nearbyLoot(){return this.roomLoot.filter(e=>this.distance(this.position,e.position)<=1);}
     get availableLoot(){return this.roomLoot.filter(e=>this.items.get(e.id)?.slot!=='weapon');}
     get weaponBonus(){const item=this.items.get(this.equipment.weapon);return item?.staff&&this.characterClass!=='Mage'?0:item?.damage_bonus||0;}
-    get attackSpec(){const item=this.items.get(this.equipment.weapon);if(item?.staff){if(this.characterClass!=='Mage')return {dice:'1d4',stat:'STR',bonus:0,ap:1,name:'Sopa vuruşu'};return {dice:item.spell?.damage_dice||this.profile.damage,stat:'INT',bonus:item.damage_bonus||0,ap:item.spell?.ap_cost||1,name:item.spell?.name||'Arkane darbe',effect:item.spell?.effect,piercing:item.spell?.armor_piercing||0};}return {dice:item?.damage_dice||this.profile.damage,stat:item?.damage_stat||this.profile.damage_stat,bonus:this.weaponBonus,ap:item?.ap_cost||1,name:this.characterClass==='Mage'?'Büyü saldırısı':'Saldır'};}
+    get attackSpec(){const item=this.items.get(this.equipment.weapon);if(item?.staff){if(this.characterClass!=='Mage')return {dice:'1d4',stat:'STR',bonus:0,ap:1,name:'Sopa vuruşu'};return {dice:item.spell?.damage_dice||this.profile.damage,stat:'INT',bonus:item.damage_bonus||0,ap:item.spell?.ap_cost||1,name:item.spell?.name||'Rün darbesi',effect:item.spell?.effect,piercing:item.spell?.armor_piercing||0};}return {dice:item?.damage_dice||this.profile.damage,stat:item?.damage_stat||this.profile.damage_stat,bonus:this.weaponBonus,ap:item?.ap_cost||1,name:this.characterClass==='Mage'?'Büyü saldırısı':'Saldır'};}
     get attackCost(){return this.attackSpec.ap;}
     get availableWeapons(){return [...new Set(this.roomLoot.filter(e=>this.items.get(e.id)?.slot==='weapon').map(e=>e.id))];}
     canTakeLoot(entry){const item=this.items.get(entry.id);return this.available()&&!this.combat&&this.visibleLoot.includes(entry)&&this.distance(this.position,entry.position)<=1&&(!this.visibleEnemies.length||this.bypassed)&&(!item.classes||item.classes.includes(this.characterClass));}
+    randomEnemyPosition(room){
+      const [rx,ry,w,h]=room.bounds,cells=[],doors=this.map.connections.filter(c=>c.from===room.id||c.to===room.id).map(c=>{const q=c.points[c.from===room.id?0:c.points.length-1];return {x:Math.max(rx,Math.min(rx+w-1,q[0])),y:Math.max(ry,Math.min(ry+h-1,q[1]))};});
+      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0))cells.push(p);}
+      const interior=cells.filter(p=>doors.every(d=>this.distance(p,d)>1)),pool=interior.length?interior:cells;if(!pool.length)throw Error('No valid enemy spawn block');const p=pool[Math.min(pool.length-1,Math.floor(this.random()*pool.length))];return [p.x-rx,p.y-ry];
+    }
     isDoorPosition(p,room=this.room){
       const [x,y,w,h]=room.bounds;
       return this.map.connections.filter(c=>c.from===room.id||c.to===room.id).some(c=>{const point=c.points[c.from===room.id?0:c.points.length-1];return p.x===Math.max(x,Math.min(x+w-1,point[0]))&&p.y===Math.max(y,Math.min(y+h-1,point[1]));});
@@ -100,7 +105,7 @@
       if(!this.opened.has(door.id)&&door.connection.kind==='fighter')this.alarm=Math.min(3,this.alarm+1);
       this.opened.add(door.id);this.entry={roomId:this.roomId,doorId:door.id};this.roomId=door.target;this.hidden=false;this.bypassed=false;this.visited.add(this.roomId);
       this.position=this.spawnPosition(door);this.facing=(this.doors().find(d=>d.id===door.id).direction+2)%4;
-      this.justEntered=true;this.notice=null;this.noticedEnemies.clear();this.finish(this.room.name+' odasına giriyorsun. '+(this.torchLit?'Meşalenin ışığı duvarları aydınlatıyor.':'Karanlıkta yalnızca hemen çevreni seçebiliyorsun.')); if(this.roomId===this.map.start&&this.hasStone){this.completed=true;this.say('Mühür Taşı zindanların dış kapısını açıyor. Gün ışığına ulaşıyorsun. Görev tamamlandı!');}else {this.checkEncounter();if(!this.combat&&!this.notice&&this.enemyHint)this.notice={kind:'sound',text:this.enemyHint};}return true;
+      this.justEntered=true;this.notice=null;this.noticedEnemies.clear();this.finish(this.room.name+' odasına giriyorsun. '+(this.torchLit?'Meşalenin ışığı duvarları aydınlatıyor.':'Karanlıkta yalnızca hemen çevreni seçebiliyorsun.')); if(this.roomId===this.map.start&&this.hasStone){this.completed=true;this.say('Mithril külçesini kurtarıp Doğu Kapısı’nın alt geçidine dönüyorsun. Gün ışığına ulaşıyorsun. Görev tamamlandı!');}else {this.checkEncounter();if(!this.combat&&!this.notice&&this.enemyHint)this.notice={kind:'sound',text:this.enemyHint};}return true;
     }
     prepare(){if(!this.canAct())return;this.begin();if(this.combat&&this.prepared)return this.say('Silahın zaten hazır.');this.prepared=!this.prepared;this.finish(this.characterClass==='Mage'?(this.prepared?'Avucunda soluk bir kıvılcım beliriyor. Büyün hazır.':'Büyünün ışığını söndürüyorsun.'):(this.prepared?'Silahını çekiyorsun.':'Silahını kınına koyuyorsun.'));if(this.combat)this.spendAP();}
     inspect(){if(!this.canAct()||this.combat)return;this.begin();this.inspected.add(this.roomId);this.finish(this.visibleEnemies.length?this.room.inspection:(this.room.quiet_inspection||this.room.quiet_summary||this.room.inspection));if(['archive','rubble'].includes(this.roomId)){this.finalAdvantage=true;this.say('Muhafızın savunmasındaki boşluğu öğreniyorsun. Ona karşı ilk saldırın avantajlı.');}}
@@ -152,7 +157,7 @@
     }
     takeLoot(uid){const entry=this.roomLoot.find(e=>e.uid===uid);if(!entry)return false;this.begin();if(!this.canTakeLoot(entry)){this.say(this.distance(this.position,entry.position)>1?'Eşyaya yaklaşmalısın.':'Önce düşmanı aş veya sınıfına uygun eşya seç.');return false;}const item=this.items.get(entry.id);if(item.slot==='weapon')return this.takeWeapon(item.id,uid);const quantity=entry.quantity;
       if(item.type==='quest'){if(this.roomId!==this.map.goal)throw Error('Quest item must be in the final room');this.hasStone=true;}else if(item.type==='healing')this.potions+=quantity;else this.inventory[item.id]=(this.inventory[item.id]||0)+quantity;
-      entry.quantity=0;this.lastLoot.push({id:item.id,quantity});this.finish(item.name+(quantity>1?' ×'+quantity:'')+' alıyorsun.');if(this.hasStone&&item.type==='quest')this.say('Mühür Taşı sende. Şimdi zindanların dış kapısına dön.');return true;
+      entry.quantity=0;this.lastLoot.push({id:item.id,quantity});this.finish(item.name+(quantity>1?' ×'+quantity:'')+' alıyorsun.');if(this.hasStone&&item.type==='quest')this.say('Mithril Külçesi sende. Şimdi Doğu Kapısı’nın alt geçidine dön.');return true;
     }
     canUseItem(id){
       const item=this.items.get(id);if(!item||!this.canAct())return false;

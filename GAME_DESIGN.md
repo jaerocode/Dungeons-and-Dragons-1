@@ -1,10 +1,10 @@
-# Moria Madenleri — sahne üzerinden oda keşfi
+# Mines of Moria — sahne üzerinden oda keşfi
 
-Oyuncu Zindan Hücreleri’nde isim ve sınıf seçerek başlar. Sahnedeki kapı düğmeleri doğrudan hedef odaya götürür; koridor ekranı ve minimap kaldırılmıştır. Ana oyun ekranı pencere yüksekliğine sığar. Aksiyonlar görselin alt kenarında, kapılar resimdeki geçitlerin üzerinde, ganimet belirgin bir sahne düğmesindedir. Uzun açıklamalar, kayıtlar ve etkileşimler “Odayı incele” penceresinde okunur. Küçük ekranda karakter paneli yatay özet olur; envanterin tamamı Bohça penceresinden açılır.
+Oyuncu Doğu Kapısı Hücreleri’nde isim ve sınıf seçerek başlar. Sahnedeki kapı düğmeleri doğrudan hedef odaya götürür; koridor ekranı ve minimap kaldırılmıştır. Ana oyun ekranı pencere yüksekliğine sığar. Aksiyonlar görselin alt kenarında, kapılar resimdeki geçitlerin üzerinde, ganimet belirgin bir sahne düğmesindedir. Uzun açıklamalar, kayıtlar ve etkileşimler “Odayı incele” penceresinde okunur. Küçük ekranda karakter paneli yatay özet olur; envanterin tamamı Bohça penceresinden açılır.
 
 ## Oda kadrosu
 
-13 oda ayrı sahne görseli, atmosfer açıklaması, inceleme metni ve ikişer okunabilir kayıt içerir. Hücreler, Üç Kapı Avlusu, İşkence Odası, Kara Demir Cephaneliği, Katakomblar, Yasak Simya Odası, Başbüyücünün Arşivi, Sular Altındaki Zindan, Rünlü Kapı Odası, Gümüş Mühür Hazinesi, Kemik Bekçisinin Salonu, Mühür Haznesi ve Lav Damarları Salonu bulunur.
+13 oda ayrı sahne görseli, atmosfer açıklaması, inceleme metni ve ikişer okunabilir kayıt içerir. Hücreler, Üç Kapı Avlusu, İşkence Odası, Kara Demir Cephaneliği, Katakomblar, Yasak Simya Odası, Başbüyücünün Arşivi, Sular Altındaki Zindan, Rünlü Kapı Odası, Gümüş Mühür Hazinesi, Kemik Bekçisinin Salonu, Mithril Deposu ve Lav Damarları Salonu bulunur.
 
 “Odayı incele” ayrıntıları, okuma düğmelerini ve oda etkileşimlerini açar. Simya odasında INT 11 kontrolüyle bir kere iyileştirme iksiri hazırlanabilir; başarısız deneme ilerlemeyi kilitlemez. Hücrede bir defalık 4 can temizlenmesi, arşivde bir defalık 2 Focus yenilenmesi vardır. Mühür odasındaki taş bank tek sefer tam can ve Focus verir.
 
@@ -36,7 +36,7 @@ Başlangıçta yalnızca sınıfın silahı/büyüsü vardır, iksir yoktur. Sol
 
 Gölge Pelerini +2 gizlilik, Kül Zırhı +2 AC, Kara Demir Kılıç +2 fiziksel hasar verir. Cephanelikte ayrıca Fighter için Külbiçen +4 hasar, Rogue için Fısıltı Hançeri +3 hasar/+1 gizlilik, Mage için Gece Rünü Asası +2 büyü hasarı bulunur. Aynı ekipman slotunun bonusları üst üste eklenmez. İyileştirme İksiri 8 can, Odak İksiri 3 Focus yeniler. Öfke İksiri bir aksiyon tüketir ve o oyuncu turunda kalan saldırılara +3 hasar verir; tur sonunda veya kaçışta silinir.
 
-Mühür Taşı yalnızca son Mühür Haznesi’ndedir. Sahnedeki taşı al düğmesiyle toplanır; resim boş kaideye dönüşür. Oyuncu kapılardan Zindan Hücreleri’ne dönünce dış kapı açılır ve macera tamamlanır.
+Mithril Külçesi yalnızca son Mithril Deposu’ndedir. Sahnedeki taşı al düğmesiyle toplanır; resim boş kaideye dönüşür. Oyuncu kapılardan Doğu Kapısı Hücreleri’ne dönünce dış kapı açılır ve macera tamamlanır.
 
 ## Dosyalar ve doğrulama
 

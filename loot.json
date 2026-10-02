@@ -2,14 +2,14 @@
   "items": [
     {
       "id": "healing_potion",
-      "name": "İyileştirme İksiri",
+      "name": "Cüce Şifa İksiri",
       "type": "healing",
       "description": "8 can yeniler. Combat sırasında 1 aksiyon harcar.",
       "amount": 8
     },
     {
       "id": "shadow_cloak",
-      "name": "Gölge Pelerini",
+      "name": "Rivendell Pelerini",
       "type": "equipment",
       "slot": "cloak",
       "description": "Kuşanınca gizliliğe +2. Sessiz geçiş kontrolünü kolaylaştırır.",
@@ -17,15 +17,15 @@
     },
     {
       "id": "warded_armor",
-      "name": "Mühürlü Kül Zırhı",
+      "name": "Mithril Örgü Zırh",
       "type": "equipment",
       "slot": "armor",
-      "description": "Üzerindeki koruyucu rünler Armor Class değerine +2 verir. Her sınıf kuşanabilir.",
+      "description": "Hafif, sağlam mithril örgü. Armor Class değerine +2 verir. Her sınıf kuşanabilir.",
       "armor_bonus": 2
     },
     {
       "id": "iron_sword",
-      "name": "Kara Demir Kılıç",
+      "name": "Cüce Çelik Kılıcı",
       "type": "equipment",
       "slot": "weapon",
       "classes": [
@@ -37,14 +37,14 @@
     },
     {
       "id": "fury_potion",
-      "name": "Öfke İksiri",
+      "name": "Cüce Dayanıklılık İksiri",
       "type": "fury",
       "description": "Combat sırasında 1 aksiyonla içilir. O oyuncu turundaki kalan tüm isabetlerine +3 hasar. Tur bitince etki sona erer; birikmez.",
       "damage_bonus": 3
     },
     {
       "id": "focus_potion",
-      "name": "Odak İksiri",
+      "name": "Rivendell Şifa Damlası",
       "type": "focus",
       "classes": [
         "Mage"
@@ -54,13 +54,13 @@
     },
     {
       "id": "seal_stone",
-      "name": "Mühür Taşı",
+      "name": "Mithril Külçesi",
       "type": "quest",
-      "description": "Son haznenin görev eşyası. Bunu aldıktan sonra mahzen girişine dönmelisin."
+      "description": "Moria-gümüşünden bir külçe. Görevini tamamlamak için Doğu Kapısı Hücreleri’ne geri götür."
     },
     {
       "id": "ash_cleaver",
-      "name": "Külbiçen",
+      "name": "Khazad-dûm Ağır Kılıcı",
       "type": "equipment",
       "slot": "weapon",
       "classes": [
@@ -71,7 +71,7 @@
     },
     {
       "id": "whisper_dagger",
-      "name": "Fısıltı Hançeri",
+      "name": "Elf İşi Hançer",
       "type": "equipment",
       "slot": "weapon",
       "classes": [
@@ -83,7 +83,7 @@
     },
     {
       "id": "rune_staff",
-      "name": "Gece Rünü Asası",
+      "name": "Cirth İşlemeli Asa",
       "type": "equipment",
       "slot": "weapon",
       "classes": [
@@ -92,12 +92,12 @@
         "Mage"
       ],
       "damage_bonus": 2,
-      "description": "Mage: arkane büyü hasarına +2. Fighter/Rogue: 1d4 + STR sopa vuruşu, büyü etkisi yok. 1 aksiyon.",
+      "description": "Mage: büyü büyü hasarına +2. Fighter/Rogue: 1d4 + STR sopa vuruşu, büyü etkisi yok. 1 aksiyon.",
       "staff": true
     },
     {
       "id": "battle_axe",
-      "name": "Köz Baltası",
+      "name": "Khazad-dûm Baltası",
       "classes": [
         "Fighter",
         "Rogue"
@@ -112,7 +112,7 @@
     },
     {
       "id": "war_hammer",
-      "name": "Bazalt Savaş Çekici",
+      "name": "Erebor Savaş Çekici",
       "classes": [
         "Fighter"
       ],
@@ -126,7 +126,7 @@
     },
     {
       "id": "iron_mace",
-      "name": "Kara Demir Gürz",
+      "name": "Cüce Demir Gürzü",
       "classes": [
         "Fighter",
         "Rogue"
@@ -141,7 +141,7 @@
     },
     {
       "id": "ash_spear",
-      "name": "Kül Uçlu Mızrak",
+      "name": "Elf İşi Mızrak",
       "classes": [
         "Fighter",
         "Rogue"
@@ -194,7 +194,7 @@
     },
     {
       "id": "fireball_staff",
-      "name": "Ateş Topu Asası",
+      "name": "Ateş Asası",
       "spell": {
         "name": "Ateş Topu",
         "damage_dice": "2d8",
@@ -213,9 +213,9 @@
     },
     {
       "id": "old_map",
-      "name": "Eskimiş Mahzen Haritası",
+      "name": "Khazad-dûm’un Eski Haritası",
       "type": "map",
-      "description": "Bir tutsağın sararmış parşömene çizdiği mahzen planı. Yanında taşıyabilir, envanterden tekrar açabilirsin. Haritaya bakmak aksiyon harcamaz."
+      "description": "Cüce işaretleriyle çizilmiş bir yan galeri planı. Envanterden yeniden açabilirsin; bakmak aksiyon harcamaz."
     }
   ]
 }

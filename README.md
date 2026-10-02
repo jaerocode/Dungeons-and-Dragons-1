@@ -1,16 +1,24 @@
-# Moria Madenleri
+# Mines of Moria
 
-Fighter, Mage veya Rogue ile oynanan, sıra tabanlı bir dungeon macerası.
-Mühür Taşı'nı bul ve başlangıçtaki zindanlardan kaç.
+Fighter, Mage veya Rogue ile oynanan, Moria’da geçen sıra tabanlı bir macera.
+Mithril külçesini kurtar, Doğu Kapısı Hücreleri’ne dön ve madenden çık.
+Orta Dünya adları ve Mazarbul kayıtları için [dünya rehberine](LORE_GUIDE.md) bak.
 
 ## İndir ve oyna (kurulum gerekmez)
 
 GitHub'da **Code → Download ZIP** seçeneğiyle projeyi indir ve ZIP'i çıkar.
-`game.html` dosyasını Chrome, Edge veya Firefox ile aç. Görseller bu dosyanın
+`Mines of Moria.html` dosyasını Chrome, Edge veya Firefox ile aç. Görseller bu dosyanın
 içindedir; Node.js ve ayrı bir sunucu kurmadan oynayabilirsin.
 
-Yalnızca `game.html` dosyasını da GitHub'daki dosya sayfasının indirme
-düğmesinden indirebilirsin. Dosya yaklaşık 56 MB olduğu için GitHub önizlemesi
+Windows’ta trol kafalı **Mines of Moria** kısayolunu oluşturmak için
+`Create Game Shortcut.ps1` dosyasına sağ tıklayıp **PowerShell ile çalıştır**.
+Kısayola çift tıklayınca oyun tarayıcında açılır. Klasörü taşıdıysan kısayolu
+yeniden oluştur. `Mines of Moria.cmd` ise klasörle birlikte taşınabilen başlatıcıdır.
+HTML dosyasının Explorer simgesi tarayıcıya aittir; özel trol simgesi kısayolda ve
+oyunun tarayıcı sekmesinde gösterilir. `mines-of-moria.ico` dosyasını yanında tut.
+
+Yalnızca `Mines of Moria.html` dosyasını da GitHub'daki dosya sayfasının indirme
+düğmesinden indirebilirsin. Dosya yaklaşık 50 MB olduğu için GitHub önizlemesi
 açılmayabilir; dosyayı indirip bilgisayarında aç.
 
 Özel (Private) depoları yalnızca erişim izni olan kullanıcılar indirebilir.
@@ -30,13 +38,13 @@ Aynı yerel ağdaki diğer cihazlar bilgisayarın yerel IP adresi üzerinden
 8080 portuna bağlanabilir.
 
 Görseller `assets1` ve `assets2` klasörlerinde bulunur; iki klasör de gereklidir.
-`game.html` ve `game.web.html` hazır sürümler olarak depoda bulunur;
+`Mines of Moria.html` ve `game.web.html` hazır sürümler olarak depoda bulunur;
 derleme sırasında en güncel kaynaklardan yeniden oluşturulur.
 
 ## Dosya boyutları
 
-Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 42 MB'tır;
-her görsel 3 MB'tan küçüktür. Hazır `game.html` yaklaşık 56 MB'tır.
+Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 38 MB'tır;
+her görsel 3 MB'tan küçüktür. Hazır `Mines of Moria.html` yaklaşık 50 MB'tır.
 GitHub web yükleyicisindeki 25 MiB dosya sınırı nedeniyle güncellemeleri
 Git veya GitHub Desktop ile push etmek gerekir. Normal Git'in tek dosya
 sınırı 100 MiB'tır. Bu proje mevcut boyutlarıyla Git LFS gerektirmez.
@@ -54,8 +62,8 @@ gizlice kaçmayı dene. Düşmanın merkezindeki 3×3 alana girmek savaşı
 otomatik başlatır; başarılı gizlilik bu yakınlık kontrolünden korur.
 Görünmeyen düşmanların varlığını sesler haber verir. Görüş alanındaki
 ganimetler minimap'te mavi eşya ikonlarıyla görünür. Yakındaki ikona
-tıklayarak al; uzaktakilerde “Yaklaşman lazım” yazar. Mektupları ve
-kayıtları loot olarak toplayıp envanterden okuyabilirsin.
+tıklayarak al; uzaktakilerde “Yaklaşman lazım” yazar. Duvar yazılarını ve
+kayıtları odadaki “Oku” seçenekleriyle pencerede okuyabilirsin; taşınmazlar.
 Başlangıç odasındaki eski haritayı alarak dungeon planını inceleyebilirsin.
 Başlangıç haritası bakış yönünden bağımsız görünür. Karşılaşma
 penceresi yaratığı oda sahnesinde gösterir; başarısız gizlilik, engellenen
@@ -86,3 +94,6 @@ gösterir. En fazla iki silah taşıyabilirsin. Yedek slota tıklayarak silah
 değiştir; savaşta bu işlem 1 aksiyon harcar ve yeni silahı hazırlaman gerekir.
 İki slot da doluyken yeni silah almak için bırakacağın silahı seçersin.
 Bu mekaniği `node test_equipment_slots.js` ile doğrulayabilirsin.
+
+Düşmanlar her yeni macerada uygun rastgele bloklarda doğar. Rünlü kapının
+bilmece seçeneği yalnızca kapıya bir blok yaklaştığında görünür.

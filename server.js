@@ -15,17 +15,17 @@ const server = http.createServer((req, res) => {
   let pathname;
   try { pathname = new URL(req.url, 'http://localhost').pathname; }
   catch { res.writeHead(400); return res.end(); }
-  const asset=/^\/(assets[12])\/([a-z_]+\.png)$/.exec(pathname);
+  const asset=/^\/(assets[12])\/([a-z_]+\.(?:png|svg))$/.exec(pathname);
   if (asset) {
     const file=path.join(__dirname,asset[1],asset[2]);
-    fs.readFile(file,(error,data)=>{if(error){res.writeHead(404);return res.end('Not found');}res.writeHead(200,{'Content-Type':'image/png','Content-Length':data.length,'Cache-Control':'public, max-age=3600'});res.end(req.method==='HEAD'?undefined:data);});
+    fs.readFile(file,(error,data)=>{if(error){res.writeHead(404);return res.end('Not found');}res.writeHead(200,{'Content-Type':asset[2].endsWith('.svg')?'image/svg+xml':'image/png','Content-Length':data.length,'Cache-Control':'public, max-age=3600'});res.end(req.method==='HEAD'?undefined:data);});
     return;
   }
-  if (!['/', '/game.html', '/index.html'].includes(pathname)) {
+  if (!['/', '/game.html', '/Mines%20of%20Moria.html', '/Mines of Moria.html', '/index.html'].includes(pathname)) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Not found');
   }
-  const gameFile=fs.existsSync(path.join(__dirname,'game.web.html'))?'game.web.html':'game.html';
+  const gameFile=fs.existsSync(path.join(__dirname,'game.web.html'))?'game.web.html':'Mines of Moria.html';
   fs.readFile(path.join(__dirname, gameFile), (error, html) => {
     if (error) { res.writeHead(500); return res.end('Game file unavailable'); }
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': html.length, 'Cache-Control': 'no-store' });

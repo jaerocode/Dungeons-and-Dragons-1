@@ -1,6 +1,6 @@
 {
-  "source": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
-  "note": "Skeleton ve örümcek temaları D&D SRD 5.2.1’den esinlenir. Can, AC, saldırı ve hasar değerleri bu tek oyunculu oyuna özel hafif uyarlamalardır; resmi stat blokları değildir.",
+  "source": "https://tolkiengateway.net/wiki/Moria",
+  "note": "Moria orkları, mağara trolleri ve büyük örümcekler Orta Dünya temalarıyla kullanılır. Savaş değerleri ve örümceklerin bu yan galeride bulunması oyun uyarlamasıdır. Eski skeleton kimlikleri kayıt uyumu için içeride korunur.",
   "encounter_rules": {
     "max_active_hostiles": 2,
     "monster_attacks_per_turn": 1,
@@ -13,7 +13,7 @@
   "monsters": [
     {
       "id": "spider",
-      "name": "Mahzen Örümceği",
+      "name": "Büyük Mağara Örümceği",
       "label": "İri bir mağara örümceği",
       "kind": "spider",
       "hp": 10,
@@ -32,13 +32,13 @@
       "noncombat": "Tetikleme alanına girmeden geri çekil.",
       "loot": "Örümcek ipeği.",
       "art": "spider",
-      "lore": "Mahzenin altındaki mağaralardan taş çatlaklarına sızmış bir avcı. Simya artıklarından beslenen nesiller, bu örümcekleri olağandışı büyüklüğe ulaştırmış. Ağlarındaki paslı anahtarlar ve kemikler, burada yalnız böcek avlamadıklarını anlatıyor."
+      "lore": "Orta Dünya’nın karanlık yerlerindeki büyük örümcekleri hatırlatan bir avcı. Bu oyunda Moria’nın terk edilmiş yan galerilerindeki çatlaklara ağ kurmuş. İnce bacakları taşın üstünde sessizce ilerler; avını ağların titreşimiyle izler."
     },
     {
       "id": "skeleton",
-      "name": "Skeleton",
-      "label": "Paslı kılıç taşıyan iskelet",
-      "kind": "skeleton",
+      "name": "Moria Orku",
+      "label": "Paslı pala ve cüce yağması zırh taşıyan ork",
+      "kind": "orc",
       "hp": 13,
       "defense": 12,
       "dexterity": 14,
@@ -50,18 +50,18 @@
       "hearing_radius": 3,
       "flee_dc": 12,
       "difficulty": "kolay–orta",
-      "behavior": "Kemik tıkırtıları duyulur. Yakınında ya da gürültüyle uyanınca kılıcını savurur.",
-      "counterplay": "Hazırlanmış silah +2 inisiyatif sağlar. Her düşman turunda bir saldırı yapar.",
-      "noncombat": "Tetikleme alanından uzak kal.",
-      "loot": "Bir iyileştirme iksiri.",
-      "art": "skeleton",
-      "lore": "Bir zamanlar bu koridorlarda nöbet tutan bir askerdi. Mahzen terk edildiğinde karanlık mühür büyüsü, gömülmemiş kemiklerini yeniden ayağa kaldırdı. Adını ve efendisini unuttu; paslı kılıcıyla yalnızca son emrini sürdürüyor: kimseyi geçirme."
+      "behavior": "Karanlık galeride nöbet tutar. Metal sürtünmeleri duyulur; gürültü ve yakınlık onu uyarır.",
+      "counterplay": "Silahını önceden hazırla; güç yerine sessiz bir geçiş de deneyebilirsin.",
+      "noncombat": "Görüşünü ve yakınlık alanını aşmadan gölgelerden dolaş.",
+      "loot": "Cüce Şifa İksiri veya son depoya geçiş.",
+      "art": "moria_orc",
+      "lore": "Khazad-dûm’un terk edilmiş yollarını kullanan bir Moria orku. Üzerindeki demirler farklı zırhlardan sökülmüş, palasının ağzı eski çarpışmalarla çentilmiş. Cüce ustalarının açtığı geçitleri artık av ve yağma için gözetliyor."
     },
     {
       "id": "skeleton_captain",
-      "name": "Skeleton Muhafız",
-      "label": "Mühür odasının iskelet bekçisi",
-      "kind": "skeleton",
+      "name": "Moria Ork Nöbetçisi",
+      "label": "Paslı pala ve cüce yağması zırh taşıyan ork",
+      "kind": "orc",
       "hp": 24,
       "defense": 13,
       "dexterity": 14,
@@ -73,17 +73,17 @@
       "hearing_radius": 4,
       "flee_dc": 13,
       "difficulty": "final karşılaşması",
-      "behavior": "Son hazneyi korur. Yüksek alarmda seni duyunca uyanır.",
-      "counterplay": "Mühür Odası’ndaki tek kullanımlık dinlenmeyle hazırlan; saldır veya DEX ile kaç.",
-      "noncombat": "Arşivdeki rün dizisi bir saldırılık avantaj sağlar; savaşı otomatik bitirmez.",
-      "loot": "Mühür Haznesi’ne geçiş.",
-      "art": "skeleton",
-      "lore": "Göğsündeki silinmiş arma, mahzenin son muhafız komutanına ait. Mühür Taşı’nı koruma yemini ölümünden sonra bile çözülmedi. Karanlık büyü kemiklerini zırhına bağladı; yüzyıllardır aynı eşiği, aynı unutulmuş emirle bekliyor."
+      "behavior": "Karanlık galeride nöbet tutar. Metal sürtünmeleri duyulur; gürültü ve yakınlık onu uyarır.",
+      "counterplay": "Silahını önceden hazırla; güç yerine sessiz bir geçiş de deneyebilirsin.",
+      "noncombat": "Görüşünü ve yakınlık alanını aşmadan gölgelerden dolaş.",
+      "loot": "Cüce Şifa İksiri veya son depoya geçiş.",
+      "art": "moria_orc",
+      "lore": "Khazad-dûm’un terk edilmiş yollarını kullanan bir Moria orku. Üzerindeki demirler farklı zırhlardan sökülmüş, palasının ağzı eski çarpışmalarla çentilmiş. Cüce ustalarının açtığı geçitleri artık av ve yağma için gözetliyor."
     },
     {
       "id": "troll",
-      "name": "Mahzen Trolü",
-      "label": "Sütunların arasında dev bir trol",
+      "name": "Moria Mağara Trolü",
+      "label": "Cüce sütunlarını gölgede bırakan mağara trolü",
       "kind": "troll",
       "hp": 65,
       "defense": 15,
@@ -97,11 +97,11 @@
       "difficulty": "çok güçlü",
       "behavior": "Salonun ortasında bekler. Sütunlar görüşünü keser; gürültü onu uyarır.",
       "counterplay": "Sütunların yanında gizlen ve yavaş ilerle.",
-      "loot": "İyileştirme iksiri",
+      "loot": "Cüce Şifa İksiri",
       "damage": 11,
       "noncombat": "Sütunların yanındaki gölgelerde gizlenerek yan koridorlardan geç.",
       "art": "troll",
-      "lore": "Lav mağaralarından zincirlenerek getirilen bu dev, mahzenin haznelerine bekçi yapıldı. Efendileri öldüğünde zincirlerini kırdı ama sıcak taşların arasından ayrılmadı. Sopası, devirdiği bir sütunun parçası; duvarlardaki oyuklar son ziyaretçilerin izleri."
+      "lore": "Moria’nın karanlık galerilerinde dolaşan bir mağara trolü. Orkların kullandığı kaba zincirin halkaları bileğinde kalmış. Geniş omuzları taş kemeri dolduruyor; elindeki ağır sopa, cüce sütunlarının dibinde kırık izler bırakıyor."
     }
   ]
 }
