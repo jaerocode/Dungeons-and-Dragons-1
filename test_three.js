@@ -28,4 +28,24 @@ for(const kind of ['goblin','troll','barrow_wight','spider','warg']){
  if(kind==='warg')assert.ok(vm.runInContext('view.enemyAnimations[0].tail',context));
 }
 g.torchLit=false;vm.runInContext('view.update();',context);assert.equal(vm.runInContext('view.enemyAnimations.length',context),0,'Invisible enemies must have no animation rig in the scene');
-console.log('Passed: real Three.js geometry in all 13 rooms, hidden enemy meshes, raycast picking, and five low-poly idle animations with fixed tile positions.');
+for(const cls of ['Fighter','Rogue','Mage']){
+ const character=new DungeonExplorer(map,rules,cls,'Model',{bestiary,loot,fixedSpawns:true});character.appearance={body:'#224466',head:'#663399',mask:'#992233',beard:true};character.prepared=true;context.game=character;vm.runInContext('view.update();',context);
+ assert.equal(vm.runInContext('view.player.userData.characterClass',context),cls);
+ assert.ok(vm.runInContext('view.player.children.length>20',context),'Class models contain separate armor, cloth, limbs and head pieces');
+ assert.ok(vm.runInContext('view.player.children.some(o=>o.material?.color.getHexString()===\'224466\')',context),'Body customization carries into 3D');
+ assert.ok(vm.runInContext('view.player.getObjectByProperty(\'type\',\'Group\')',context));
+ for(let facing=0;facing<4;facing++){
+  character.facing=facing;vm.runInContext('view.update();view.scene.updateMatrixWorld(true);var pose=view.player.getObjectByName(\'held-weapon-pose\');var aim=new THREE.Vector3(0,1,0).applyQuaternion(pose.getWorldQuaternion(new THREE.Quaternion()));',context);
+  const aim=vm.runInContext('[aim.x,aim.z]',context),forward=[[0,-1],[1,0],[0,1],[-1,0]][facing];
+  assert.ok(aim[0]*forward[0]+aim[1]*forward[1]>.95,'Readied weapon points forward in every facing direction');
+ }
+}
+const trapGame=new DungeonExplorer(map,rules,'Fighter','Test',{bestiary,loot,fixedSpawns:true,random:()=>.5});trapGame.roomId='hall';const plate=trapGame.traps.find(t=>t.roomId==='hall');trapGame.position={...plate.position};context.game=trapGame;
+vm.runInContext('view.update();var plateModel=view.world.children.find(o=>o.userData.kind===\'trap\');',context);
+assert.ok(vm.runInContext('plateModel&&!plateModel.userData.triggered',context));
+assert.ok(vm.runInContext('plateModel.children.filter(o=>o.geometry.type===\'ConeGeometry\').every(o=>o.geometry.parameters.height<=.035)',context),'Untriggered hints must remain tiny');
+trapGame.triggerTrap();vm.runInContext('view.update();var openPlate=view.world.children.find(o=>o.userData.triggered);',context);
+assert.equal(vm.runInContext('openPlate.children.filter(o=>o.geometry.type===\'ConeGeometry\'&&o.geometry.parameters.height===.36).length',context),9);
+trapGame.position={x:plate.position.x+2,y:plate.position.y};trapGame.facing=1;trapGame.torchLit=false;assert.equal(trapGame.canSee(plate.position),false);vm.runInContext('view.update();',context);
+assert.ok(vm.runInContext('view.world.children.some(o=>o.userData.triggered)',context),'Triggered spikes remain as a remembered landmark outside vision');
+console.log('Passed: real Three.js rooms, raycast picking, idle animations, subtle trap tips and nine persistent triggered spikes.');

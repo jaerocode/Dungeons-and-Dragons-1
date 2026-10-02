@@ -211,3 +211,10 @@
 .shell.in-combat .view>.journal{display:none}
 @media(max-width:900px){.shell.in-combat .play-stage{grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr)}}
 @media(max-height:650px){.shell.in-combat .enemy-dossier .enemy-portrait{height:70px;min-height:70px}.shell.in-combat .enemy-dossier-header .eyebrow{display:none}}
+/* Exit choices share the action panel and never consume map height. */
+.play-stage .scene-actions .mini-exits{display:grid;gap:7px;flex:none;max-height:none;overflow:visible;margin:0}
+.play-stage .scene-actions .mini-exits:empty{display:none}
+.play-stage .scene-actions .mini-exits button{width:100%;font-size:14px;min-height:40px;padding:9px;text-align:left}
+.play-stage .scene-actions .mini-exits small{font-size:11px}
+.shell:not(.in-combat) .play-stage .mini-controls{bottom:48px}
+.shell.in-combat .view>.journal{display:flex;visibility:hidden}
