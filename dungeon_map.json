@@ -131,7 +131,7 @@
     {
       "id": "barracks",
       "number": 3,
-      "name": "Orkların Ele Geçirdiği Nöbet Odası",
+      "name": "Goblinlerin Ele Geçirdiği Nöbet Odası",
       "type": "combat",
       "bounds": [
         8,
@@ -139,8 +139,8 @@
         6,
         4
       ],
-      "description": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
-      "encounter": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "description": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor.",
+      "encounter": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor.",
       "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
       "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
@@ -171,22 +171,22 @@
       ],
       "art": "simple_torture",
       "mood": "PASLI ZİNCİRLER · İS · KIRMIZI KORLAR",
-      "arrival": "Orkların Ele Geçirdiği Nöbet Odası eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
-      "inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "arrival": "Goblinlerin Ele Geçirdiği Nöbet Odası eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor.",
       "readings": [
         {
           "id": "text_0",
           "title": "Silinmiş cüce levhası",
-          "text": "Levhanın kenarında Khazad-dûm’un nöbet düzenine ait işaretler kalmış. Yazının ortası kazınmış; orkların kaba çentikleri cüce harflerinin üstüne binmiş. Silah deposuna açılan servis kapısının menteşesi hâlâ sağlam."
+          "text": "Levhanın kenarında Khazad-dûm’un nöbet düzenine ait işaretler kalmış. Yazının ortası kazınmış; goblinlerin kaba çentikleri cüce harflerinin üstüne binmiş. Silah deposuna açılan servis kapısının menteşesi hâlâ sağlam."
         },
         {
           "id": "text_1",
-          "title": "Moria orklarının izleri",
-          "text": "Orklar madenin karanlık yollarını sığınak ve geçit olarak kullanıyor. Buradaki ayak izleri ağır çizme tabanlarına ait. Metalin taşta sürüklenmesi, yakınlarda silahlı bir nöbetçinin bulunduğunu düşündürüyor."
+          "title": "Moria goblinlerinın izleri",
+          "text": "Goblinler madenin karanlık yollarını sığınak ve geçit olarak kullanıyor. Buradaki ayak izleri ince ve düzensiz ayak izlerine ait. Metalin taşta sürüklenmesi, yakınlarda silahlı bir nöbetçinin bulunduğunu düşündürüyor."
         }
       ],
       "interactions": [],
-      "summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
+      "summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor.",
       "door_hotspots": [
         {
           "x": 23,
@@ -215,8 +215,8 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor.",
-      "quiet_inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Orkların bıraktığı izler eski işçiliği örtüyor."
+      "quiet_summary": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor.",
+      "quiet_inspection": "Cüce nöbet odasına sonradan zincirler ve kaba demir kancalar eklenmiş. Devrilmiş bir masa, ezilmiş miğferler ve kararmış taşlar var. Goblinlerin bıraktığı izler eski işçiliği örtüyor."
     },
     {
       "id": "armory",
@@ -229,8 +229,8 @@
         6,
         4
       ],
-      "description": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
-      "encounter": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "description": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
+      "encounter": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
       "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
       "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [],
@@ -287,7 +287,7 @@
       "art": "simple_armory",
       "mood": "ÇELİK · ÇEKİÇ İZLERİ · KIRMIZI KUMAŞ",
       "arrival": "Khazad-dûm Silah Deposu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
-      "inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
       "readings": [
         {
           "id": "text_0",
@@ -301,7 +301,7 @@
         }
       ],
       "interactions": [],
-      "summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
+      "summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
       "door_hotspots": [
         {
           "x": 22,
@@ -312,8 +312,8 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş.",
-      "quiet_inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, orkların yağmasından kurtulmuş."
+      "quiet_summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
+      "quiet_inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş."
     },
     {
       "id": "rubble",
@@ -729,7 +729,7 @@
     {
       "id": "guardian",
       "number": 11,
-      "name": "Ork Nöbet Salonu",
+      "name": "Goblin Nöbet Salonu",
       "type": "combat",
       "bounds": [
         22,
@@ -737,8 +737,8 @@
         6,
         4
       ],
-      "description": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
-      "encounter": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "description": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "encounter": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
       "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
       "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
       "monsters": [
@@ -756,13 +756,13 @@
       "loot": [],
       "art": "simple_ossuary",
       "mood": "BRONZ KAPI · EZİLMİŞ KALKANLAR · İS",
-      "arrival": "Ork Nöbet Salonu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
-      "inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "arrival": "Goblin Nöbet Salonu eşiğinden geçiyorsun. Khazad-dûm’un taşları sesini yankılıyor.",
+      "inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
       "readings": [
         {
           "id": "text_0",
           "title": "Nöbet izleri",
-          "text": "Kapının önündeki geniş çizme izleri, Moria orklarının burada nöbet tuttuğunu gösteriyor. Küçük bir kampın silahları duvara yaslanmış. Bu yolun açık kalması, nöbetçiyi aşmana bağlı."
+          "text": "Kapının önündeki küçük ayak izleri, Moria goblinlerinın burada nöbet tuttuğunu gösteriyor. Küçük bir kampın silahları duvara yaslanmış. Bu yolun açık kalması, nöbetçiyi aşmana bağlı."
         },
         {
           "id": "text_1",
@@ -772,7 +772,7 @@
       ],
       "interactions": [],
       "stealth_difficulty": 2,
-      "summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
       "door_hotspots": [
         {
           "x": 21,
@@ -793,8 +793,8 @@
           "y": 42
         }
       ],
-      "quiet_summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
-      "quiet_inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve orkların bıraktığı çentikler var. Son deponun eşiği buradan geçiyor."
+      "quiet_summary": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor.",
+      "quiet_inspection": "Eski cüce salonunun kemik nişleri yağmalanmış. Ağır bronz kapının önünde ezilmiş kalkanlar ve goblinlerin bıraktığı çentikler var. Son deponun eşiği buradan geçiyor."
     },
     {
       "id": "vault",
@@ -921,7 +921,7 @@
         {
           "id": "text_1",
           "title": "Kırılmış zincir",
-          "text": "Orkların trolleri ağır işlerde ve savaşta kullandığını hatırlatan kaba zincirler yerde duruyor. Bir halka kopmuş, bir sütunun tabanı ezilmiş. Bu salonun bekçisi cüce yapımı değil; karanlık galerilere sonradan yerleşmiş bir mağara trolü."
+          "text": "Goblinlerin trolleri ağır işlerde ve savaşta kullandığını hatırlatan kaba zincirler yerde duruyor. Bir halka kopmuş, bir sütunun tabanı ezilmiş. Bu salonun bekçisi cüce yapımı değil; karanlık galerilere sonradan yerleşmiş bir mağara trolü."
         }
       ],
       "interactions": [],

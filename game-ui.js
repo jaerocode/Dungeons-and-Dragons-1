@@ -8,7 +8,7 @@ const escapeHTML=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&
 function drawScene(){
   const artKey=game.roomId===MAP.goal&&game.hasStone?game.room.empty_art:game.visibleEnemies.length&&game.room.enemy_art?game.room.enemy_art:game.room.art;
   $('scene').innerHTML='<image data-background="'+artKey+'" href="'+ASSETS[artKey]+'" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/><rect width="1000" height="500" fill="#060b08" opacity=".08"/>';
-  if(game.visibleEnemies.some(e=>e.definition.kind==='orc'))$('scene').innerHTML+='<ellipse cx="510" cy="459" rx="130" ry="17" fill="#000" opacity=".45"/><image data-scene-enemy="orc" href="'+ASSETS.moria_orc+'" x="350" y="80" width="310" height="380" opacity=".88"/>';
+  if(game.visibleEnemies.some(e=>e.definition.kind==='goblin'))$('scene').innerHTML+='<defs><filter id="goblinGroundBlur"><feGaussianBlur stdDeviation="5"/></filter></defs><ellipse cx="505" cy="452" rx="86" ry="14" fill="#060907" opacity=".48" filter="url(#goblinGroundBlur)"/><image class="scene-goblin" data-scene-enemy="goblin" href="'+ASSETS.moria_goblin+'" x="355" y="155" width="300" height="300"/>';
   $('scene').setAttribute('aria-label',game.room.name+' · '+game.room.mood);
   const visible=game.visibleEnemies;
   $('enemyCards').hidden=!!game.combat;
@@ -28,7 +28,7 @@ function renderEnemyDossier(){
 }
 
 function mapEnemyIcon(kind){
-  const drawing=kind==='spider'?'<ellipse cx="50" cy="53" rx="15" ry="20"/><circle cx="50" cy="28" r="10"/><path d="M36 40L18 23L8 10M35 48L13 40L5 28M35 57L14 65L5 81M38 65L25 83L23 96M64 40L82 23L92 10M65 48L87 40L95 28M65 57L86 65L95 81M62 65L75 83L77 96" fill="none" stroke-width="6"/>':kind==='orc'?'<path d="M26 31L8 18L14 54L26 60L29 78L44 92H60L75 78L77 59L90 51L95 19L74 30L63 9H39Z"/><path d="M30 49L43 54M58 54L72 49M36 73H66" stroke="#30120e" stroke-width="7"/><path d="M33 65L40 82L47 66M55 66L63 82L70 65" fill="#ffe0bb" stroke="none"/>':kind==='troll'?'<path d="M26 29L12 23L16 48L25 53L27 78L42 92H59L74 77L77 52L86 47L91 23L73 29L63 12H37Z"/><path d="M31 50L42 53M59 53L70 50M40 75L60 75" stroke="#30120e" stroke-width="7"/><path d="M32 66L38 83L44 67M56 67L63 83L69 66" fill="#ffe0bb" stroke="none"/>':'<path d="M20 41Q20 9 50 9Q80 9 80 41L75 65L63 70V88H37V70L25 65Z"/><circle cx="36" cy="45" r="10" fill="#30120e" stroke="none"/><circle cx="64" cy="45" r="10" fill="#30120e" stroke="none"/><path d="M50 56L43 67H57Z M44 75V87M55 75V87" fill="#30120e" stroke="#30120e" stroke-width="3"/>';
+  const drawing=kind==='spider'?'<ellipse cx="50" cy="53" rx="15" ry="20"/><circle cx="50" cy="28" r="10"/><path d="M36 40L18 23L8 10M35 48L13 40L5 28M35 57L14 65L5 81M38 65L25 83L23 96M64 40L82 23L92 10M65 48L87 40L95 28M65 57L86 65L95 81M62 65L75 83L77 96" fill="none" stroke-width="6"/>':kind==='goblin'?'<path d="M30 25L5 14L19 47L30 50L34 74L48 93L61 79L69 48L84 41L95 9L68 26L60 13H39Z"/><path d="M35 45L45 48M56 47L65 42M46 71L59 70" stroke="#30120e" stroke-width="5"/><path d="M51 43L44 63L62 59Z" fill="#30120e" stroke="none"/>':kind==='troll'?'<path d="M26 29L12 23L16 48L25 53L27 78L42 92H59L74 77L77 52L86 47L91 23L73 29L63 12H37Z"/><path d="M31 50L42 53M59 53L70 50M40 75L60 75" stroke="#30120e" stroke-width="7"/><path d="M32 66L38 83L44 67M56 67L63 83L69 66" fill="#ffe0bb" stroke="none"/>':'<path d="M20 41Q20 9 50 9Q80 9 80 41L75 65L63 70V88H37V70L25 65Z"/><circle cx="36" cy="45" r="10" fill="#30120e" stroke="none"/><circle cx="64" cy="45" r="10" fill="#30120e" stroke="none"/><path d="M50 56L43 67H57Z M44 75V87M55 75V87" fill="#30120e" stroke="#30120e" stroke-width="3"/>';
   return '<svg class="map-enemy-icon" data-map-enemy="'+kind+'" viewBox="0 0 100 100" aria-hidden="true" fill="#ff947e" stroke="#ff947e" stroke-linecap="round" stroke-linejoin="round">'+drawing+'</svg>';
 }
 function renderBattleConsole(){
@@ -126,7 +126,7 @@ function renderEncounterNotice(){
   $('encounterTitle').textContent=enemy?(notice.kind==='enemy'?'Bir '+enemy.definition.name+' tam karşında duruyor!':'Bu odada bir '+enemy.definition.name+' var!'):'Yalnız değilsin…';
   $('encounterImage').hidden=!enemy;
   $('encounterScene').hidden=!enemy;$('encounterCreature').hidden=true;
-  if(enemy){$('encounterImage').src=ASSETS[game.room.enemy_art||game.room.art];$('encounterImage').alt=game.room.name+' · '+enemy.definition.name;$('encounterCreature').hidden=!!game.room.enemy_art;$('encounterCreature').src=ASSETS[enemy.definition.art];$('encounterCreature').alt=enemy.definition.name;}
+  if(enemy){$('encounterImage').src=ASSETS[game.room.enemy_art||game.room.art];$('encounterImage').alt=game.room.name+' · '+enemy.definition.name;$('encounterCreature').hidden=!!game.room.enemy_art;$('encounterScene').classList.toggle('goblin-encounter',enemy.definition.kind==='goblin');$('encounterCreature').src=ASSETS[enemy.definition.art];$('encounterCreature').alt=enemy.definition.name;}
   $('encounterText').hidden=!!enemy;$('encounterText').textContent=enemy?'':notice.text;
   $('encounterChoices').innerHTML=enemy?'<button class="quiet-button" id="noticeSneak">Gizlice kaçmayı dene</button><button class="context-button exit-button" id="noticeAttack">Saldır</button>':'<button class="context-button" id="noticeContinue">Dikkatli ol ve devam et</button>';
   if(enemy){

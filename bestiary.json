@@ -1,6 +1,6 @@
 {
   "source": "https://tolkiengateway.net/wiki/Moria",
-  "note": "Moria orkları, mağara trolleri ve büyük örümcekler Orta Dünya temalarıyla kullanılır. Savaş değerleri ve örümceklerin bu yan galeride bulunması oyun uyarlamasıdır. Eski skeleton kimlikleri kayıt uyumu için içeride korunur.",
+  "note": "Moria goblinleri, mağara trolleri ve büyük örümcekler Orta Dünya temalarıyla kullanılır. Savaş değerleri ve örümceklerin bu yan galeride bulunması oyun uyarlamasıdır. Eski skeleton kimlikleri kayıt uyumu için içeride korunur.",
   "encounter_rules": {
     "max_active_hostiles": 2,
     "monster_attacks_per_turn": 1,
@@ -36,16 +36,16 @@
     },
     {
       "id": "skeleton",
-      "name": "Moria Orku",
-      "label": "Paslı pala ve cüce yağması zırh taşıyan ork",
-      "kind": "orc",
+      "name": "Moria Goblini",
+      "label": "Soluk tenli, cılız ve paslı bıçak taşıyan goblin",
+      "kind": "goblin",
       "hp": 13,
       "defense": 12,
       "dexterity": 14,
       "attack_bonus": 4,
       "damage": 5,
       "damage_dice": "1d6+2",
-      "attack_name": "Kılıç Darbesi",
+      "attack_name": "Bıçak Darbesi",
       "aggro_radius": 1,
       "hearing_radius": 3,
       "flee_dc": 12,
@@ -54,21 +54,21 @@
       "counterplay": "Silahını önceden hazırla; güç yerine sessiz bir geçiş de deneyebilirsin.",
       "noncombat": "Görüşünü ve yakınlık alanını aşmadan gölgelerden dolaş.",
       "loot": "Cüce Şifa İksiri veya son depoya geçiş.",
-      "art": "moria_orc",
-      "lore": "Khazad-dûm’un terk edilmiş yollarını kullanan bir Moria orku. Üzerindeki demirler farklı zırhlardan sökülmüş, palasının ağzı eski çarpışmalarla çentilmiş. Cüce ustalarının açtığı geçitleri artık av ve yağma için gözetliyor."
+      "art": "moria_goblin",
+      "lore": "Moria’nın dar galerilerine sinmiş, soluk tenli bir goblin. İnce kolları yırtık bezlerden uzanıyor; uzun kulakları en hafif sesi bile kolluyor. Hurda demirleri zırh diye bağlamış, paslı bıçağına güveniyor. Gücünden çok karanlığı ve dar geçitleri kullanarak avına yaklaşır."
     },
     {
       "id": "skeleton_captain",
-      "name": "Moria Ork Nöbetçisi",
-      "label": "Paslı pala ve cüce yağması zırh taşıyan ork",
-      "kind": "orc",
+      "name": "Moria Goblin Nöbetçisi",
+      "label": "Soluk tenli, cılız ve paslı bıçak taşıyan goblin",
+      "kind": "goblin",
       "hp": 24,
       "defense": 13,
       "dexterity": 14,
       "attack_bonus": 4,
       "damage": 5,
       "damage_dice": "1d6+2",
-      "attack_name": "Kılıç Darbesi",
+      "attack_name": "Bıçak Darbesi",
       "aggro_radius": 2,
       "hearing_radius": 4,
       "flee_dc": 13,
@@ -77,8 +77,8 @@
       "counterplay": "Silahını önceden hazırla; güç yerine sessiz bir geçiş de deneyebilirsin.",
       "noncombat": "Görüşünü ve yakınlık alanını aşmadan gölgelerden dolaş.",
       "loot": "Cüce Şifa İksiri veya son depoya geçiş.",
-      "art": "moria_orc",
-      "lore": "Khazad-dûm’un terk edilmiş yollarını kullanan bir Moria orku. Üzerindeki demirler farklı zırhlardan sökülmüş, palasının ağzı eski çarpışmalarla çentilmiş. Cüce ustalarının açtığı geçitleri artık av ve yağma için gözetliyor."
+      "art": "moria_goblin",
+      "lore": "Moria’nın dar galerilerine sinmiş, soluk tenli bir goblin. İnce kolları yırtık bezlerden uzanıyor; uzun kulakları en hafif sesi bile kolluyor. Hurda demirleri zırh diye bağlamış, paslı bıçağına güveniyor. Gücünden çok karanlığı ve dar geçitleri kullanarak avına yaklaşır."
     },
     {
       "id": "troll",

@@ -16,9 +16,9 @@ Mevcut Fighter / Mage / Rogue sistemi bir oyun sınıflandırmasıdır.
 İsim önerileri Orta Dünya’daki yan karakter adlarını kullanır; oyuncu o kişinin
 kanonik hayatını oynamaz ve isterse kendi adını yazabilir.
 
-Örümceklerin bu yan galerideki konumu oyun uyarlamasıdır. Moria orkları ve mağara
+Örümceklerin bu yan galerideki konumu oyun uyarlamasıdır. Moria goblinleri ve mağara
 trolleri Moria temasına uygundur. Eski `skeleton` veri kimlikleri yalnızca kod
-uyumu için korunur; görünür düşmanlar ork olarak çizilir ve adlandırılır.
+uyumu için korunur; görünür düşmanlar goblin olarak çizilir ve adlandırılır.
 
 Kaynaklar:
 
