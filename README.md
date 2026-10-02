@@ -18,7 +18,7 @@ HTML dosyasının Explorer simgesi tarayıcıya aittir; özel trol simgesi kısa
 oyunun tarayıcı sekmesinde gösterilir. `mines-of-moria.ico` dosyasını yanında tut.
 
 Yalnızca `Mines of Moria.html` dosyasını da GitHub'daki dosya sayfasının indirme
-düğmesinden indirebilirsin. Dosya yaklaşık 50 MB olduğu için GitHub önizlemesi
+düğmesinden indirebilirsin. Dosya yaklaşık 53 MB olduğu için GitHub önizlemesi
 açılmayabilir; dosyayı indirip bilgisayarında aç.
 
 Özel (Private) depoları yalnızca erişim izni olan kullanıcılar indirebilir.
@@ -43,8 +43,8 @@ derleme sırasında en güncel kaynaklardan yeniden oluşturulur.
 
 ## Dosya boyutları
 
-Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 38 MB'tır;
-her görsel 3 MB'tan küçüktür. Hazır `Mines of Moria.html` yaklaşık 50 MB'tır.
+Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 40 MB'tır;
+her görsel 3 MB'tan küçüktür. Hazır `Mines of Moria.html` yaklaşık 53 MB'tır.
 GitHub web yükleyicisindeki 25 MiB dosya sınırı nedeniyle güncellemeleri
 Git veya GitHub Desktop ile push etmek gerekir. Normal Git'in tek dosya
 sınırı 100 MiB'tır. Bu proje mevcut boyutlarıyla Git LFS gerektirmez.
