@@ -24,7 +24,17 @@ class ThreeDungeon {
   wall(x,z,back){const levels=back?4:1;for(let row=0;row<levels;row++)for(let b=0;b<2;b++){const shade=['#59675e','#687368','#4d5b53'][(Math.abs(x*3+z*7+row+b))%3];this.box(.48,.28,.68,shade,x+(b-.5)*.5,.15+row*.29,z);}this.box(1.04,.11,.77,'#7c8371',x,levels*.29+.05,z);}
   pillar(x,z,seen){const c=seen?'#808879':'#404d45';this.box(.62,.16,.62,c,x,.12,z);this.cylinder(.22,.26,1.16,c,x,.77,z);this.box(.58,.2,.58,c,x,1.43,z);this.box(.69,.09,.69,seen?'#b1ad8f':'#536055',x,1.56,z);}
   torch(x,z){this.cylinder(.04,.055,.4,'#634633',x,.67,z);this.mesh(new THREE.ConeGeometry(.12,.31,5),'#ee9b3d',x,1,z,this.world,'#df7429');this.mesh(new THREE.ConeGeometry(.055,.2,5),'#ffdf8c',x,1.03,z,this.world,'#ffba51');const light=new THREE.PointLight(0xffa45b,1.6,3,2);light.position.set(x,1.2,z);this.world.add(light);}
-  door(x,z,direction,seen){const g=new THREE.Group();g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);g.rotation.y=direction%2?Math.PI/2:0;this.world.add(g);const c=seen?'#a59e7d':'#45544a';this.box(.18,1.18,.26,c,-.37,.64,0,g);this.box(.18,1.18,.26,c,.37,.64,0,g);for(let i=0;i<5;i++){const angle=(i+.5)/5*Math.PI;const stone=this.box(.25,.19,.28,c,Math.cos(angle)*.37,1.19+Math.sin(angle)*.22,0,g);stone.rotation.z=angle-Math.PI/2;}this.box(.55,.99,.1,seen?'#634d36':'#26382f',0,.61,0,g);for(let i=-1;i<=1;i++)this.box(.025,.86,.035,'#2a2a23',i*.17,.59,.065,g);this.box(.51,.05,.05,'#292f28',0,.5,.08,g);this.mesh(new THREE.SphereGeometry(.04,5,4),'#c3ad71',.16,.6,.11,g);}
+  door(x,z,direction,seen){
+    const g=new THREE.Group(),[, ,w,h]=game.room.bounds;
+    g.position.set(direction===3?-1:direction===1?w:x,0,direction===0?-1:direction===2?h:z);
+    g.userData.kind='door';g.userData.direction=direction;g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);g.rotation.y=-direction*Math.PI/2;this.world.add(g);
+    const stone='#788273';this.box(.2,1.2,.68,stone,-.4,.65,0,g);this.box(.2,1.2,.68,stone,.4,.65,0,g);
+    for(let i=0;i<7;i++){const a=(i+.5)/7*Math.PI,m=this.box(.21,.2,.68,i%2?'#89907b':stone,Math.cos(a)*.39,1.17+Math.sin(a)*.28,0,g);m.rotation.z=a-Math.PI/2;}
+    this.box(.58,1.05,.12,'#5c4934',0,.63,.25,g);for(let i=-2;i<=2;i++)this.box(.014,.99,.012,'#342f26',i*.115,.63,.318,g);
+    for(const y of [.35,.94])this.box(.56,.045,.025,'#303832',0,y,.33,g);
+    this.mesh(new THREE.TorusGeometry(.047,.012,4,8),'#bd9d61',.17,.65,.35,g);
+    this.box(.8,.035,.8,'#8b8c75',0,.105,.12,g);return g;
+  }
   chest(x,z){this.box(.57,.32,.4,'#664529',x,.31,z);this.cylinder(.22,.22,.55,'#87613d',x,.47,z).rotation.z=Math.PI/2;for(const dx of [-.2,.2])this.box(.045,.4,.43,'#b49b67',x+dx,.35,z);this.box(.08,.11,.025,'#dfb05d',x,.36,z+.22);}
   barrel(x,z){this.cylinder(.21,.18,.49,'#805832',x,.34,z,undefined,8);for(const y of [.19,.47]){const m=this.mesh(new THREE.TorusGeometry(.21,.018,4,8),'#4e5148',x,y,z);m.rotation.x=Math.PI/2;}}
   table(x,z,archive){this.box(.75,.11,.47,'#79583b',x,.54,z);for(const dx of [-.28,.28])for(const dz of [-.15,.15])this.box(.07,.45,.07,'#4b3b2b',x+dx,.3,z+dz);if(archive){for(let i=0;i<3;i++)this.box(.2,.06,.27,['#b7a879','#536a64','#8d6750'][i],x-.16+i*.15,.63+i*.025,z);}else {for(let i=0;i<2;i++){this.cylinder(.06,.07,.13,['#73a993','#b69470'][i],x-.17+i*.3,.69,z);this.cylinder(.026,.026,.09,'#b5c3a5',x-.17+i*.3,.79,z);}}}
@@ -55,9 +65,9 @@ class ThreeDungeon {
     const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geo.setIndex(indices);geo.computeVertexNormals();this.mesh(geo,color,0,0,0,parent);
     this.cylinder(.42,.43,.035,color,0,1.32,0,parent,7);
   }
-  playerModel(x,z,appearance={},weapon){
-    const g=new THREE.Group(),cls=game.characterClass,body=appearance.body||'#47523b',head=appearance.head||'#68745c',skin='#c2ae8e',leather='#342a24',metal='#a3ac9c';
-    g.position.set(x,0,z);g.userData.kind='player';g.userData.characterClass=cls;g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);
+  playerModel(x,z,appearance={},weapon,preview){
+    const g=new THREE.Group(),cls=preview?.characterClass||game.characterClass,body=appearance.body||'#47523b',head=appearance.head||'#68745c',skin='#c2ae8e',leather='#342a24',metal='#a3ac9c';
+    g.position.set(x,0,z);g.userData.kind='player';g.userData.characterClass=cls;if(!preview)g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);
     const mage=cls==='Mage',rogue=cls==='Rogue';
     for(const side of [-1,1]){
       this.limb(g,[side*.12,.68,0],[side*.17,.37,.025],.092,mage?body:'#706c58');
@@ -91,7 +101,7 @@ class ThreeDungeon {
       this.limb(g,[side*.27,1,0],elbow,.095,body);this.limb(g,elbow,hand,.075,mage?body:leather);
       this.mesh(new THREE.DodecahedronGeometry(.065,0),skin,...hand,g);
     }
-    if(game.prepared){
+    if(preview?.prepared??game.prepared){
       const pose=new THREE.Group();pose.name='held-weapon-pose';g.add(pose);pose.position.set(.34,.64,.19);pose.rotation.x=Math.PI/2;
       const held=this.weapon(pose,weapon,mage);held.position.set(-.32,-.68,-.12);
     }
@@ -125,22 +135,39 @@ class ThreeDungeon {
     for(let i=0;i<3;i++){const stitch=this.box(.012,.06,.013,shadow,0,1.17-i*.055,.19,g);stitch.rotation.z=i%2?.65:-.65;}
     this.ring(0,0,'#c65b50',g,.35);return g;
   }
-  humanoid(kind,x,z,appearance,weapon){if(kind==='player')return this.playerModel(x,z,appearance,weapon);if(kind==='barrow_wight')return this.wightModel(x,z);const g=new THREE.Group();g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);const player=kind==='player',cls=game.characterClass,body=player?(appearance?.body||'#47523b'):kind==='troll'?'#667060':kind==='barrow_wight'?'#8b9988':'#819473';const skin=player?'#b5a388':body,head=player?(appearance?.head||'#68745c'):body;
-    this.cylinder(.19,.26,.47,body,0,.57,0,g,6);this.mesh(new THREE.SphereGeometry(.2,6,4),skin,0,.99,0,g);this.mesh(new THREE.SphereGeometry(.21,6,4),head,0,1.06,-.015,g);this.box(.24,.12,.07,skin,0,.96,.16,g);
-    this.box(.09,.12,.065,'#243a32',-.08,1.02,.18,g);this.box(.09,.12,.065,'#243a32',.08,1.02,.18,g);
-    for(const side of [-1,1]){this.box(.12,.24,.13,body,side*.26,.62,0,g);this.box(.12,.1,.14,skin,side*.26,.45,0,g);this.box(.13,.28,.15,'#39473a',side*.11,.25,0,g);this.box(.15,.08,.21,'#2e3a31',side*.11,.12,.04,g);}
-    if(player&&cls==='Mage'){this.mesh(new THREE.ConeGeometry(.23,.38,6),head,0,1.34,0,g);if(appearance?.beard)this.mesh(new THREE.ConeGeometry(.13,.2,5),'#c7c1a6',0,.8,.17,g).rotation.z=Math.PI;if(game.prepared)this.weapon(g,weapon,true);}
-    else if(player&&cls==='Rogue')this.box(.27,.095,.08,appearance?.mask||'#273c30',0,.9,.18,g);
-    else {this.box(.035,.39,.035,'#b1b79c',0,1.07,.21,g);if(!player){this.mesh(new THREE.ConeGeometry(.13,.31,4),head,-.26,1.03,0,g).rotation.z=1;this.mesh(new THREE.ConeGeometry(.13,.31,4),head,.26,1.03,0,g).rotation.z=-1;}}
-    if(player&&game.prepared&&cls!=='Mage')this.weapon(g,weapon,false);if(!player){this.weapon(g,{id:kind==='troll'?'war_hammer':'iron_sword'},false);this.ring(0,0,'#c65b50',g,.35);}else this.ring(0,0,'#c9b96e',g,.33);
-    if(kind==='troll'){g.scale.set(2.65,2.15,2.4);this.box(.58,.28,.4,'#657462',0,.73,0,g);}if(kind==='barrow_wight'){g.scale.y=1.2;this.mesh(new THREE.ConeGeometry(.32,.65,6),'#65776f',0,.5,0,g);this.box(.25,.23,.07,'#283a35',0,1.02,.19,g);for(const side of [-1,1])this.mesh(new THREE.SphereGeometry(.032,5,3),'#a4d4c6',side*.065,1.06,.24,g,'#72b6ac');}g.userData.kind=kind;return g;
+  humanoid(kind,x,z,appearance,weapon){
+    if(kind==='player')return this.playerModel(x,z,appearance,weapon);
+    if(kind==='barrow_wight')return this.wightModel(x,z);
+    const g=new THREE.Group();g.position.set(x,0,z);g.userData.kind=kind;g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);
+    const troll=kind==='troll',skin=troll?'#737b73':'#91a67a',dark=troll?'#434c48':'#334433',armor='#4c5552';
+    this.cylinder(troll?.35:.2,troll?.27:.15,troll?.48:.48,skin,0,.86,0,g,6);
+    const chest=this.mesh(new THREE.IcosahedronGeometry(troll?.38:.23,0),skin,0,1.01,0,g);chest.scale.set(1.2,1,.7);
+    this.cylinder(.2,.26,.24,troll?armor:'#3f4435',0,.6,0,g,6);
+    const head=this.mesh(new THREE.IcosahedronGeometry(troll?.235:.23,0),skin,0,1.39,.08,g);head.scale.set(troll?1.15:.85,1.2,.85);
+    this.box(troll?.28:.14,.08,.1,dark,0,1.28,.25,g);
+    for(const side of [-1,1]){
+      this.box(.055,.024,.02,'#1e2c26',side*.085,1.43,.25,g);
+      this.mesh(new THREE.ConeGeometry(.03,.07,4),'#c4c1a4',side*.085,1.28,.31,g);
+      const knee=[side*.2,.33,.06];this.limb(g,[side*.17,.62,0],knee,troll?.14:.07,troll?skin:'#4b5140');this.limb(g,knee,[side*.22,.12,.12],troll?.105:.045,skin);this.box(troll?.24:.13,.11,troll?.33:.23,skin,side*.23,.13,.17,g);
+      const elbow=[side*(troll?.48:.36),.87,.07],hand=[side*(troll?.58:.39),troll?.52:.69,.22];this.limb(g,[side*(troll?.34:.21),1.12,0],elbow,troll?.18:.065,skin);this.limb(g,elbow,hand,troll?.15:.047,skin);this.mesh(new THREE.IcosahedronGeometry(troll?.15:.065,0),skin,...hand,g);
+      if(troll){
+        const shoulder=this.mesh(new THREE.IcosahedronGeometry(.25,0),armor,side*.38,1.1,0,g);shoulder.scale.y=.65;
+        this.limb(g,elbow,hand,.17,armor);for(let i=0;i<3;i++)this.mesh(new THREE.ConeGeometry(.055,.21,4),'#95998a',side*(.38+i*.055),1.28-i*.14,.04,g).rotation.z=-side*.65;
+        this.box(.22,.16,.22,armor,side*.2,.34,.09,g);
+      }else{
+        const ear=this.mesh(new THREE.ConeGeometry(.105,.37,3),skin,side*.29,1.49,0,g);ear.rotation.z=-side*1.12;ear.scale.z=.35;
+      }
+    }
+    if(troll){for(let i=0;i<4;i++)this.box(.43,.04,.075,armor,0,.79+i*.075,.24,g);g.scale.set(2.2,1.85,2.05);}
+    else {this.limb(g,[-.39,.7,.22],[-.42,1.12,.3],.045,'#513b29');this.mesh(new THREE.IcosahedronGeometry(.09,0),'#604531',-.42,1.12,.3,g);}
+    this.ring(0,0,'#c65b50',g,troll?.4:.35);return g;
   }
   // Animate a separate model group so its tile position and selection ring stay fixed.
   rigEnemy(g){
     const body=new THREE.Group(),parts=g.children.filter(o=>o.geometry?.type!=='TorusGeometry');
     for(const part of parts)body.add(part);g.add(body);
-    const legs=parts.filter(o=>o.geometry?.type==='BoxGeometry'&&o.position.y<.3&&Math.abs(o.position.x)>.1);
-    const tail=parts.find(o=>o.geometry?.type==='ConeGeometry'&&o.position.z<-.4);
+    const legs=parts.filter(o=>o.userData.spiderLeg);
+    const tail=parts.find(o=>o.userData.tail);
     this.enemyAnimations.push({kind:g.userData.kind,body,legs:legs.map(mesh=>({mesh,rotation:mesh.rotation.clone()})),tail,phase:g.position.x*.73+g.position.z*1.17});
   }
   animateEnemies(seconds){
@@ -166,14 +193,39 @@ class ThreeDungeon {
     else {this.box(.21,.035,.07,'#b69f65',.32,.86,.12,held);const blade=this.mesh(new THREE.ConeGeometry(dagger?.045:.065,dagger?.26:.48,4),color,.32,dagger?.99:1.10,.12,held);blade.scale.z=.3;}
     return held;
   }
-  beast(kind,x,z){const g=new THREE.Group();g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);const spider=kind==='spider';this.mesh(new THREE.SphereGeometry(spider?.2:.23,6,4),spider?'#59453c':'#5d6b5a',0,.38,0,g).scale.z=1.7;if(spider){for(let i=0;i<8;i++){const side=i<4?-1:1,a=i%4;const leg=this.box(.055,.055,.5,'#4d3f36',side*.27,.22,(a-1.5)*.16,g);leg.rotation.y=side*.6;leg.rotation.z=side*.45;}}else{this.mesh(new THREE.SphereGeometry(.2,5,4),'#758271',0,.57,.36,g);this.box(.16,.13,.24,'#48594b',0,.49,.5,g);for(const side of [-1,1]){this.mesh(new THREE.ConeGeometry(.09,.22,4),'#586953',side*.13,.77,.31,g);for(const z of [-.22,.24])this.box(.1,.31,.12,'#475545',side*.14,.23,z,g);}this.mesh(new THREE.ConeGeometry(.09,.42,5),'#596653',0,.47,-.48,g).rotation.x=-1;}
-    this.ring(0,0,'#c85a50',g,.35);g.userData.kind=kind;return g;}
+  beast(kind,x,z){
+    const g=new THREE.Group();g.position.set(x,0,z);g.userData.kind=kind;g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);
+    if(kind==='spider'){
+      const shell=this.mesh(new THREE.IcosahedronGeometry(.28,1),'#725132',0,.42,-.16,g);shell.scale.set(1,1,1.25);
+      const head=this.mesh(new THREE.IcosahedronGeometry(.18,0),'#805b35',0,.35,.19,g);head.scale.set(1.2,.7,1);
+      for(const side of [-1,1]){
+        this.mesh(new THREE.SphereGeometry(.024,4,3),'#211e19',side*.065,.4,.33,g);
+        this.limb(g,[side*.065,.32,.29],[side*.09,.23,.39],.025,'#503c28');
+        for(let i=0;i<4;i++){
+          const leg=new THREE.Group();leg.position.set(side*.13,.34,(i-1.5)*.11);leg.userData.spiderLeg=true;g.add(leg);
+          const knee=[side*(.34+Math.sin(i)*.055),.23,(i-1.5)*.16];this.limb(leg,[0,0,0],knee,.034,'#705032');this.limb(leg,knee,[side*.5,-.25,(i-1.5)*.23],.021,'#553f29');
+        }
+      }
+    }else{
+      const fur='#758185',shadow='#4e5e64';const torso=this.mesh(new THREE.IcosahedronGeometry(.32,1),fur,0,.55,-.05,g);torso.scale.set(.85,1,1.65);
+      this.mesh(new THREE.IcosahedronGeometry(.31,0),'#879398',0,.69,.25,g);this.mesh(new THREE.IcosahedronGeometry(.22,0),fur,0,.79,.49,g);this.box(.19,.12,.27,shadow,0,.69,.64,g);this.box(.12,.07,.06,'#263338',0,.73,.8,g);
+      for(const side of [-1,1]){
+        const ear=this.mesh(new THREE.ConeGeometry(.095,.28,4),fur,side*.14,1.02,.41,g);ear.rotation.z=-side*.25;
+        this.mesh(new THREE.SphereGeometry(.025,4,3),'#78d2df',side*.155,.83,.64,g,'#2e7d96');
+        for(const z of [-.35,.28]){this.limb(g,[side*.21,.53,z],[side*.27,.29,z+.08],.1,fur);this.limb(g,[side*.27,.29,z+.08],[side*.28,.13,z+.14],.06,shadow);this.box(.18,.1,.22,fur,side*.28,.13,z+.18,g);for(let i=0;i<3;i++)this.mesh(new THREE.ConeGeometry(.02,.09,4),'#b9b9a4',side*.28+(i-1)*.045,.11,z+.29,g).rotation.x=Math.PI/2;}
+      }
+      for(let i=0;i<7;i++){const spike=this.mesh(new THREE.ConeGeometry(.085,.22+(i%2)*.09,4),'#a0aaab',0,.86,-.48+i*.12,g);spike.rotation.x=-.55;}
+      const tail=new THREE.Group();tail.position.set(0,.57,-.48);tail.userData.tail=true;g.add(tail);this.limb(tail,[0,0,0],[0,.08,-.28],.085,fur);this.limb(tail,[0,.08,-.28],[0,.32,-.45],.045,shadow);
+      g.scale.set(1.15,1.15,1.15);
+    }
+    this.ring(0,0,'#c85a50',g,.35);return g;
+  }
   loot(item,x,z){const g=new THREE.Group();g.userData.kind='loot';g.userData.itemId=item.id;g.position.set(x,0,z);g.userData.cellKey=(game.room.bounds[0]+x)+':'+(game.room.bounds[1]+z);this.pickGroups.push(g);this.world.add(g);this.ring(0,0,'#50b8d3',g,.24);const id=item.id;if(item.type==='map'||item.type==='reading'){this.box(.29,.025,.36,'#cabc83',0,.17,0,g);for(let i=0;i<3;i++)this.box(.17,.005,.012,'#716440',0,.19,-.1+i*.08,g);}else if(item.slot==='weapon')this.weapon(g,item,!!item.staff);else if(item.slot==='armor'||item.slot==='cloak'){this.mesh(new THREE.ConeGeometry(.19,.33,5),item.slot==='armor'?'#899a91':'#617c8d',0,.35,0,g);}else{this.mesh(new THREE.SphereGeometry(.13,6,4),'#68a9b8',0,.29,0,g);this.cylinder(.045,.045,.11,'#bd9e72',0,.43,0,g);} }
   clearWorld(){if(!this.world)return;this.scene.remove(this.world);this.world.traverse(o=>{if(o.geometry)o.geometry.dispose();});this.world=null;}
   update(){const [rx,ry,w,h]=game.room.bounds;this.clearWorld();this.world=new THREE.Group();this.scene.add(this.world);this.pickMeshes=[];this.pickGroups=[];this.host.appendChild(this.canvas);this.host.classList.add('has-three');
     this.box(w+1.8,.23,h+1.8,'#303d32',(w-1)/2,-.2,(h-1)/2);
     for(let z=-1;z<=h;z++)for(let x=-1;x<=w;x++){
-      const outside=x<0||x===w||z<0||z===h;if(outside){if((x<0||x===w)&&(z<0||z===h))continue;this.wall(x,z,x<0||z<0);if((x<0||z<0)&&(x+z)%3===0)this.torch(x,z);continue;}
+      const outside=x<0||x===w||z<0||z===h;if(outside){if((x<0||x===w)&&(z<0||z===h))continue;const opening=game.doors().some(d=>{const p=game.spawnPosition(d),dx=p.x-rx,dz=p.y-ry;return d.direction===0&&z===-1&&x===dx||d.direction===2&&z===h&&x===dx||d.direction===1&&x===w&&z===dz||d.direction===3&&x===-1&&z===dz;});if(opening)continue;this.wall(x,z,x<0||z<0);if((x<0||z<0)&&(x+z)%3===0)this.torch(x,z);continue;}
       const p={x:rx+x,y:ry+z},seen=game.canSee(p),salt=Math.abs(x*13+z*7)%4;
       const trap=game.traps.find(t=>t.roomId===game.roomId&&game.distance(t.position,p)===0);
       const palette=seen?['#9e9d82','#a4a087','#989983','#a8a58a']:['#536052','#576456','#505d52','#596559'];let color=palette[salt];if(seen&&trap)color=new THREE.Color(color).multiplyScalar(.955);
@@ -199,6 +251,31 @@ class ThreeDungeon {
   clearHover(){this.hover=null;hideDoorPreview();const tip=this.host.querySelector('.three-hover');if(tip)tip.hidden=true;this.canvas.style.cursor='default';}
   pointerMove(e){const cell=this.pick(e);if(cell===this.hover)return;this.clearHover();this.hover=cell;if(!cell||cell.classList.contains('fog'))return;this.canvas.style.cursor=cell.getAttribute('aria-disabled')==='false'?'pointer':'default';const tip=this.host.querySelector('.three-hover');if(tip){tip.textContent=cell.getAttribute('aria-label');tip.hidden=false;}if(cell.dataset.previewRoom)showDoorPreview({dataset:cell.dataset,setAttribute(){},getBoundingClientRect:()=>({left:e.clientX,right:e.clientX+5,top:e.clientY})});}
   frame(time){if(document.hidden||!this.host.clientHeight||this.lastFrame&&time-this.lastFrame<32)return;this.lastFrame=time;if(this.player&&this.targetPosition){this.player.position.x+=(this.targetPosition.x-this.player.position.x)*.2;this.player.position.z+=(this.targetPosition.z-this.player.position.z)*.2;}this.animateEnemies(time/1000);this.renderer.render(this.scene,this.camera);}
+}
+let characterModelPreview=null;
+class CharacterModelPreview {
+  constructor(host){
+    this.host=host;this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#202a25');
+    this.camera=new THREE.OrthographicCamera(-1.4,1.4,1.8,-1.8,.1,30);this.camera.position.set(3,2.8,4);this.camera.lookAt(0,.9,0);
+    this.renderer=new THREE.WebGLRenderer({antialias:true});this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.15;
+    this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;
+    this.scene.add(new THREE.HemisphereLight(0xdde6e0,0x303128,2.5));const key=new THREE.DirectionalLight(0xffdeb5,3);key.position.set(-3,6,4);key.castShadow=true;key.shadow.mapSize.set(512,512);this.scene.add(key);
+    this.builder=Object.create(ThreeDungeon.prototype);this.builder.scene=this.scene;this.builder.materials=new Map();this.builder.pickGroups=[];
+    const floor=new THREE.Mesh(new THREE.CylinderGeometry(.78,.85,.1,8),new THREE.MeshStandardMaterial({color:'#4c574b',roughness:1,flatShading:true}));floor.receiveShadow=true;floor.position.y=.02;this.scene.add(floor);
+    this.canvas=this.renderer.domElement;this.canvas.setAttribute('aria-label','İzometrik low-poly karakter önizlemesi');this.canvas.dataset.renderer='three';
+    this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(host);
+    this.renderer.setAnimationLoop(time=>{if(document.hidden||!host.closest('dialog')?.open||time-(this.lastFrame||0)<40)return;this.lastFrame=time;if(this.model)this.model.position.y=Math.sin(time*.002)*.008;this.renderer.render(this.scene,this.camera);});
+  }
+  update(cls,appearance){
+    this.builder.clearWorld();this.builder.world=new THREE.Group();this.scene.add(this.builder.world);this.builder.pickGroups=[];
+    this.model=this.builder.playerModel(0,0,appearance,{id:'starter_'+cls.toLowerCase()},{characterClass:cls,prepared:true});
+    this.host.replaceChildren(this.canvas);this.canvas.dataset.class=cls;this.resize();
+  }
+  resize(){const width=this.host.clientWidth,height=this.host.clientHeight;if(!width||!height)return;this.renderer.setSize(width,height,false);const half=1.15,aspect=width/height;this.camera.left=-half*aspect;this.camera.right=half*aspect;this.camera.top=half;this.camera.bottom=-half;this.camera.updateProjectionMatrix();this.renderer.render(this.scene,this.camera);}
+}
+function renderThreeCharacterPreview(host,cls,appearance){
+  if(typeof THREE==='undefined'||typeof ResizeObserver==='undefined')return false;
+  try{if(!characterModelPreview)characterModelPreview=new CharacterModelPreview(host);characterModelPreview.update(cls,appearance);return true;}catch(error){console.error('Character 3D preview unavailable.',error);return false;}
 }
 function renderThreeDungeon(){
   if(typeof THREE==='undefined'||typeof ResizeObserver==='undefined')return;

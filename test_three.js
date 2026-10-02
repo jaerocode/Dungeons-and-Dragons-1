@@ -13,6 +13,9 @@ for(const room of map.rooms){
   const pos=game.spawnPosition(door),key=pos.x+':'+pos.y;
   context.doorKey=key;
   assert.ok(vm.runInContext('view.pickGroups.some(g=>g.userData.cellKey===doorKey)',context),'Every door must have a 3D arch even outside vision');
+  const doorModel=vm.runInContext("view.pickGroups.find(g=>g.userData.kind==='door'&&g.userData.cellKey===doorKey)",context);
+  assert.equal(doorModel.position.x,door.direction===3?-1:door.direction===1?room.bounds[2]:pos.x-room.bounds[0]);
+  assert.equal(doorModel.position.z,door.direction===0?-1:door.direction===2?room.bounds[3]:pos.y-room.bounds[1],'Door arch belongs to the perimeter wall, never the walkable floor tile');
  }
  const p=game.position;vm.runInContext(`var selector='[data-grid-x="${p.x}"][data-grid-y="${p.y}"]';cells.set(selector,{key:'${p.x}:${p.y}',setAttribute(){}});var tile=view.pickMeshes.find(m=>m.userData.cellKey==='${p.x}:${p.y}');var point=tile.position.clone();point.y=.08;point.project(view.camera);`,context);
  const clicked=vm.runInContext('view.pick({clientX:(point.x+1)*350,clientY:(-point.y+1)*180})',context);assert.equal(clicked?.key,p.x+':'+p.y,'Camera projection and raycasting should pick the correct tile');
@@ -34,6 +37,11 @@ for(const cls of ['Fighter','Rogue','Mage']){
  assert.ok(vm.runInContext('view.player.children.length>20',context),'Class models contain separate armor, cloth, limbs and head pieces');
  assert.ok(vm.runInContext('view.player.children.some(o=>o.material?.color.getHexString()===\'224466\')',context),'Body customization carries into 3D');
  assert.ok(vm.runInContext('view.player.getObjectByProperty(\'type\',\'Group\')',context));
+ context.previewClass=cls;
+ vm.runInContext("var previewModel=view.playerModel(0,0,{body:'#123456',head:'#654321',beard:true},{id:'starter_'+previewClass.toLowerCase()},{characterClass:previewClass,prepared:true});",context);
+ assert.equal(vm.runInContext('previewModel.userData.characterClass',context),cls);
+ assert.equal(vm.runInContext('previewModel.userData.cellKey',context),undefined,'Creation preview is independent of dungeon tile interactions');
+ assert.ok(vm.runInContext("previewModel.children.some(o=>o.material?.color.getHexString()==='123456')",context),'Preview renders the selected appearance with the same model builder');
  for(let facing=0;facing<4;facing++){
   character.facing=facing;vm.runInContext('view.update();view.scene.updateMatrixWorld(true);var pose=view.player.getObjectByName(\'held-weapon-pose\');var aim=new THREE.Vector3(0,1,0).applyQuaternion(pose.getWorldQuaternion(new THREE.Quaternion()));',context);
   const aim=vm.runInContext('[aim.x,aim.z]',context),forward=[[0,-1],[1,0],[0,1],[-1,0]][facing];

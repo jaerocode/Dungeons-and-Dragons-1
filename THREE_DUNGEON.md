@@ -24,3 +24,5 @@ WebGL kullanılamıyorsa mevcut izometrik SVG görünümü erişilebilir yedek o
 Doğrulama: `test_three.js` gerçek Three.js geometrisini 13 odada kurar, kamera yerleşimini ve ışık dışındaki düşmanların oluşturulmamasını denetler, projeksiyondan raycast ile doğru bloğu seçmeyi test eder. Diğer oyun ve geçiş testleri korunur.
 
 API kaynakları: https://threejs.org/docs/#OrthographicCamera ve https://threejs.org/docs/#Raycaster
+
+Doors occupy openings in the perimeter masonry and retain the original adjacent floor tile for click/exit interaction. Character creation uses the same Three.js player model in an isometric preview, including live class/color/beard updates. Goblins have thin limbs and pointed ears; spiders have eight articulated legs; trolls wear heavy faceted armor; wargs have clawed legs, a segmented tail and a ridged back. Barrow-wight retains the turquoise skeletal model.
