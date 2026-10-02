@@ -80,3 +80,9 @@ Karakter seçiminde sınıfa göre kask, kapüşon, maske ve kıyafet renkleri;
 Mage için sakal seçimi bulunur. Keşifte solda büyük minimap, sağda oda
 görseli ve etkileşimler vardır. Savaşta düşman solda, savaş günlüğü ve
 aksiyonlar sağda ayrı bir düzende gösterilir.
+
+Görevin altındaki teçhizat paneli zırhını, ana silahını ve yedek silahını
+gösterir. En fazla iki silah taşıyabilirsin. Yedek slota tıklayarak silah
+değiştir; savaşta bu işlem 1 aksiyon harcar ve yeni silahı hazırlaman gerekir.
+İki slot da doluyken yeni silah almak için bırakacağın silahı seçersin.
+Bu mekaniği `node test_equipment_slots.js` ile doğrulayabilirsin.

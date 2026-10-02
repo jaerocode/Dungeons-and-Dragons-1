@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),{DungeonExplorer}=require('./game-engine');
+const make=()=>new DungeonExplorer(require('./dungeon_map.json'),require('./game_rules.json'),'Fighter','Test',{bestiary:require('./bestiary.json'),loot:require('./loot.json'),random:()=>.99});
+const g=make();g.roomId='armory';const starter=g.equipment.weapon;
+const at=id=>{const e=g.roomLoot.find(e=>e.id===id);g.position={...e.position};return e;};
+const axe=at('battle_axe');assert.ok(g.takeWeapon(axe.id,axe.uid));assert.equal(g.carriedWeapons.length,2);assert.equal(g.inventory[starter],1);assert.equal(g.equipment.weapon,'battle_axe');
+g.prepare();g.useItem(starter);assert.equal(g.equipment.weapon,starter);assert.equal(g.prepared,false);assert.equal(g.carriedWeapons.length,2);
+const hammer=at('war_hammer');assert.equal(g.takeWeapon(hammer.id,hammer.uid),false);assert.equal(hammer.quantity,1);assert.equal(g.equipment.weapon,starter);
+assert.ok(g.takeWeapon(hammer.id,hammer.uid,'battle_axe'));assert.equal(g.carriedWeapons.length,2);assert.equal(g.inventory[starter],1);assert.equal(g.inventory.battle_axe,undefined);assert.equal(g.equipment.weapon,'war_hammer');assert.ok(g.roomLoot.some(e=>e.id==='battle_axe'&&g.distance(e.position,g.position)===0));
+g.roomId='barracks';g.engage();g.combat.phase='player';g.useItem(starter);assert.equal(g.combat.ap,2);assert.equal(g.equipment.weapon,starter);assert.equal(g.prepared,false);assert.equal(g.carriedWeapons.length,2);
+const dead=g.hp=0;g.dead=true;g.useItem('war_hammer');assert.equal(g.equipment.weapon,starter);
+console.log('Passed: two-weapon capacity, full-slot replacement choice, dropped weapon persistence, switching resets preparation and costs one combat AP.');

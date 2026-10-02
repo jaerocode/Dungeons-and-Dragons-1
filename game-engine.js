@@ -155,10 +155,18 @@
       if(item.type==='focus')return this.focus<this.profile.resource.max;
       return false;
     }
-    takeWeapon(id,uid){const entry=this.roomLoot.find(e=>e.id===id&&(!uid||e.uid===uid)&&this.distance(this.position,e.position)<=1);if(!entry||!this.canTakeLoot(entry))return false;this.begin();const item=this.items.get(id),old=this.equipment.weapon;entry.quantity=0;if(old){this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:this.roomId,id:old,quantity:1,position:{...this.position}});delete this.inventory[old];}this.inventory[id]=1;this.equipment.weapon=id;this.prepared=false;this.lastLoot=[{id,quantity:1}];this.finish((old?this.items.get(old).name+' silahını yere bırakıp ':'')+item.name+' alıyorsun. Yeni silahını hazırlamalısın.');return true;}
+    get carriedWeapons(){return Object.keys(this.inventory).filter(id=>this.inventory[id]>0&&this.items.get(id)?.slot==='weapon');}
+    takeWeapon(id,uid,dropId){
+      const entry=this.roomLoot.find(e=>e.id===id&&(!uid||e.uid===uid)&&this.distance(this.position,e.position)<=1);
+      if(!entry||!this.canTakeLoot(entry)||this.inventory[id])return false;
+      const weapons=this.carriedWeapons;if(weapons.length>=2&&!weapons.includes(dropId)){this.say('İki silah taşıyorsun. Yeni silah için hangisini bırakacağını seç.');return false;}
+      this.begin();let dropped='';if(dropId){if(!weapons.includes(dropId))return false;this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:this.roomId,id:dropId,quantity:1,position:{...this.position}});delete this.inventory[dropId];dropped=this.items.get(dropId).name+' silahını yere bırakıp ';}
+      entry.quantity=0;this.inventory[id]=1;this.equipment.weapon=id;this.prepared=false;this.lastLoot=[{id,quantity:1}];this.finish(dropped+this.items.get(id).name+' alıp kuşanıyorsun. Yeni silahını hazırlamalısın.');return true;
+    }
+
     useItem(id){
       if(!this.canUseItem(id))return;const item=this.items.get(id);if(item.type==='healing')return this.drinkPotion();if(item.type==='map')return true;if(item.type==='torch')return this.toggleTorch();this.begin();
-      if(item.type==='equipment'){this.equipment[item.slot]=id;this.ac=10+this.mod('DEX')+this.profile.armor_bonus+(this.items.get(this.equipment.armor)?.armor_bonus||0);this.finish(item.name+' kuşanıldı.');}
+      if(item.type==='equipment'){this.equipment[item.slot]=id;if(item.slot==='weapon')this.prepared=false;this.ac=10+this.mod('DEX')+this.profile.armor_bonus+(this.items.get(this.equipment.armor)?.armor_bonus||0);this.finish(item.name+' kuşanıldı.');}
       else {this.inventory[id]--;if(item.type==='fury'){this.damageBuff={bonus:item.damage_bonus,round:this.combat.round};this.finish('Öfke İksiri içildi. Bu oyuncu turundaki kalan isabetlerin +'+item.damage_bonus+' hasar verecek.');}
         if(item.type==='focus'){const amount=Math.min(item.amount,this.profile.resource.max-this.focus);this.focus+=amount;this.finish(item.name+' içildi. +'+amount+' Focus.');}
       }
