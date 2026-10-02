@@ -1,0 +1,22 @@
+{
+  "name": "dungeons_n_dragons_game",
+  "version": "1.0.0",
+  "description": "Mines of Moria — turn-based low-poly Three.js dungeon",
+  "main": "build_dungeon.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build_three.js && node build_game.js",
+    "test": "node test_three.js && node test_game.js && node test_traps.js && node test_progression.js && node test_encounters.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "private": true
+}

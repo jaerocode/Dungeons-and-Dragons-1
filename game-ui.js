@@ -9,9 +9,10 @@ function drawScene(){
   const artKey=game.roomId===MAP.goal&&game.hasStone?game.room.empty_art:game.visibleEnemies.length&&game.room.enemy_art?game.room.enemy_art:game.room.art;
   $('scene').innerHTML='<image data-background="'+artKey+'" href="'+ASSETS[artKey]+'" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/><rect width="1000" height="500" fill="#060b08" opacity=".08"/>';
   if(game.visibleEnemies.some(e=>e.definition.kind==='goblin'))$('scene').innerHTML+='<defs><filter id="goblinGroundBlur"><feGaussianBlur stdDeviation="5"/></filter></defs><ellipse cx="505" cy="452" rx="86" ry="14" fill="#060907" opacity=".48" filter="url(#goblinGroundBlur)"/><image class="scene-goblin" data-scene-enemy="goblin" href="'+ASSETS.moria_goblin+'" x="355" y="155" width="300" height="300"/>';
+  for(const [index,enemy] of game.visibleEnemies.filter(e=>['warg','barrow_wight'].includes(e.definition.kind)).entries())$('scene').innerHTML+='<image class="scene-creature" data-scene-enemy="'+enemy.definition.kind+'" href="'+ASSETS[enemy.definition.art]+'" x="'+(index||game.visibleEnemies.some(e=>e.definition.kind==='goblin')?600:360)+'" y="125" width="330" height="350"/>';
   $('scene').setAttribute('aria-label',game.room.name+' · '+game.room.mood);
   const visible=game.visibleEnemies;
-  $('enemyCards').hidden=!!game.combat;
+  $('enemyCards').hidden=!!game.combat||!visible.length;
   renderEnemyDossier();
   $('enemyCards').innerHTML=visible.map(e=>'<button class="enemy-card" data-target="'+e.id+'"><strong>'+escapeHTML(e.definition.name)+'</strong><span>Can: ?</span><small>'+(game.bypassed?'Seni fark etmedi':e.hp/e.maxHp<=.35?'Ağır yaralı':e.hp<e.maxHp?'Yaralı':'Henüz yara almamış')+(e.chilled?' · Buz etkisi':e.burning?' · Yanıyor':'')+'</small></button>').join('');
   $('enemyCards').querySelectorAll('[data-target]').forEach(button=>button.addEventListener('click',()=>{game.selectTarget(button.dataset.target);render();}));
@@ -28,7 +29,7 @@ function renderEnemyDossier(){
 }
 
 function mapEnemyIcon(kind){
-  const drawing=kind==='spider'?'<ellipse cx="50" cy="53" rx="15" ry="20"/><circle cx="50" cy="28" r="10"/><path d="M36 40L18 23L8 10M35 48L13 40L5 28M35 57L14 65L5 81M38 65L25 83L23 96M64 40L82 23L92 10M65 48L87 40L95 28M65 57L86 65L95 81M62 65L75 83L77 96" fill="none" stroke-width="6"/>':kind==='goblin'?'<path d="M30 25L5 14L19 47L30 50L34 74L48 93L61 79L69 48L84 41L95 9L68 26L60 13H39Z"/><path d="M35 45L45 48M56 47L65 42M46 71L59 70" stroke="#30120e" stroke-width="5"/><path d="M51 43L44 63L62 59Z" fill="#30120e" stroke="none"/>':kind==='troll'?'<path d="M26 29L12 23L16 48L25 53L27 78L42 92H59L74 77L77 52L86 47L91 23L73 29L63 12H37Z"/><path d="M31 50L42 53M59 53L70 50M40 75L60 75" stroke="#30120e" stroke-width="7"/><path d="M32 66L38 83L44 67M56 67L63 83L69 66" fill="#ffe0bb" stroke="none"/>':'<path d="M20 41Q20 9 50 9Q80 9 80 41L75 65L63 70V88H37V70L25 65Z"/><circle cx="36" cy="45" r="10" fill="#30120e" stroke="none"/><circle cx="64" cy="45" r="10" fill="#30120e" stroke="none"/><path d="M50 56L43 67H57Z M44 75V87M55 75V87" fill="#30120e" stroke="#30120e" stroke-width="3"/>';
+  const drawing=kind==='warg'?'<path d="M25 34L16 7L38 21L62 21L84 7L75 35L77 65L50 94L23 65Z"/><path d="M29 43L42 48M58 48L71 43M42 70L50 77L58 70" stroke="#30120e" stroke-width="6"/>':kind==='barrow_wight'?'<path d="M10 91L18 35Q25 5 50 5Q75 5 82 35L90 91L67 81L50 96L33 81Z"/><path d="M30 37L70 37L64 70L50 80L36 70Z" fill="#30120e"/><path d="M34 47L44 49M56 49L66 47" stroke="#ffe0bb" stroke-width="5"/>':kind==='spider'?'<ellipse cx="50" cy="53" rx="15" ry="20"/><circle cx="50" cy="28" r="10"/><path d="M36 40L18 23L8 10M35 48L13 40L5 28M35 57L14 65L5 81M38 65L25 83L23 96M64 40L82 23L92 10M65 48L87 40L95 28M65 57L86 65L95 81M62 65L75 83L77 96" fill="none" stroke-width="6"/>':kind==='goblin'?'<path d="M30 25L5 14L19 47L30 50L34 74L48 93L61 79L69 48L84 41L95 9L68 26L60 13H39Z"/><path d="M35 45L45 48M56 47L65 42M46 71L59 70" stroke="#30120e" stroke-width="5"/><path d="M51 43L44 63L62 59Z" fill="#30120e" stroke="none"/>':kind==='troll'?'<path d="M26 29L12 23L16 48L25 53L27 78L42 92H59L74 77L77 52L86 47L91 23L73 29L63 12H37Z"/><path d="M31 50L42 53M59 53L70 50M40 75L60 75" stroke="#30120e" stroke-width="7"/><path d="M32 66L38 83L44 67M56 67L63 83L69 66" fill="#ffe0bb" stroke="none"/>':'<path d="M20 41Q20 9 50 9Q80 9 80 41L75 65L63 70V88H37V70L25 65Z"/><circle cx="36" cy="45" r="10" fill="#30120e" stroke="none"/><circle cx="64" cy="45" r="10" fill="#30120e" stroke="none"/><path d="M50 56L43 67H57Z M44 75V87M55 75V87" fill="#30120e" stroke="#30120e" stroke-width="3"/>';
   return '<svg class="map-enemy-icon" data-map-enemy="'+kind+'" viewBox="0 0 100 100" aria-hidden="true" fill="#ff947e" stroke="#ff947e" stroke-linecap="round" stroke-linejoin="round">'+drawing+'</svg>';
 }
 function renderBattleConsole(){
@@ -42,27 +43,22 @@ function renderBattleConsole(){
 
 function renderMinimap(){
   hideDoorPreview();
-  const radius=3,heading=[[0,-1],[1,0],[0,1],[-1,0]][game.facing],cells=[];
-  for(let y=game.position.y-radius;y<=game.position.y+radius;y++)for(let x=game.position.x-radius;x<=game.position.x+radius;x++){
-    const p={x,y},seen=game.canSee(p)||game.roomLoot.some(e=>e.id==='old_map'&&game.roomId===MAP.start&&e.position.x===x&&e.position.y===y),walk=game.walkable(p),dx=x-game.position.x,dy=y-game.position.y,lit=dx*heading[0]+dy*heading[1]>=Math.abs(dx*heading[1]-dy*heading[0]),player=dx===0&&dy===0,enemy=seen&&game.visibleEnemies.find(e=>e.position.x===x&&e.position.y===y),door=seen&&game.doors().find(d=>{const q=game.spawnPosition(d);return q.x===x&&q.y===y;}),adjacent=Math.abs(dx)+Math.abs(dy)===1;
-    const drops=(seen||game.roomId===MAP.start)?game.visibleLoot.filter(e=>e.position.x===x&&e.position.y===y):[],direction=dy<0?0:dx>0?1:dy>0?2:3,label=(!seen?'Karanlık · görünmeyen blok':player?'Sen':enemy?enemy.definition.name:door?'Kapı: '+MAP.rooms.find(r=>r.id===door.target).name:walk?'Boş blok':'Duvar / sütun')+(drops.length?' · Ganimet: '+drops.map(e=>game.items.get(e.id).name).join(', '):'');
-    const enterDoor=door&&game.nearDoor(door)&&(!game.gateReason(door)||door.connection.gate==='seal_puzzle'&&!game.sealSolved)&&!game.combat&&gameStarted&&game.available();
-    const pickup=drops.find(e=>game.canTakeLoot(e)),near=drops.length&&game.distance(game.position,p)<=1,lootHint=pickup?'Al':!near?'Yaklaşman lazım':game.visibleEnemies.length&&!game.bypassed?'Önce düşmanı aş':'Bu eşyayı kullanamazsın',tooltip=drops.length?drops.map(e=>game.items.get(e.id).name).join(', ')+' · '+lootHint:label;
-    cells.push('<button class="map-cell '+(walk?'floor':'wall')+(lit?' lit':' dim')+(drops.length?' loot':'')+(enemy?' mob':'')+(door?' door':'')+(player?' player':'')+(!seen?' fog':'')+'" title="'+escapeHTML(tooltip)+'" aria-label="'+escapeHTML(tooltip)+'" '+(drops.length?'data-loot-hint="'+escapeHTML(lootHint)+'" ':'')+(pickup&&gameStarted?'data-map-pickup="'+pickup.uid+'" ':drops.length?'aria-disabled="true" ':door?'data-preview-room="'+door.target+'" data-preview-door="'+door.id+'" '+(enterDoor?'data-enter-door="'+door.id+'" ':''):'')+(!drops.length?(!door&&seen&&adjacent&&walk&&!game.combat&&gameStarted?'data-move="'+direction+'"':door?'':'disabled'):'')+'>'+(enemy?mapEnemyIcon(enemy.definition.kind):drops.length?'<span class="map-loot-icon" data-map-item="'+drops[0].id+'">'+itemArt(drops[0].id)+'</span>':player?['↑','→','↓','←'][game.facing]:door?'▣':'')+(drops.length?'<span class="map-pickup-hint" aria-hidden="true">'+escapeHTML(lootHint)+'</span>':'')+'</button>');
-  }
-  $('miniGrid').innerHTML=cells.join('');$('miniGrid').querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>{game.move(Number(b.dataset.move));record();}));
+  $('miniGrid').innerHTML=renderIsometricRoom();
+  $('miniGrid').querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>{game.move(Number(b.dataset.move));record();}));
   $('miniGrid').querySelectorAll('[data-enter-door]').forEach(b=>b.addEventListener('click',()=>{openMapDoor(b.dataset.enterDoor);}));
   $('miniGrid').querySelectorAll('[data-map-pickup]').forEach(b=>b.addEventListener('click',()=>{showLoot(b.dataset.mapPickup);record();}));
   $('miniGrid').querySelectorAll('[data-preview-room]').forEach(b=>{b.addEventListener('pointerenter',()=>showDoorPreview(b));b.addEventListener('pointerleave',hideDoorPreview);b.addEventListener('focus',()=>showDoorPreview(b));b.addEventListener('blur',hideDoorPreview);});
+  $('miniGrid').querySelectorAll('[role=button]').forEach(cell=>cell.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();if(cell.getAttribute('aria-disabled')==='false')cell.dispatchEvent(new MouseEvent('click',{bubbles:true}));}}));
   $('sightStatus').textContent=game.torchLit?'Meşale yanıyor · Önünde 3 blok · Gizlenemezsin':'Meşale sönük · Önünde 1 blok';
   $('miniHeading').textContent=['Kuzey ↑','Doğu →','Güney ↓','Batı ←'][game.facing];
   $('miniControls').innerHTML=[['forward','İleri git'],['back','Geri gel'],['left','Sola dön'],['right','Sağa dön'],['fast','Hızlı git · 3 adım']].map(([id,label])=>'<button data-nav="'+id+'" '+(!gameStarted||!game.available()||game.combat?'disabled':'')+'>'+label+'</button>').join('');
   $('miniControls').querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.nav;if(n==='left'||n==='right')game.turnFacing(n==='left'?-1:1);else game.move(n==='back'?'back':'forward',n==='fast'?3:1);record();}));
-  $('miniExits').innerHTML=game.doors().filter(d=>game.nearDoor(d)&&(game.roomId===MAP.start||game.canSee(game.spawnPosition(d)))).map(d=>'<button data-mini-door="'+d.id+'" '+(game.gateReason(d)&&d.connection.gate!=='seal_puzzle'||game.combat||!gameStarted||!game.available()?'disabled':'')+' title="'+escapeHTML(game.gateReason(d)||game.passageNarrative(d))+'"><span>Odadan çık · '+escapeHTML(MAP.rooms.find(r=>r.id===d.target).name)+'</span>'+((game.gateReason(d)||game.passageNarrative(d))?'<small>'+escapeHTML(game.gateReason(d)||game.passageNarrative(d))+'</small>':'')+'</button>').join('');
+  $('miniExits').innerHTML=game.doors().filter(d=>game.nearDoor(d)).map(d=>'<button data-mini-door="'+d.id+'" '+(game.gateReason(d)&&d.connection.gate!=='seal_puzzle'||game.combat||!gameStarted||!game.available()?'disabled':'')+' title="'+escapeHTML(game.gateReason(d)||game.passageNarrative(d))+'"><span>Odadan çık · '+escapeHTML(MAP.rooms.find(r=>r.id===d.target).name)+'</span>'+((game.gateReason(d)||game.passageNarrative(d))?'<small>'+escapeHTML(game.gateReason(d)||game.passageNarrative(d))+'</small>':'')+'</button>').join('');
   $('miniExits').querySelectorAll('[data-mini-door]').forEach(b=>b.addEventListener('click',()=>{openMapDoor(b.dataset.miniDoor);}));
   $('nearbyLoot').hidden=!!game.combat;
   $('nearbyLoot').innerHTML=game.nearbyLoot.filter(e=>game.visibleLoot.includes(e)).map(e=>'<button class="context-button pickup-button" data-pickup="'+e.uid+'" '+(gameStarted&&game.canTakeLoot(e)?'':'disabled')+'>Al · '+escapeHTML(game.items.get(e.id).name)+(e.quantity>1?' ×'+e.quantity:'')+'</button>').join('');
   $('nearbyLoot').querySelectorAll('[data-pickup]').forEach(b=>b.addEventListener('click',()=>{showLoot(b.dataset.pickup);record();}));
+  if(typeof renderThreeDungeon==='function')renderThreeDungeon();
 }
 function actionButton(action,label){return '<button class="action" data-choice="'+action+'"><span class="action-label">'+escapeHTML(label)+'</span></button>';}
 function renderChoices(){
@@ -70,15 +66,15 @@ function renderChoices(){
   $('explorationActions').hidden=fighting;$('doorChoices').hidden=true;
   {
     const prepare=game.characterClass==='Mage'?(game.prepared?'Büyünü bırak':'Büyünü hazırla'):(game.prepared?'Silahını indir':'Silahını hazırla');
-    $('explorationActions').innerHTML=actionButton('prepare',prepare)+actionButton('torch',game.torchLit?'Meşaleyi söndür':'Meşaleyi yak')+(game.visibleEnemies.length&&!game.bypassed?actionButton('sneak',game.torchLit?'Gizlenmek için meşaleyi söndür':'Gizlice uzaklaş · '+({Fighter:'çok zor',Mage:'zor',Rogue:'kolay'})[game.characterClass])+actionButton('engage',game.characterClass==='Mage'?'Büyünü hazırla / combat’a gir':'Silahını çek / combat’a gir'):'');
+    $('explorationActions').innerHTML=actionButton('prepare',prepare)+actionButton('torch',game.torchLit?'Meşaleyi söndür':'Meşaleyi yak')+((game.visibleEnemies.length||game.currentEnemies.some(e=>e.discovered))&&!game.bypassed?actionButton('sneak','Gizlice uzaklaş')+actionButton('engage','Savaşa gir'):'');
     $('explorationActions').innerHTML+=(game.room.interactions||[]).map(i=>'<button class="action" data-direct-interaction="'+i.id+'" '+(game.interacted.has(game.roomId+':'+i.id)?'disabled':'')+'><span class="action-label">'+escapeHTML(i.label)+'</span></button>').join('');
     const doors=game.doors(),positions=(game.currentEnemies.length?game.room.enemy_door_hotspots:null)||game.room.door_hotspots||[];
     $('doorChoices').innerHTML=doors.map((d,i)=>{const reason=game.gateReason(d),blocked=reason||game.currentEnemies.length&&!game.bypassed,target=MAP.rooms.find(r=>r.id===d.target),point=positions[i]||{x:50,y:40};return '<button class="door-choice" data-door="'+d.id+'" style="--door-x:'+point.x+'%;--door-y:'+point.y+'%" title="'+escapeHTML(reason||(blocked?'Önce düşmanı aşmalısın.':game.doorLabel(d)))+'" '+(!available||blocked?'disabled':'')+'>'+escapeHTML(target.name)+(blocked?'<small>'+escapeHTML(reason||'Önce düşmanı aşmalısın.')+'</small>':'')+'</button>';}).join('');
   }
-  $('explorationActions').innerHTML+=(game.room.readings||[]).map(r=>'<button class="action" data-room-record="'+r.id+'" '+(!available?'disabled':'')+'><span class="action-label">Oku · '+escapeHTML(r.title)+'</span></button>').join('');
+  $('explorationActions').innerHTML+=((game.room.readings||[]).length?'<details class="room-readings"><summary>Odadaki yazılar</summary><div class="reading-actions">':'')+(game.room.readings||[]).map(r=>'<button class="action" data-room-record="'+r.id+'" '+(!available?'disabled':'')+'><span class="action-label">Oku · '+escapeHTML(r.title)+'</span></button>').join('')+((game.room.readings||[]).length?'</div></details>':'');
     $('explorationActions').querySelectorAll('[data-direct-interaction]').forEach(b=>{b.disabled=!available||game.interacted.has(game.roomId+':'+b.dataset.directInteraction);b.addEventListener('click',()=>{game.interact(b.dataset.directInteraction);record();});});
   $('explorationActions').querySelectorAll('[data-room-record]').forEach(b=>b.addEventListener('click',()=>{const entry=game.readEntry(b.dataset.roomRecord);if(!entry)return;if(['archive','rubble'].includes(game.roomId))game.finalAdvantage=true;record();$('readingTitle').textContent=entry.title;$('readingText').textContent=entry.text;$('readingDialog').showModal();}));
-  $('explorationActions').querySelectorAll('[data-choice]').forEach(b=>{b.disabled=!available||(b.dataset.choice==='sneak'&&game.torchLit);b.addEventListener('click',()=>action(b.dataset.choice));});
+  $('explorationActions').querySelectorAll('[data-choice]').forEach(b=>{b.disabled=!available;b.addEventListener('click',()=>action(b.dataset.choice));});
   $('doorChoices').querySelectorAll('[data-door]').forEach(b=>b.addEventListener('click',()=>{game.goDoor(b.dataset.door);record();}));
 
 }
@@ -104,38 +100,18 @@ function render(){
   $('turnBuff').hidden=!game.damageBuff;$('turnBuff').textContent=game.damageBuff?'Bu tur +'+game.damageBuff.bonus+' hasar':'';$('hiddenStatus').hidden=!game.bypassed;$('hiddenStatus').textContent='Düşmanı sessizce aştın';
   $('gameShell').classList.toggle('torch-lit',game.torchLit);$('gameShell').classList.toggle('inactive',!gameStarted);document.body.classList.toggle('dead-screen',game.dead);
   if(game.hp<lastHP){$('gameShell').classList.remove('hit');void $('gameShell').offsetWidth;$('gameShell').classList.add('hit');if(damageTimer)clearTimeout(damageTimer);damageTimer=setTimeout(()=>{$('gameShell').classList.remove('hit');damageTimer=null;},450);}lastHP=game.hp;
-  renderBattleConsole();portrait();renderEquipmentPanel();renderInventoryPanel();renderChoices();drawScene();renderMinimap();renderImportantResult();renderEncounterNotice();scheduleEnemy();if($('inventoryDialog').open)renderInventory();
-  if(game.dead&&deathPresentedFor!==game){deathPresentedFor=game;for(const id of ['resultDialog','encounterDialog','mapDialog','inventoryDialog','fleeDialog','sealDialog','lootDialog','readingDialog'])if($(id).open)$(id).close();$('deathText').textContent=game.room.name+' son gördüğün yer oldu.';$('deathDialog').showModal();}
+  renderBattleConsole();portrait();renderEquipmentPanel();renderInventoryPanel();renderChoices();drawScene();renderMinimap();renderImportantResult();scheduleEnemy();if($('inventoryDialog').open)renderInventory();
+  if(game.dead&&deathPresentedFor!==game){deathPresentedFor=game;for(const id of ['resultDialog','mapDialog','inventoryDialog','fleeDialog','sealDialog','lootDialog','readingDialog'])if($(id).open)$(id).close();$('deathText').textContent=game.room.name+' son gördüğün yer oldu.';$('deathDialog').showModal();}
   if(game.completed&&victoryPresentedFor!==game){victoryPresentedFor=game;$('outcomeText').textContent=game.name+' Mithril Külçesi ile Moria’dan kurtuldu. Görevin tamamlandı!';$('outcomeDialog').showModal();}
 }
 function renderImportantResult(){
   const dialog=$('resultDialog'),notice=game.resultNotice;
   if(!notice||!game.available()){if(dialog.open)dialog.close();return;}
   if(!gameStarted||dialog.open||document.querySelector('dialog[open]'))return;
-  $('resultTitle').textContent=notice.title;$('resultText').textContent=notice.text;dialog.showModal();
+  $('resultTitle').textContent=notice.title;$('resultText').textContent=notice.text;const image=$('resultImage');image.hidden=!notice.art;if(notice.art){image.src=ASSETS[notice.art];image.alt=notice.title;}dialog.showModal();
 }
-$('resultContinue').addEventListener('click',()=>{game.resultNotice=null;$('resultDialog').close();render();});
+$('resultContinue').addEventListener('click',()=>{$('resultDialog').close();game.dismissResult();record();});
 $('resultDialog').addEventListener('cancel',event=>event.preventDefault());
-function renderEncounterNotice(){
-  const dialog=$('encounterDialog'),notice=game.notice;
-  if(!notice||game.combat||!game.available()){if(dialog.open)dialog.close();return;}
-  if(!gameStarted||dialog.open||document.querySelector('dialog[open]'))return;
-  const enemy=notice.kind==='enemy'?game.currentEnemies.find(e=>e.id===notice.enemyId):null;
-  if(notice.kind==='enemy'&&(!enemy||!game.visibleEnemies.includes(enemy))){game.notice=null;return;}
-  $('encounterEyebrow').textContent=enemy?'Dikkat · Karşılaşma':'Karanlığın içinden';
-  $('encounterTitle').textContent=enemy?(notice.kind==='enemy'?'Bir '+enemy.definition.name+' tam karşında duruyor!':'Bu odada bir '+enemy.definition.name+' var!'):'Yalnız değilsin…';
-  $('encounterImage').hidden=!enemy;
-  $('encounterScene').hidden=!enemy;$('encounterCreature').hidden=true;
-  if(enemy){$('encounterImage').src=ASSETS[game.room.enemy_art||game.room.art];$('encounterImage').alt=game.room.name+' · '+enemy.definition.name;$('encounterCreature').hidden=!!game.room.enemy_art;$('encounterScene').classList.toggle('goblin-encounter',enemy.definition.kind==='goblin');$('encounterCreature').src=ASSETS[enemy.definition.art];$('encounterCreature').alt=enemy.definition.name;}
-  $('encounterText').hidden=!!enemy;$('encounterText').textContent=enemy?'':notice.text;
-  $('encounterChoices').innerHTML=enemy?'<button class="quiet-button" id="noticeSneak">Gizlice kaçmayı dene</button><button class="context-button exit-button" id="noticeAttack">Saldır</button>':'<button class="context-button" id="noticeContinue">Dikkatli ol ve devam et</button>';
-  if(enemy){
-    $('noticeAttack').onclick=()=>{dialog.close();game.notice=null;game.engage(enemy.id);record();};
-    $('noticeSneak').onclick=()=>{dialog.close();game.notice=null;if(game.torchLit)game.toggleTorch();if(!game.combat)game.sneak(enemy.id);record();};
-  }else $('noticeContinue').onclick=()=>{game.notice=null;dialog.close();render();};
-  dialog.showModal();
-}
-$('encounterDialog').addEventListener('cancel',event=>event.preventDefault());
 function record(){history.push({turn:game.turn,message:game.message});if(history.length>80)history.shift();render();}
 function handleNavigationKey(event){
   if(event.ctrlKey||event.altKey||event.metaKey||event.repeat||!gameStarted||!game.available()||game.combat||document.querySelector('dialog[open]'))return;
@@ -153,7 +129,7 @@ function renderWeaponChoices(uid){
  $('weaponChoices').querySelectorAll('[data-take-weapon]').forEach(b=>b.addEventListener('click',()=>{const entry=game.roomLoot.find(e=>e.uid===b.dataset.takeWeapon);if(entry&&game.takeWeapon(entry.id,entry.uid,b.dataset.dropWeapon)){record();$('lootReveal').innerHTML='<figure>'+itemArt(entry.id)+'<figcaption>'+escapeHTML(game.items.get(entry.id).name)+' alındı</figcaption></figure>';renderWeaponChoices(null);}}));
 }
 
-function action(name){if(!gameStarted)return;const calls={torch:()=>game.toggleTorch(),prepare:()=>game.prepare(),sneak:()=>game.sneak(),engage:()=>game.engage(),attack:()=>game.attack(),flee:()=>showFlee(),endTurn:()=>game.endTurn(),potion:()=>game.drinkPotion(),rest:()=>game.rest(),meditate:()=>game.meditate(),loot:()=>showLoot()};if(calls[name]){const before=game.turn,message=game.message;calls[name]();if(before!==game.turn||message!==game.message)record();else render();}}
+function action(name){if(!gameStarted)return;const calls={torch:()=>game.toggleTorch(),prepare:()=>game.prepare(),sneak:()=>{if(game.torchLit)game.toggleTorch();if(!game.combat)game.sneak();},engage:()=>game.engage(),attack:()=>game.attack(),flee:()=>showFlee(),endTurn:()=>game.endTurn(),potion:()=>game.drinkPotion(),rest:()=>game.rest(),meditate:()=>game.meditate(),loot:()=>showLoot()};if(calls[name]){const before=game.turn,message=game.message;calls[name]();if(before!==game.turn||message!==game.message)record();else render();}}
 function previousRiddle(){try{return localStorage.getItem('lastDungeonRiddle');}catch{return null;}}
 function startAdventure(name,cls,appearance){if(enemyTimer){clearTimeout(enemyTimer);enemyTimer=null;}if(damageTimer){clearTimeout(damageTimer);damageTimer=null;}$('gameShell').classList.remove('hit');game=new DungeonExplorer(MAP,RULES,cls,name,{bestiary:BESTIARY,loot:LOOT,previousRiddleId:previousRiddle()});game.appearance={...APPEARANCE_DEFAULTS[cls],...appearance};try{localStorage.setItem('lastDungeonRiddle',game.riddle.id);}catch{}lastHP=game.hp;history=[{turn:1,message:game.message}];gameStarted=false;victoryPresentedFor=null;deathPresentedFor=null;render();$('questDialog').showModal();}
 function suggestCharacterNames(fill=true){

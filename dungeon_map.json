@@ -126,7 +126,24 @@
         }
       ],
       "quiet_summary": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
-      "quiet_inspection": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor."
+      "quiet_inspection": "Yüksek kemerler taşın içine uzanıyor. Cüce yapımı sütunların dibinde kırılmış zincirler var. Bir yanda silah rafları, öbür yanda yazı ve işçilik odaları; derinden sıcak hava geliyor.",
+      "traps": {
+        "count": 3,
+        "name": "Gizli Diken Plakası",
+        "art": "pressure_trap",
+        "damage_dice": "1d4+2",
+        "description": "Taş plaka ağırlığınla çöküyor. Zemindeki dar yarıklardan paslı demir dikenler fırlıyor!"
+      },
+      "pillars": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ]
     },
     {
       "id": "barracks",
@@ -313,7 +330,17 @@
         }
       ],
       "quiet_summary": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
-      "quiet_inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş."
+      "quiet_inspection": "Baltalar, çekiçler ve mızraklar taş raflara dizilmiş. Kırmızı kumaşlar çürümüş olsa da demirin ağzı sağlam. Cüce ustalarının bıraktığı birkaç parça, goblinlerin yağmasından kurtulmuş.",
+      "pillars": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ]
     },
     {
       "id": "rubble",
@@ -409,7 +436,18 @@
       "encounter": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
       "reward": "Moria’nın yan galerilerinde ilerleme ve kullanılabilir eşyalar.",
       "consequence": "Gürültü ve hazırlık, bu galerideki karşılaşmaların sonucunu değiştirir.",
-      "monsters": [],
+      "monsters": [
+        {
+          "id": "warg",
+          "count": 1,
+          "positions": [
+            [
+              3,
+              1
+            ]
+          ]
+        }
+      ],
       "loot": [
         {
           "id": "healing_potion",
@@ -466,7 +504,13 @@
         }
       ],
       "quiet_summary": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
-      "quiet_inspection": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor."
+      "quiet_inspection": "Cam kaplar, öğütülmüş otlar ve eski havanlar taş tezgâhlara bırakılmış. Cüce rünleri kapların kullanımını işaretliyor. Yan kapıdaki kilit, kuvvetten çok eski işçiliğin dilini anlamayı gerektiriyor.",
+      "pillars": [
+        [
+          1,
+          1
+        ]
+      ]
     },
     {
       "id": "archive",
@@ -539,7 +583,13 @@
         }
       ],
       "quiet_summary": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
-      "quiet_inspection": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor."
+      "quiet_inspection": "Taş raflarda deri kaplı kayıtlar ve çürümüş parşömenler var. Bir kitabın koyu kapağı diğerlerinden ayrılıyor. Tozlu masanın üstünde cüce harfleriyle tutulmuş maden ve yol kayıtları duruyor.",
+      "pillars": [
+        [
+          1,
+          1
+        ]
+      ]
     },
     {
       "id": "cistern",
@@ -671,7 +721,14 @@
         }
       ],
       "quiet_summary": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
-      "quiet_inspection": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş."
+      "quiet_inspection": "Cüce rünleriyle çevrili ağır bir kapı yolu kesiyor. Yakınındaki taş bank kuru ve güvenli. İçerideki kilit, yaklaştığında okunabilecek kısa bir bilmeceyle korunmuş.",
+      "traps": {
+        "count": 2,
+        "name": "Gizli Diken Plakası",
+        "art": "pressure_trap",
+        "damage_dice": "1d4+2",
+        "description": "Taş plaka ağırlığınla çöküyor. Zemindeki dar yarıklardan paslı demir dikenler fırlıyor!"
+      }
     },
     {
       "id": "cache",
@@ -724,7 +781,20 @@
         }
       ],
       "quiet_summary": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
-      "quiet_inspection": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış."
+      "quiet_inspection": "Sandıklar taş duvarlara yaslanmış. Çürümüş kumaşların arasında bir pelerin, sağlam bir zırh ve birkaç kapalı şişe var. İnce bir tel kapağın menteşesine bağlanmış.",
+      "traps": {
+        "count": 2,
+        "name": "Gizli Diken Plakası",
+        "art": "pressure_trap",
+        "damage_dice": "1d4+2",
+        "description": "Taş plaka ağırlığınla çöküyor. Zemindeki dar yarıklardan paslı demir dikenler fırlıyor!"
+      },
+      "pillars": [
+        [
+          1,
+          1
+        ]
+      ]
     },
     {
       "id": "guardian",
@@ -749,6 +819,16 @@
             [
               4,
               2
+            ]
+          ]
+        },
+        {
+          "id": "barrow_wight",
+          "count": 1,
+          "positions": [
+            [
+              4,
+              1
             ]
           ]
         }

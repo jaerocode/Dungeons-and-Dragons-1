@@ -123,3 +123,62 @@
 .room-visual .scene-goblin{filter:saturate(.68) brightness(.9) contrast(.84)}
 .goblin-encounter #encounterCreature{left:25%;width:50%;height:78%;bottom:2%;z-index:2;filter:saturate(.68) brightness(.82) contrast(.84) drop-shadow(0 5px 5px #10120cc0)}
 .goblin-encounter::after{content:'';position:absolute;left:36%;right:36%;height:5%;bottom:3%;background:#090c08a0;border-radius:50%;filter:blur(6px);z-index:1;pointer-events:none}
+
+/* Pressure plates are only a quiet tonal clue, with no revealing icon or tooltip. */
+.map-cell.floor.pressure-plate:not(.loot):not(.door):not(.mob):not(.player)::after{content:"";position:absolute;inset:0;background:#000;opacity:.055;pointer-events:none;border-radius:inherit}
+#resultImage{display:block;width:100%;max-height:35vh;object-fit:cover;border:1px solid #716449;border-radius:6px;margin:10px 0}#resultImage[hidden]{display:none}.scene-creature{filter:saturate(.65) brightness(.82) contrast(.86)}
+
+/* Upright figures over depth-sorted stone geometry; the game grid is unchanged. */
+.play-stage .mini-grid{display:block;position:relative;padding:0;min-height:150px;background:radial-gradient(ellipse at 50% 60%,#333324,#111910 75%);border:1px solid #645b41;border-radius:7px;box-shadow:inset 0 0 35px #0008;overflow:hidden}
+.iso-dungeon{display:block;width:100%;height:100%;min-height:0;touch-action:manipulation}
+.iso-dungeon .iso-cell{background:none;border:0;box-shadow:none;outline:none;filter:none;pointer-events:visiblePainted;font-family:Georgia,serif}
+.iso-dungeon .iso-cell.fog{pointer-events:none;color:inherit}
+.iso-dungeon .iso-cell[aria-disabled="false"],.iso-dungeon .iso-cell.door{cursor:pointer}
+.iso-dungeon .iso-cell.loot[aria-disabled="true"]{cursor:help}
+.iso-dungeon .iso-cell:hover .iso-tile-top,.iso-dungeon .iso-cell:focus-visible .iso-tile-top{stroke:#d5c397;stroke-width:2}
+.iso-dungeon .iso-cell[aria-disabled="false"]:hover .iso-tile-top{fill:#8b8060}
+.iso-dungeon .iso-cell.player .iso-tile-top{stroke:#d4b274;stroke-width:1.8}
+.iso-dungeon .map-enemy-icon{width:48px;height:48px;filter:drop-shadow(0 0 3px #dd4138)}
+.iso-dungeon .iso-loot-art{filter:drop-shadow(0 0 3px #3ba9cb)}
+.iso-loot-art>circle:first-child{display:none}
+.iso-pickup-label{display:none;pointer-events:none;font:11px "Segoe UI",sans-serif}
+.iso-cell.loot:hover .iso-pickup-label,.iso-cell.loot:focus-visible .iso-pickup-label{display:block}
+.iso-dungeon .pressure-plate::after{content:none!important}
+.play-stage .minimap-title strong{font-family:Georgia,serif;color:#dfc595}
+
+/* Three.js becomes the principal gameplay surface. */
+.shell:not(.in-combat) .play-stage{grid-template-columns:minmax(0,2.5fr) minmax(245px,1fr);grid-template-rows:minmax(0,.8fr) minmax(0,1.2fr)}
+.play-stage .mini-grid.has-three>.iso-dungeon{position:absolute;inset:0;opacity:0;pointer-events:none}
+.play-stage .mini-grid.has-three .iso-cell{pointer-events:none}
+.dungeon-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:manipulation}
+.three-hover{position:absolute;left:12px;bottom:10px;right:90px;z-index:2;pointer-events:none;padding:6px 10px;color:#e0d7b8;background:#18251de8;border:1px solid #6d7457;border-radius:5px;font:13px/1.4 "Segoe UI",sans-serif}
+.three-hover[hidden]{display:none}.three-camera-tools{position:absolute;right:8px;top:8px;z-index:2;display:flex;gap:4px}.three-camera-tools button{width:28px;height:28px;padding:0;background:#24362cdc;border:1px solid #80866a;color:#ddd7ae;border-radius:4px;font-size:18px;cursor:pointer}
+.play-stage .minimap-panel{gap:6px}.play-stage .mini-legend{line-height:1.5}
+.shell:not(.in-combat) .play-stage .minimap-panel{position:relative}
+.shell:not(.in-combat) .play-stage .mini-controls{position:absolute;left:24px;bottom:105px;z-index:3;width:255px;gap:4px;opacity:.92}
+.shell:not(.in-combat) .play-stage .mini-controls button{font-size:12px;min-height:27px;padding:5px}
+.shell:not(.in-combat) .play-stage .mini-grid{min-height:180px}
+@media(max-width:900px){.shell:not(.in-combat) .play-stage .mini-controls{width:220px;left:15px;bottom:94px}}
+@media(max-height:650px){.shell:not(.in-combat) .play-stage .mini-controls{bottom:88px;left:16px;width:220px}.shell:not(.in-combat) .play-stage .mini-grid{min-height:125px}}
+@media(max-width:900px){.shell:not(.in-combat) .play-stage{grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr)}}
+@media(max-width:650px){.shell:not(.in-combat) .play-stage{grid-template-columns:minmax(0,1.35fr) minmax(150px,1fr)}.three-hover{font-size:10px;left:5px;bottom:5px;right:5px}}
+/* Room labels and creature status occupy separate rows around the illustration. */
+.play-stage .room-visual{display:flex;flex-direction:column}
+.play-stage .room-visual>svg{position:relative;inset:auto;order:2;flex:1;min-height:0;height:0;width:100%}
+.play-stage .room-visual .scene-meta{position:static;order:1;flex:none;display:flex;align-items:center;gap:8px;padding:7px 10px;background:#151c16;letter-spacing:.5px}
+.play-stage .scene-meta span{padding:0;background:none}
+.play-stage .scene-meta #roomCounter{white-space:nowrap}
+.play-stage .scene-meta #lightLevel{text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px}
+.play-stage .room-visual .enemy-cards{position:static;order:3;flex:none;width:100%;max-width:none;margin:0;padding:8px 10px;background:#191e18;border-top:1px solid #716449;gap:6px}
+.play-stage .room-visual .enemy-card{flex:1;min-width:0;background:none;border:0;padding:0;font-size:12px}
+.play-stage .room-visual .enemy-card strong{font-size:17px;margin-bottom:3px}
+.play-stage .room-visual .enemy-card small{font-size:11px}
+.play-stage .scene-actions .action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.play-stage .scene-actions .action{min-width:0;justify-content:center;padding:9px 7px;min-height:42px}
+.play-stage .scene-actions .action-label{font-size:15px;text-align:center;overflow-wrap:anywhere}
+.play-stage .scene-actions .keyboard-hint{display:none}
+.play-stage .room-readings{grid-column:1/-1;border-top:1px solid #71644966;padding-top:8px;margin-top:2px;color:#cbbb98}
+.room-readings summary{cursor:pointer;padding:5px 0;font-size:13px}
+.reading-actions{display:grid;gap:6px;margin-top:6px}
+.play-stage .reading-actions .action{justify-content:flex-start;min-height:34px}
+.play-stage .reading-actions .action-label{font-size:13px;text-align:left}

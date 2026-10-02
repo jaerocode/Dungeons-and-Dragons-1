@@ -23,6 +23,7 @@
 
         for(const [i,entry] of entries.entries())this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:room.id,id:entry.id,quantity:entry.quantity,position:{...(cells[i%cells.length])}});
       }
+      this.traps=[];this.pendingTrapEncounter=false;this.spawnTraps();
       this.say('Soğuk bir hücrede gözlerini açıyorsun. Kilit kırılmış; Doğu Kapısı’nın alt geçidi aralık. Henüz silahını hazırlamadın.');
     }
     get room(){return this.map.rooms.find(r=>r.id===this.roomId);}
@@ -38,7 +39,7 @@
       return true;
     }
     get visibleEnemies(){return this.currentEnemies.filter(e=>this.combat?e.alert||e.id===this.combat.target:this.torchLit&&this.canSee(e.position));}
-    get enemyHint(){const unseen=this.currentEnemies.filter(e=>!this.visibleEnemies.includes(e));if(!unseen.length)return '';const kinds=new Set(unseen.map(e=>e.definition.kind)),hints=[];if(kinds.has('goblin'))hints.push('Tam kestiremiyorsun ama karanlığın içinden boğuk homurtular ve taşta sürüklenen metal sesleri duyuyorsun.');if(kinds.has('spider'))hints.push('Gölgelerden ince hıslamalar geliyor. Bir şey taşların üzerinde hızla sürünüyor.');if(kinds.has('troll'))hints.push('Derin, ağır bir hırıltı duyuyorsun. Çok ağır ayak sesleri zemini titretiyor.');return hints.join(' ');}
+    get enemyHint(){const unseen=this.currentEnemies.filter(e=>!this.visibleEnemies.includes(e));if(!unseen.length)return '';const kinds=new Set(unseen.map(e=>e.definition.kind)),hints=[];if(kinds.has('goblin'))hints.push('Tam kestiremiyorsun ama karanlığın içinden boğuk homurtular ve taşta sürüklenen metal sesleri duyuyorsun.');if(kinds.has('spider'))hints.push('Gölgelerden ince hıslamalar geliyor. Bir şey taşların üzerinde hızla sürünüyor.');if(kinds.has('troll'))hints.push('Derin, ağır bir hırıltı duyuyorsun. Çok ağır ayak sesleri zemini titretiyor.');if(kinds.has('barrow_wight'))hints.push('Taş duvarlardan soğuk, boğuk bir fısıltı geliyor. Hava birden buz kesiyor.');if(kinds.has('warg'))hints.push('Karanlıkta alçak bir hırıltı ve taşları çizen pençe sesleri duyuyorsun.');return hints.join(' ');}
     get visibleLoot(){return this.roomLoot.filter(e=>e.id==='old_map'&&this.roomId===this.map.start||this.canSee(e.position));}
     toggleTorch(){if(!this.canAct())return;this.begin();this.torchLit=!this.torchLit;this.justEntered=false;if(this.torchLit){this.hidden=false;this.bypassed=false;}this.finish(this.torchLit?'Meşaleyi yakıyorsun. Görüşün genişledi, ama ışığın içinde gizlenemezsin.':'Meşaleyi söndürüyorsun. Yalnızca hemen çevreni seçebiliyorsun; artık gölgelere karışabilirsin.');if(this.combat)this.spendAP();else this.checkEncounter();}
     get target(){return this.combat?this.currentEnemies.find(e=>e.id===this.combat.target)||this.currentEnemies[0]:null;}
@@ -57,13 +58,26 @@
       for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0))cells.push(p);}
       const interior=cells.filter(p=>doors.every(d=>this.distance(p,d)>1)),pool=interior.length?interior:cells;if(!pool.length)throw Error('No valid enemy spawn block');const p=pool[Math.min(pool.length-1,Math.floor(this.random()*pool.length))];return [p.x-rx,p.y-ry];
     }
+    spawnTraps(){
+      for(const room of this.map.rooms){if(!room.traps)continue;const [rx,ry,w,h]=room.bounds,cells=[];
+        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(!this.isDoorPosition(p,room)&&!(room.pillars||[]).some(q=>q[0]+rx===x&&q[1]+ry===y)&&!this.floorLoot.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0)&&!this.enemies.some(e=>e.roomId===room.id&&this.distance(e.position,p)===0))cells.push(p);}
+        if(cells.length<room.traps.count)throw Error('Not enough safe trap blocks: '+room.id);
+        for(let i=0;i<room.traps.count;i++){const index=Math.min(cells.length-1,Math.floor(this.random()*cells.length));this.traps.push({roomId:room.id,position:cells.splice(index,1)[0],triggered:false,definition:room.traps});}
+      }
+    }
+    triggerTrap(){
+      const trap=this.traps.find(t=>t.roomId===this.roomId&&!t.triggered&&this.distance(t.position,this.position)===0);if(!trap)return false;
+      trap.triggered=true;const damage=this.rollDamage(trap.definition.damage_dice);this.hp=Math.max(0,this.hp-damage);this.dead=this.hp===0;if(this.dead)this.combat=null;
+      const text=trap.definition.description+' Canın '+damage+' azaldı!';this.say('Bastığın adım tuzak çıktı! '+text);this.resultNotice={title:'Bastığın adım tuzak çıktı!',text,art:trap.definition.art};this.pendingTrapEncounter=!this.dead;return true;
+    }
+    dismissResult(){this.resultNotice=null;if(this.pendingTrapEncounter){this.pendingTrapEncounter=false;this.checkEncounter();}}
     isDoorPosition(p,room=this.room){
       const [x,y,w,h]=room.bounds;
       return this.map.connections.filter(c=>c.from===room.id||c.to===room.id).some(c=>{const point=c.points[c.from===room.id?0:c.points.length-1];return p.x===Math.max(x,Math.min(x+w-1,point[0]))&&p.y===Math.max(y,Math.min(y+h-1,point[1]));});
     }
     safeLootPosition(preferred){
       const [rx,ry,w,h]=this.room.bounds,cells=[];
-      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(this.walkable(p)&&!this.isDoorPosition(p)&&!this.currentEnemies.some(e=>this.distance(e.position,p)===0))cells.push(p);}
+      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(this.walkable(p)&&!this.isDoorPosition(p)&&!this.traps.some(t=>t.roomId===this.roomId&&this.distance(t.position,p)===0)&&!this.currentEnemies.some(e=>this.distance(e.position,p)===0))cells.push(p);}
       cells.sort((a,b)=>this.distance(a,preferred)-this.distance(b,preferred)||a.y-b.y||a.x-b.x);
       if(!cells.length)throw new Error('No safe floor block for loot');return {...cells[0]};
     }
@@ -74,7 +88,7 @@
     navigate(direction){if(!this.available()||this.combat)return false;if(this.facing===direction)return this.move(direction);this.turnFacing((direction-this.facing+4)%4);return true;}
     turnFacing(delta){if(!this.available()||this.combat)return;this.begin();this.justEntered=false;this.facing=(this.facing+delta+4)%4;this.finish(delta>0?'Sağa dönüyorsun.':'Sola dönüyorsun.');this.checkEncounter();}
     move(direction='forward',steps=1){if(!this.available()||this.combat)return false;this.begin();this.justEntered=false;const heading=typeof direction==='number'?direction:(this.facing+(direction==='back'?2:0))%4,vector=[[0,-1],[1,0],[0,1],[-1,0]][heading];let moved=0;
-      for(let i=0;i<steps;i++){const p={x:this.position.x+vector[0],y:this.position.y+vector[1]};if(!this.walkable(p))break;this.position=p;moved++;if(this.checkEncounter(steps>1))break;}
+      for(let i=0;i<steps;i++){const p={x:this.position.x+vector[0],y:this.position.y+vector[1]};if(!this.walkable(p))break;this.position=p;moved++;if(this.triggerTrap())break;if(this.checkEncounter(steps>1))break;}
       const encounter=this.events.join('\n');this.events=[];this.finish(moved?(moved+' adım '+(direction==='back'?'geri geliyorsun.':'ilerliyorsun.')+(steps>1?' Ayak seslerin odada yankılanıyor.':'')):'Önünde duvar veya sütun var.');if(encounter)this.say(encounter);return moved>0;}
     mod(stat){return Math.floor((this.profile.stats[stat]-10)/2);}
     roll(sides){return Math.floor(this.random()*sides)+1;}
@@ -85,7 +99,7 @@
     finish(message){this.say(message);this.turn++;return this.message;}
     available(){return !this.dead&&!this.completed;}
     canAct(){return this.available()&&(!this.combat||this.combat.phase==='player');}
-    checkEncounter(noisy=false){if(this.combat||this.bypassed||!this.available())return false;if(noisy)this.currentEnemies.filter(e=>this.distance(this.position,e.position)<=3).forEach(e=>e.alert=true);const hostile=this.currentEnemies.find(e=>this.distance(this.position,e.position)<=1);if(hostile){this.startCombat(hostile,'Düşmanın çok yakınına girdin. '+hostile.definition.name+' seni fark ediyor ve saldırmak için üzerine dönüyor.');return true;}const enemy=this.visibleEnemies.find(e=>!this.noticedEnemies.has(e.id));if(!enemy)return false;enemy.discovered=true;this.noticedEnemies.add(enemy.id);this.notice={kind:'enemy',enemyId:enemy.id};this.say('Meşalenin ışığında '+enemy.definition.name+' beliriyor. Saldırabilir veya meşaleni söndürüp gizlice uzaklaşmayı deneyebilirsin.');return true;}
+    checkEncounter(noisy=false){if(this.combat||this.bypassed||!this.available())return false;if(noisy)this.currentEnemies.filter(e=>this.distance(this.position,e.position)<=3).forEach(e=>e.alert=true);const hostile=this.currentEnemies.find(e=>this.distance(this.position,e.position)<=1);if(hostile){this.startCombat(hostile,'Düşmanın çok yakınına girdin. '+hostile.definition.name+' seni fark ediyor ve saldırmak için üzerine dönüyor.');return true;}const enemy=this.visibleEnemies.find(e=>!this.noticedEnemies.has(e.id));if(!enemy)return false;enemy.discovered=true;this.noticedEnemies.add(enemy.id);return false;}
     doors(){return this.map.connections.filter(c=>c.from===this.roomId||c.to===this.roomId).map(c=>{const outgoing=c.from===this.roomId,p=c.points[outgoing?0:c.points.length-1],[rx,ry,w,h]=this.room.bounds;return {connection:c,id:c.from+':'+c.to,target:outgoing?c.to:c.from,direction:p[1]===ry?0:p[0]===rx+w?1:p[1]===ry+h?2:3,allowed:c.kind==='common'||c.kind===this.profile.route};});}
     doorLabel(door){const target=this.map.rooms.find(r=>r.id===door.target);return (door.connection.labels?.[this.roomId]||['Karşı kapıdan git','Sağ kapıdan git','Arka kapıdan git','Sol kapıdan git'][door.direction])+' · '+target.name;}
     passageNarrative(door){
@@ -105,7 +119,7 @@
       if(!this.opened.has(door.id)&&door.connection.kind==='fighter')this.alarm=Math.min(3,this.alarm+1);
       this.opened.add(door.id);this.entry={roomId:this.roomId,doorId:door.id};this.roomId=door.target;this.hidden=false;this.bypassed=false;this.visited.add(this.roomId);
       this.position=this.spawnPosition(door);this.facing=(this.doors().find(d=>d.id===door.id).direction+2)%4;
-      this.justEntered=true;this.notice=null;this.noticedEnemies.clear();this.finish(this.room.name+' odasına giriyorsun. '+(this.torchLit?'Meşalenin ışığı duvarları aydınlatıyor.':'Karanlıkta yalnızca hemen çevreni seçebiliyorsun.')); if(this.roomId===this.map.start&&this.hasStone){this.completed=true;this.say('Mithril külçesini kurtarıp Doğu Kapısı’nın alt geçidine dönüyorsun. Gün ışığına ulaşıyorsun. Görev tamamlandı!');}else {this.checkEncounter();if(!this.combat&&!this.notice&&this.enemyHint)this.notice={kind:'sound',text:this.enemyHint};}return true;
+      this.justEntered=true;this.notice=null;this.noticedEnemies.clear();this.finish(this.room.name+' odasına giriyorsun. '+(this.torchLit?'Meşalenin ışığı duvarları aydınlatıyor.':'Karanlıkta yalnızca hemen çevreni seçebiliyorsun.')); if(this.roomId===this.map.start&&this.hasStone){this.completed=true;this.say('Mithril külçesini kurtarıp Doğu Kapısı’nın alt geçidine dönüyorsun. Gün ışığına ulaşıyorsun. Görev tamamlandı!');}else {this.checkEncounter();}return true;
     }
     prepare(){if(!this.canAct())return;this.begin();if(this.combat&&this.prepared)return this.say('Silahın zaten hazır.');this.prepared=!this.prepared;this.finish(this.characterClass==='Mage'?(this.prepared?'Avucunda soluk bir kıvılcım beliriyor. Büyün hazır.':'Büyünün ışığını söndürüyorsun.'):(this.prepared?'Silahını çekiyorsun.':'Silahını kınına koyuyorsun.'));if(this.combat)this.spendAP();}
     inspect(){if(!this.canAct()||this.combat)return;this.begin();this.inspected.add(this.roomId);this.finish(this.visibleEnemies.length?this.room.inspection:(this.room.quiet_inspection||this.room.quiet_summary||this.room.inspection));if(['archive','rubble'].includes(this.roomId)){this.finalAdvantage=true;this.say('Muhafızın savunmasındaki boşluğu öğreniyorsun. Ona karşı ilk saldırın avantajlı.');}}
@@ -122,10 +136,10 @@
     answerRiddle(index){if(!this.canAct()||this.combat||this.roomId!=='seal_room'||this.sealSolved||!this.riddle)return false;this.begin();if(!Number.isInteger(index)||index<0||index>=this.riddle.options.length)return false;if(index!==this.riddle.answer){this.alarm=Math.min(3,this.alarm+1);this.finish('Yanlış cevap. Rünler kızarıyor; uzaktan metal bir uğultu geliyor. İpucunu okuyup tekrar deneyebilirsin.');return false;}this.sealSolved=true;this.finish('Doğru cevap. Rünler sönüyor ve ağır kapı açılıyor.');return true;}
     meditate(){if(!this.canAct()||this.combat||this.characterClass!=='Mage')return;this.begin();this.focus=Math.min(this.profile.resource.max,this.focus+1);this.finish('Korunaklı bir köşede meditasyon yapıyorsun. 1 Focus yenilendi.');}
     rest(){if(!this.canAct()||this.combat||this.roomId!=='seal_room'||this.restUsed)return;this.begin();this.restUsed=true;this.hp=this.maxHp;this.focus=this.profile.resource.max;this.finish('Taş bankta dinleniyorsun. Canın ve Focus’un tamamen yenilendi.');}
-    flee(direction){if(!this.combat||!this.canAct())return;this.begin();if(!Number.isInteger(direction)||direction<0||direction>3)return this.say('Kaçacağın yönü seç.');const enemy=this.target,dc=Math.max(...this.currentEnemies.map(e=>e.definition.flee_dc)),v=[[0,-1],[1,0],[0,1],[-1,0]][direction];let destination={...this.position},moved=0;
-      for(let i=0;i<3;i++){const p={x:destination.x+v[0],y:destination.y+v[1]};if(!this.walkable(p))break;if(this.currentEnemies.some(e=>this.distance(p,e.position)===0)){const reason='Doğrudan düşmanın bulunduğu bloğa kaçmaya çalıştın. Yolunu kesiyor; kaçışın başarısız!';this.finish('Critical fail! '+reason);this.reportResult('Kaçışın kesildi!',reason);this.spendAP();return;}destination=p;moved++;}
+    flee(direction){if(!this.combat||!this.canAct())return;this.begin();if(!Number.isInteger(direction)||direction<0||direction>3)return this.say('Kaçacağın yönü seç.');const enemy=this.target,dc=Math.max(...this.currentEnemies.map(e=>e.definition.flee_dc)),v=[[0,-1],[1,0],[0,1],[-1,0]][direction];let destination={...this.position},moved=0,path=[];
+      for(let i=0;i<3;i++){const p={x:destination.x+v[0],y:destination.y+v[1]};if(!this.walkable(p))break;if(this.currentEnemies.some(e=>this.distance(p,e.position)===0)){const reason='Doğrudan düşmanın bulunduğu bloğa kaçmaya çalıştın. Yolunu kesiyor; kaçışın başarısız!';this.finish('Critical fail! '+reason);this.reportResult('Kaçışın kesildi!',reason);this.spendAP();return;}destination=p;path.push(p);moved++;}
       if(!moved){const reason='Bu yönde duvar veya sütun var. Başka bir yön seç.';this.say(reason);this.reportResult('Yol kapalı',reason);return;}
-      if(this.roll(20)+this.mod('DEX')>=dc){this.position=destination;this.combat=null;this.damageBuff=null;this.bypassed=false;this.currentEnemies.forEach(e=>e.alert=false);this.finish(moved+' blok uzağa kaçıyorsun. Düşman odada kalıyor; canı korunuyor.');this.checkEncounter();}else {const reason=enemy.definition.name+' önüne geçti ve kaçışını blokladı. Geçebileceğin aralığa zamanında ulaşamadın.';this.finish(reason);this.reportResult('Kaçamadın!',reason);this.spendAP();}}
+      if(this.roll(20)+this.mod('DEX')>=dc){this.combat=null;this.damageBuff=null;this.bypassed=false;this.currentEnemies.forEach(e=>e.alert=false);for(const p of path){this.position=p;if(this.triggerTrap()){this.turn++;return;}}this.finish(moved+' blok uzağa kaçıyorsun. Düşman odada kalıyor; canı korunuyor.');this.checkEncounter();}else {const reason=enemy.definition.name+' önüne geçti ve kaçışını blokladı. Geçebileceğin aralığa zamanında ulaşamadın.';this.finish(reason);this.reportResult('Kaçamadın!',reason);this.spendAP();}}
     selectTarget(id){if(this.combat&&this.currentEnemies.some(e=>e.id===id))this.combat.target=id;}
     spendAP(cost=1){if(!this.combat)return;this.combat.ap=Math.max(0,this.combat.ap-cost);if(this.combat.ap===0){this.damageBuff=null;this.combat.phase='enemy';this.say('Aksiyonların bitti. Düşman harekete geçiyor.');}}
     attack(){
@@ -144,7 +158,7 @@
     enemyTurn(){
       if(!this.combat||this.combat.phase!=='enemy'||!this.available())return;this.begin();this.damageBuff=null;
       for(const enemy of this.currentEnemies){if(enemy.burning){enemy.hp=Math.max(0,enemy.hp-enemy.burning);this.say(enemy.definition.name+' alevlerden '+enemy.burning+' hasar aldı.');enemy.burning=0;if(!enemy.hp){this.say(enemy.definition.name+' yere yığıldı.');continue;}}const penalty=enemy.chilled?2:0;enemy.chilled=false;if(this.roll(20)+enemy.definition.attack_bonus-penalty>this.ac){const damage=this.rollDamage(enemy.definition.damage_dice);this.hp=Math.max(0,this.hp-damage);this.say(enemy.definition.name+' sana vurdu, -'+damage+' hasar!');}
-        else this.say(enemy.definition.name+(enemy.definition.kind==='spider'?' seni ısırmaya çalıştı ama zırhın karşıladı.':enemy.definition.kind==='troll'?' sopasını savurdu ama zırhın karşıladı.':' kılıcını sana savurdu ama zırhın karşıladı.'));
+        else this.say(enemy.definition.name+(enemy.definition.miss_text|| (enemy.definition.kind==='spider'?' seni ısırmaya çalıştı ama zırhın karşıladı.':enemy.definition.kind==='troll'?' sopasını savurdu ama zırhın karşıladı.':' kılıcını sana savurdu ama zırhın karşıladı.')));
         if(this.hp===0){this.dead=true;this.combat=null;this.say('Yere yığılıyorsun. Maceran burada sona erdi. Yeni bir karakterle tekrar deneyebilirsin.');this.turn++;return;}
       }
       if(!this.currentEnemies.length){this.combat=null;this.turn++;this.say('Savaş bitti. Oda artık güvenli.');return;}

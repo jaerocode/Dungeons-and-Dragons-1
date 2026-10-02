@@ -2,6 +2,7 @@
 
 Fighter, Mage veya Rogue ile oynanan, Moria’da geçen sıra tabanlı bir macera.
 Mithril külçesini kurtar, Doğu Kapısı Hücreleri’ne dön ve madenden çık.
+Harita gerçek Three.js ile çizilen low-poly bir 3D zindandır. [3D görünüm ve geliştirme rehberi](THREE_DUNGEON.md).
 Orta Dünya adları ve Mazarbul kayıtları için [dünya rehberine](LORE_GUIDE.md) bak.
 
 ## İndir ve oyna (kurulum gerekmez)
@@ -18,7 +19,7 @@ HTML dosyasının Explorer simgesi tarayıcıya aittir; özel trol simgesi kısa
 oyunun tarayıcı sekmesinde gösterilir. `mines-of-moria.ico` dosyasını yanında tut.
 
 Yalnızca `Mines of Moria.html` dosyasını da GitHub'daki dosya sayfasının indirme
-düğmesinden indirebilirsin. Dosya yaklaşık 52 MB olduğu için GitHub önizlemesi
+düğmesinden indirebilirsin. Dosya yaklaşık 63 MB olduğu için GitHub önizlemesi
 açılmayabilir; dosyayı indirip bilgisayarında aç.
 
 Özel (Private) depoları yalnızca erişim izni olan kullanıcılar indirebilir.
@@ -43,8 +44,8 @@ derleme sırasında en güncel kaynaklardan yeniden oluşturulur.
 
 ## Dosya boyutları
 
-Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 39 MB'tır;
-her görsel 3 MB'tan küçüktür. Hazır `Mines of Moria.html` yaklaşık 52 MB'tır.
+Görseller `assets1` ve `assets2` klasörlerinde toplam yaklaşık 46 MB'tır;
+her görsel 3 MB'tan küçüktür. Hazır `Mines of Moria.html` yaklaşık 63 MB'tır.
 GitHub web yükleyicisindeki 25 MiB dosya sınırı nedeniyle güncellemeleri
 Git veya GitHub Desktop ile push etmek gerekir. Normal Git'in tek dosya
 sınırı 100 MiB'tır. Bu proje mevcut boyutlarıyla Git LFS gerektirmez.
@@ -54,10 +55,11 @@ sınırı 100 MiB'tır. Bu proje mevcut boyutlarıyla Git LFS gerektirmez.
 Minimap veya klavye üzerinden ilerle: W kuzey, A batı, S güney, D doğu.
 İlk basış o yöne döndürür; aynı yöne tekrar basınca bir blok ilerlersin.
 Yakındaki kapı ikonuna tıklayarak diğer odaya geçebilirsin.
+Kapılar görüş alanının dışında da görünür; üzerine gelerek hedef odayı görebilirsin.
 Pencereler açıkken ve combat sırasında bu hareket tuşları çalışmaz.
 Meşale, baktığın yöndeki görüşünü
 genişletir; yanarken gizlenemezsin. Meşalenin aydınlattığı düşman için
-resimli bir karşılaşma penceresi açılır: saldır veya meşaleyi söndürüp
+3D haritada hareketli bir low-poly model görünür: saldır veya meşaleyi söndürüp
 gizlice kaçmayı dene. Düşmanın merkezindeki 3×3 alana girmek savaşı
 otomatik başlatır; başarılı gizlilik bu yakınlık kontrolünden korur.
 Görünmeyen düşmanların varlığını sesler haber verir. Görüş alanındaki
@@ -65,8 +67,8 @@ ganimetler minimap'te mavi eşya ikonlarıyla görünür. Yakındaki ikona
 tıklayarak al; uzaktakilerde “Yaklaşman lazım” yazar. Duvar yazılarını ve
 kayıtları odadaki “Oku” seçenekleriyle pencerede okuyabilirsin; taşınmazlar.
 Başlangıç odasındaki eski haritayı alarak dungeon planını inceleyebilirsin.
-Başlangıç haritası bakış yönünden bağımsız görünür. Karşılaşma
-penceresi yaratığı oda sahnesinde gösterir; başarısız gizlilik, engellenen
+Başlangıç haritası bakış yönünden bağımsız görünür. Düşmanı görmek pencere
+açmaz; başarısız gizlilik, engellenen
 kaçış ve yakınlık nedeniyle başlayan savaş ayrı sonuç penceresiyle bildirilir.
 Bu pencere açıkken düşman turu bekler; Devam et ile sürer.
 

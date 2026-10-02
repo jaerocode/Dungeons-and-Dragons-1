@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .github-upload/
 node_modules/
+.npm-cache/
 .env
 .env.*
 previews/
