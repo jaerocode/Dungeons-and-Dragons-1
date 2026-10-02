@@ -17,7 +17,7 @@
       const pool=map.riddles||[],candidates=pool.filter(r=>r.id!==options.previousRiddleId);this.riddle=(candidates.length?candidates:pool)[Math.floor(this.random()*(candidates.length||pool.length))];
       this.floorLoot=[];this.lootSerial=0;
       for(const room of map.rooms){const [rx,ry,w,h]=room.bounds,center={x:rx+Math.floor(w/2),y:ry+Math.floor(h/2)},cells=[];
-        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++)if(!(room.pillars||[]).some(p=>p[0]+rx===x&&p[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&e.position.x===x&&e.position.y===y))cells.push({x,y});
+        for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++)if(!this.isDoorPosition({x,y},room)&&!(room.pillars||[]).some(p=>p[0]+rx===x&&p[1]+ry===y)&&!this.enemies.some(e=>e.roomId===room.id&&e.position.x===x&&e.position.y===y))cells.push({x,y});
         cells.sort((a,b)=>this.distance(a,center)-this.distance(b,center)||a.y-b.y||a.x-b.x);
         const entries=[...(room.loot||[])];
         for(const reading of room.readings||[]){const id='reading_'+room.id+'_'+reading.id;this.items.set(id,{id,name:reading.title,type:'reading',description:'Mahzenden bir mektup / kayıt. Yanına alıp istediğin zaman okuyabilirsin.',text:reading.text,sourceRoom:room.id,readingId:reading.id});entries.push({id,quantity:1});}
@@ -52,6 +52,16 @@
     get attackCost(){return this.attackSpec.ap;}
     get availableWeapons(){return [...new Set(this.roomLoot.filter(e=>this.items.get(e.id)?.slot==='weapon').map(e=>e.id))];}
     canTakeLoot(entry){const item=this.items.get(entry.id);return this.available()&&!this.combat&&this.visibleLoot.includes(entry)&&this.distance(this.position,entry.position)<=1&&(!this.visibleEnemies.length||this.bypassed)&&(!item.classes||item.classes.includes(this.characterClass));}
+    isDoorPosition(p,room=this.room){
+      const [x,y,w,h]=room.bounds;
+      return this.map.connections.filter(c=>c.from===room.id||c.to===room.id).some(c=>{const point=c.points[c.from===room.id?0:c.points.length-1];return p.x===Math.max(x,Math.min(x+w-1,point[0]))&&p.y===Math.max(y,Math.min(y+h-1,point[1]));});
+    }
+    safeLootPosition(preferred){
+      const [rx,ry,w,h]=this.room.bounds,cells=[];
+      for(let y=ry;y<ry+h;y++)for(let x=rx;x<rx+w;x++){const p={x,y};if(this.walkable(p)&&!this.isDoorPosition(p)&&!this.currentEnemies.some(e=>this.distance(e.position,p)===0))cells.push(p);}
+      cells.sort((a,b)=>this.distance(a,preferred)-this.distance(b,preferred)||a.y-b.y||a.x-b.x);
+      if(!cells.length)throw new Error('No safe floor block for loot');return {...cells[0]};
+    }
     spawnPosition(door){const [x,y,w,h]=this.room.bounds;if(door){const c=door.connection,p=c.points[c.from===this.roomId?0:c.points.length-1];return {x:Math.max(x,Math.min(x+w-1,p[0])),y:Math.max(y,Math.min(y+h-1,p[1]))};}return {x:x+Math.floor(w/2),y:y+h-1};}
     walkable(p){const [x,y,w,h]=this.room.bounds;return p.x>=x&&p.x<x+w&&p.y>=y&&p.y<y+h&&!(this.room.pillars||[]).some(v=>v[0]+x===p.x&&v[1]+y===p.y);}
     distance(a,b){return Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y));}
@@ -160,7 +170,7 @@
       const entry=this.roomLoot.find(e=>e.id===id&&(!uid||e.uid===uid)&&this.distance(this.position,e.position)<=1);
       if(!entry||!this.canTakeLoot(entry)||this.inventory[id])return false;
       const weapons=this.carriedWeapons;if(weapons.length>=2&&!weapons.includes(dropId)){this.say('İki silah taşıyorsun. Yeni silah için hangisini bırakacağını seç.');return false;}
-      this.begin();let dropped='';if(dropId){if(!weapons.includes(dropId))return false;this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:this.roomId,id:dropId,quantity:1,position:{...this.position}});delete this.inventory[dropId];dropped=this.items.get(dropId).name+' silahını yere bırakıp ';}
+      this.begin();let dropped='';if(dropId){if(!weapons.includes(dropId))return false;this.floorLoot.push({uid:'loot:'+this.lootSerial++,roomId:this.roomId,id:dropId,quantity:1,position:this.safeLootPosition(this.position)});delete this.inventory[dropId];dropped=this.items.get(dropId).name+' silahını yere bırakıp ';}
       entry.quantity=0;this.inventory[id]=1;this.equipment.weapon=id;this.prepared=false;this.lastLoot=[{id,quantity:1}];this.finish(dropped+this.items.get(id).name+' alıp kuşanıyorsun. Yeni silahını hazırlamalısın.');return true;
     }
 
