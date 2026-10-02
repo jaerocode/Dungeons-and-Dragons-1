@@ -182,3 +182,32 @@
 .reading-actions{display:grid;gap:6px;margin-top:6px}
 .play-stage .reading-actions .action{justify-content:flex-start;min-height:34px}
 .play-stage .reading-actions .action-label{font-size:13px;text-align:left}
+/* Combat shares the same map and places its dossier, log and actions on the right. */
+.combat-sidebar{display:contents}
+.shell.in-combat .play-stage{grid-template-columns:minmax(0,2.5fr) minmax(245px,1fr);grid-template-rows:minmax(0,.8fr) minmax(0,1.2fr)}
+.shell.in-combat .play-stage .minimap-panel{display:flex;grid-column:1;grid-row:1/3}
+.shell.in-combat .play-stage .room-visual{display:none}
+.shell.in-combat .play-stage .combat-sidebar{display:flex;grid-column:2;grid-row:1/3;flex-direction:column;gap:8px;min-width:0;min-height:0;overflow:hidden}
+.shell.in-combat .play-stage .enemy-dossier{display:flex;flex:none;max-height:46%;min-height:0;overflow:auto;box-shadow:none}
+.shell.in-combat .enemy-dossier-header{padding:8px 10px 5px}
+.shell.in-combat .enemy-dossier h3{font-size:20px;margin:3px 0}
+.shell.in-combat .enemy-dossier-header p{display:none}
+.shell.in-combat .enemy-dossier .enemy-portrait{display:flex;flex:none;height:100px;min-height:100px;margin:0 8px}
+.shell.in-combat .enemy-dossier .enemy-condition{font-size:12px;padding:5px 10px}
+.shell.in-combat .enemy-dossier .enemy-lore{padding:5px 10px}
+.enemy-lore summary{font-size:12px;color:#cbbb98;cursor:pointer}
+.shell.in-combat .enemy-dossier .enemy-lore p{font-size:13px;line-height:1.5;margin-top:7px}
+.shell.in-combat .battle-console{flex:1;min-height:65px;padding:8px 10px;gap:5px}
+.shell.in-combat .battle-console>.eyebrow{font-size:11px}
+.shell.in-combat .battle-console p{font-size:12px;line-height:1.4;margin:2px 0}
+.shell.in-combat .battle-console li{margin-bottom:6px;padding:3px 6px}
+.shell.in-combat .play-stage .scene-actions{flex:none;max-height:42%;overflow:auto;padding:10px;gap:7px}
+.shell.in-combat .play-stage .combat-header{font-size:15px;margin-bottom:7px}
+.shell.in-combat .play-stage .combat-grid{grid-template-columns:1fr 1fr;gap:6px}
+.shell.in-combat .play-stage .combat-grid .action{min-height:36px;padding:7px}
+.shell.in-combat .play-stage .combat-grid .action-label{font-size:13px}
+.shell.in-combat .play-stage .combat-grid .action:last-child{grid-column:auto}
+.shell.in-combat .play-stage .mini-controls,.shell.in-combat .play-stage .mini-exits{display:none}
+.shell.in-combat .view>.journal{display:none}
+@media(max-width:900px){.shell.in-combat .play-stage{grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr)}}
+@media(max-height:650px){.shell.in-combat .enemy-dossier .enemy-portrait{height:70px;min-height:70px}.shell.in-combat .enemy-dossier-header .eyebrow{display:none}}

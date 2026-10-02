@@ -4,7 +4,7 @@ Kamera güneyden düz bakar: kuzey ekranın üstü, doğu sağıdır. W ↑, A �
 
 Three.js 0.186.1, `vendor/three.min.js` olarak yerel paketlenir. MIT lisansı `vendor/THREE-LICENSE.txt` dosyasındadır. Her iki HTML sürümü kütüphaneyi ve 3D çiziciyi içerir; oyun açılırken CDN, npm, sunucu veya internet bağlantısı gerekmez.
 
-`three-dungeon.js`, ortografik kamerayla gerçek WebGL sahnesi oluşturur. Taş örgülü duvarlar, parçalı döşemeler, alçak ön duvarlar, meşale ışıkları, gölgeler, kapı kemerleri ve oda türüne göre moloz, sandık, varil, tezgâh, su ve lav detayları yerel geometriden üretilir. Karakter, silahlar ve düşmanlar da low-poly modellerdir. Sağdaki oda resmi ve ayrı savaş arayüzü korunur.
+`three-dungeon.js`, ortografik kamerayla gerçek WebGL sahnesi oluşturur. Taş örgülü duvarlar, parçalı döşemeler, alçak ön duvarlar, meşale ışıkları, gölgeler, kapı kemerleri ve oda türüne göre moloz, sandık, varil, tezgâh, su ve lav detayları yerel geometriden üretilir. Karakter, silahlar ve düşmanlar da low-poly modellerdir. Savaşta harita solda kalır; sağda düşman resmi, bilgileri, savaş günlüğü ve hamleler gösterilir. Savaş sırasında haritadan hareket kilitlenir; kaçış hamlesi kullanılır.
 
 Hareket kareli, sıra tabanlı oyun kurallarını kullanır. Karakterin adımları görsel olarak yumuşatılır. WASD ilk basışta yön değiştirir; tekrar basınca ilerler. Fareyle yakındaki görünen zemin, eşya veya kapı seçilebilir. Raycaster zemin ve etkileşimli 3D modelleri aynı oyun bloğuna bağlar; kapının üst kemerine tıklamak da çalışır. Kamera + / − / ↺ düğmeleri ve fare tekerleğiyle ayarlanır.
 
