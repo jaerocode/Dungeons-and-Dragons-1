@@ -1,4 +1,4 @@
-# Unutulmuş Mühür — sahne üzerinden oda keşfi
+# Moria Madenleri — sahne üzerinden oda keşfi
 
 Oyuncu Zindan Hücreleri’nde isim ve sınıf seçerek başlar. Sahnedeki kapı düğmeleri doğrudan hedef odaya götürür; koridor ekranı ve minimap kaldırılmıştır. Ana oyun ekranı pencere yüksekliğine sığar. Aksiyonlar görselin alt kenarında, kapılar resimdeki geçitlerin üzerinde, ganimet belirgin bir sahne düğmesindedir. Uzun açıklamalar, kayıtlar ve etkileşimler “Odayı incele” penceresinde okunur. Küçük ekranda karakter paneli yatay özet olur; envanterin tamamı Bohça penceresinden açılır.
 

@@ -1,4 +1,4 @@
-# Unutulmuş Mühür Mahzeni
+# Moria Madenleri
 
 Fighter, Mage veya Rogue ile oynanan, sıra tabanlı bir dungeon macerası.
 Mühür Taşı'nı bul ve başlangıçtaki zindanlardan kaç.
@@ -43,10 +43,24 @@ sınırı 100 MiB'tır. Bu proje mevcut boyutlarıyla Git LFS gerektirmez.
 
 ## Kontroller
 
-Minimap üzerinden ilerle ve yön değiştir. Meşale, baktığın yöndeki görüşünü
-genişletir; yanarken gizlenemezsin. Görüş alanına giren yakındaki düşmanlarla
-savaşabilir veya meşaleyi söndürüp gizlice uzaklaşmayı deneyebilirsin.
+Minimap veya klavye üzerinden ilerle: W kuzey, A batı, S güney, D doğu.
+İlk basış o yöne döndürür; aynı yöne tekrar basınca bir blok ilerlersin.
+Yakındaki kapı ikonuna tıklayarak diğer odaya geçebilirsin.
+Pencereler açıkken ve combat sırasında bu hareket tuşları çalışmaz.
+Meşale, baktığın yöndeki görüşünü
+genişletir; yanarken gizlenemezsin. Meşalenin aydınlattığı düşman için
+resimli bir karşılaşma penceresi açılır: saldır veya meşaleyi söndürüp
+gizlice kaçmayı dene. Düşmanın merkezindeki 3×3 alana girmek savaşı
+otomatik başlatır; başarılı gizlilik bu yakınlık kontrolünden korur.
+Görünmeyen düşmanların varlığını sesler haber verir. Görüş alanındaki
+ganimetler minimap'te mavi eşya ikonlarıyla görünür. Yakındaki ikona
+tıklayarak al; uzaktakilerde “Yaklaşman lazım” yazar. Mektupları ve
+kayıtları loot olarak toplayıp envanterden okuyabilirsin.
 Başlangıç odasındaki eski haritayı alarak dungeon planını inceleyebilirsin.
+Başlangıç haritası bakış yönünden bağımsız görünür. Karşılaşma
+penceresi yaratığı oda sahnesinde gösterir; başarısız gizlilik, engellenen
+kaçış ve yakınlık nedeniyle başlayan savaş ayrı sonuç penceresiyle bildirilir.
+Bu pencere açıkken düşman turu bekler; Devam et ile sürer.
 
 ## Kontrolleri doğrulama
 
@@ -58,4 +72,11 @@ node test_escape.js
 node test_loot_staff.js
 node test_old_map.js
 node test_torch.js
+node test_exploration_controls.js
+node test_encounters.js
 ```
+
+Karakter seçiminde sınıfa göre kask, kapüşon, maske ve kıyafet renkleri;
+Mage için sakal seçimi bulunur. Keşifte solda büyük minimap, sağda oda
+görseli ve etkileşimler vardır. Savaşta düşman solda, savaş günlüğü ve
+aksiyonlar sağda ayrı bir düzende gösterilir.

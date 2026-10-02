@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict'),{DungeonExplorer}=require('./game-engine');
+const map=require('./dungeon_map.json'),rules=require('./game_rules.json'),bestiary=require('./bestiary.json'),loot=require('./loot.json');
+const make=()=>new DungeonExplorer(map,rules,'Rogue','Gölge',{bestiary,loot,random:()=>.99});
+for(const lit of [false,true])for(const facing of [0,2]){
+ const g=make();g.roomId='troll_hall';const e=g.currentEnemies[0];g.position={x:e.position.x,y:e.position.y+2};g.facing=facing;g.torchLit=lit;g.move(0);assert.ok(g.combat,'3×3 alanı meşale/yön fark etmeksizin combat başlatır');assert.equal(g.target.id,e.id);assert.equal(g.notice,null);
+}
+const discovery=make();discovery.roomId='troll_hall';const troll=discovery.currentEnemies[0];discovery.position={x:troll.position.x,y:troll.position.y+3};discovery.facing=0;
+assert.equal(discovery.visibleEnemies.length,0);assert.match(discovery.enemyHint,/hırıltı/);discovery.toggleTorch();assert.equal(discovery.visibleEnemies.length,1);assert.equal(discovery.combat,null);assert.equal(discovery.notice.enemyId,troll.id);assert.equal(discovery.enemyHint,'');
+discovery.notice=null;discovery.turnFacing(1);discovery.turnFacing(-1);assert.equal(discovery.notice,null,'Aynı ziyaret sırasında aynı düşman için pencere tekrarlanmaz');
+discovery.toggleTorch();discovery.sneak();assert.ok(discovery.bypassed);discovery.move(0);discovery.move(0);assert.equal(discovery.combat,null,'Başarılı gizlilik yakınlıktan korunur');discovery.toggleTorch();assert.ok(discovery.combat,'Yakında meşale yakmak gizliliği bozar ve savaşı başlatır');
+for(const cls of ['Fighter','Mage','Rogue']){
+ const failed=new DungeonExplorer(map,rules,cls,'Kaşif',{bestiary,loot,random:()=>0});failed.roomId='troll_hall';const foe=failed.currentEnemies[0];failed.position={x:foe.position.x,y:foe.position.y+3};failed.facing=0;failed.toggleTorch();assert.equal(failed.notice.kind,'enemy');assert.equal(failed.combat,null);
+ failed.notice=null;failed.toggleTorch();failed.sneak();assert.ok(failed.combat,'Başarısız gizlice kaçış 3×3 dışında bile doğrudan combat başlatmalı');assert.equal(failed.target.id,foe.id);assert.equal(failed.bypassed,false);assert.equal(failed.hidden,false);assert.equal(failed.notice,null);assert.match(failed.message,/savaş başladı/);assert.equal(failed.resultNotice.title,'Fark edildin!');assert.ok(failed.resultNotice.text.length>30);
+}
+const arrival=make();arrival.goDoor(arrival.doors()[0].id);const door=arrival.doors().find(d=>d.target==='troll_hall');arrival.position=arrival.spawnPosition(door);arrival.goDoor(door.id);assert.equal(arrival.notice.kind,'sound');assert.match(arrival.notice.text,/ayak sesleri/);assert.equal(arrival.visibleEnemies.length,0);
+const treasure=make();treasure.roomId='hall';const entry=treasure.roomLoot[0];treasure.position={x:entry.position.x,y:entry.position.y+1};treasure.facing=0;assert.ok(treasure.canSee(entry.position));assert.ok(treasure.visibleLoot.includes(entry));assert.ok(treasure.visibleLoot.includes(entry));treasure.turnFacing(2);assert.equal(treasure.visibleLoot.includes(entry),false);assert.equal(treasure.canTakeLoot(entry),false);treasure.turnFacing(2);assert.ok(treasure.takeLoot(entry.uid));
+console.log('Passed: torch-only enemy reveal, directional discovery, encounter notices, room-entry sounds, all-direction 3×3 combat, stealth exception, and vision-gated loot without inspection.');

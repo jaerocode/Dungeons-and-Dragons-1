@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="mapTitle mapDesc">
-<title id="mapTitle">Unutulmuş Mühür Mahzeni</title><desc id="mapDesc">On iki odalı dungeon. Güneyde giriş, kuzeyde mühür haznesi. Ortak yol gri, Fighter turuncu, Mage mor, Rogue yeşil. Kuzey yukarıdadır.</desc>
+<title id="mapTitle">Moria Madenleri</title><desc id="mapDesc">On iki odalı dungeon. Güneyde giriş, kuzeyde mühür haznesi. Ortak yol gri, Fighter turuncu, Mage mor, Rogue yeşil. Kuzey yukarıdadır.</desc>
 <defs><pattern id="tiles" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#252926"/><path d="M20 0H0V20" fill="none" stroke="#353b34" stroke-width="1"/></pattern></defs>
 <rect width="960" height="720" fill="#141a18"/>
 <g class="corridor" data-kind="common" data-from="entrance" data-to="hall"><polyline points="500,620 500,560" fill="none" stroke="#080e0c" stroke-width="28" stroke-linejoin="round"/><polyline points="500,620 500,560" fill="none" stroke="#9d9486" stroke-width="10" stroke-linejoin="round" /></g>

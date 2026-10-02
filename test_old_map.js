@@ -6,6 +6,7 @@ for(const cls of ['Fighter','Mage','Rogue']){
   assert.equal(game.inventory.old_map,undefined);
   const entry=game.nearbyLoot.find(e=>e.id==='old_map');
   assert.ok(entry,'Harita ilk odada hemen alınabilmeli');
+  assert.ok(game.visibleLoot.includes(entry),'Başlangıç haritası inceleme gerektirmeden görünür');game.facing=2;assert.ok(game.visibleLoot.includes(entry),'Harita bakış yönünden bağımsız görünür');
   assert.ok(game.takeLoot(entry.uid));
   assert.equal(game.inventory.old_map,1);
   assert.equal(game.takeLoot(entry.uid),false,'Aynı harita tekrar alınamaz');
