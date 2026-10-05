@@ -39,6 +39,9 @@ Aynı yerel ağdaki diğer cihazlar bilgisayarın yerel IP adresi üzerinden
 8080 portuna bağlanabilir.
 
 Görseller `assets1` ve `assets2` klasörlerinde bulunur; iki klasör de gereklidir.
+`game.web.html` hafif sürümdür: tek başına indirme; `assets1` ve `assets2` klasörlerini yanında tut. Görsel yolları göreli olduğu için başka bir klasöre veya web sunucusunun alt dizinine taşınabilir.
+Tek dosya olarak paylaşmak için **Mines of Moria.html** kullan; oda ve düşman görselleri, CSS efektleri ve Three.js bu dosyada gömülüdür.
+Hasar alınca kırmızı kenar/kan efekti tüm oyun ekranında görünür. İşletim sisteminde azaltılmış hareket açıksa sarsılma kapatılır, kırmızı hasar geri bildirimi korunur.
 `Mines of Moria.html` ve `game.web.html` hazır sürümler olarak depoda bulunur;
 derleme sırasında en güncel kaynaklardan yeniden oluşturulur.
 
